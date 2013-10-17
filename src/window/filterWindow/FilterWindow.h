@@ -7,7 +7,7 @@
 #ifndef __FilterWindow_H_
 #define __FilterWindow_H_
 
-#include "ImageWindow.h"
+#import "ImageWindow.h"
 #import "Transformation.h"
 
 class FilterWindow : public ImageWindow {

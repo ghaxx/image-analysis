@@ -5,6 +5,7 @@
 
 
 #include "ManipulationWindow.h"
+#include "App.h"
 
 filterWindow::ManipulationWindow::ManipulationWindow(std::string title) : FilterWindow(title, new LinearTransformation()) {
 }

@@ -7,6 +7,7 @@
 
 
 #include "ImageWindow.h"
+#include "App.h"
 
 using namespace cv;
 

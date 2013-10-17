@@ -7,7 +7,6 @@
 
 
 #include "App.h"
-#import "ImageWindow.h"
 #import "ManipulationWindow.h"
 #include "HighestValue.h"
 #include "GrayScale.h"
@@ -61,7 +60,14 @@ void App::registerWindow(ImageWindow* window) {
 }
 
 
-void App::debug(const char *message) {
-//    if (App::logLevel <= 1)
-//        printf("%s", message);
+void App::debug(const char *format, ...) {
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCSimplifyInspection"
+#pragma clang diagnostic ignored "-Wunreachable-code"
+    if (App::logLevel <= 1) {
+        va_list args;
+        va_start(args, format);
+        printf(format, args);
+    }
+#pragma clang diagnostic pop
 }

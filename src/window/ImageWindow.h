@@ -16,7 +16,6 @@
 
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
-#include "App.h"
 
 
 class ImageWindow {

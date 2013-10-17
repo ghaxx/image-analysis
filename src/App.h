@@ -17,16 +17,17 @@
 
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
+
+
 #import "LinearTransformation.h"
 #import "ImageWindow.h"
 
-class ImageWindow;
 class App {
-    static const bool logLevel = 2;
+    static const int logLevel = 2;
     bool done;
-    std::vector<ImageWindow*> windows;
+    std::vector<ImageWindow *> windows;
 
-    public:
+public:
     App();
 
     void run();
@@ -35,7 +36,7 @@ class App {
 
     void registerWindow(ImageWindow *window);
 
-    static void debug(const char* message);
+    static void debug(const char *format, ...);
 };
 
 
