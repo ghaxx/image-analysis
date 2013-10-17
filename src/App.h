@@ -20,11 +20,11 @@
 #import "LinearTransformation.h"
 #import "ImageWindow.h"
 
-
+class ImageWindow;
 class App {
+    static const bool logLevel = 2;
     bool done;
-    LinearTransformation *t;
-    std::vector<ImageWindow> windows;
+    std::vector<ImageWindow*> windows;
 
     public:
     App();
@@ -33,13 +33,9 @@ class App {
 
     void catchAction();
 
-    cv::Mat filterGrayScale(cv::Mat image);
-
-    cv::Mat filterNegative(cv::Mat image);
-
-    void reset();
-
     void registerWindow(ImageWindow *window);
+
+    static void debug(const char* message);
 };
 
 

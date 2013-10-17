@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1CA2AFCD1807711B00EE723D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1CA2AFCC1807711B00EE723D /* main.cpp */; };
-		1CA2AFCF1807711B00EE723D /* OpenCV_1.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1CA2AFCE1807711B00EE723D /* OpenCV_1.1 */; };
+		1CA2AFCF1807711B00EE723D /* Image Analysis.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1CA2AFCE1807711B00EE723D /* Image Analysis.1 */; };
 		1CA2AFDD1807731B00EE723D /* libopencv_calib3d.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA2AFD61807731B00EE723D /* libopencv_calib3d.2.4.6.dylib */; };
 		1CA2AFDE1807731B00EE723D /* libopencv_core.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA2AFD71807731B00EE723D /* libopencv_core.2.4.6.dylib */; };
 		1CA2AFDF1807731B00EE723D /* libopencv_features2d.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA2AFD81807731B00EE723D /* libopencv_features2d.2.4.6.dylib */; };
@@ -28,9 +28,13 @@
 		1CA2AFF9180773D000EE723D /* libopencv_superres.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA2AFED180773D000EE723D /* libopencv_superres.2.4.6.dylib */; };
 		1CA2AFFA180773D000EE723D /* libopencv_ts.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA2AFEE180773D000EE723D /* libopencv_ts.2.4.6.dylib */; };
 		1CA2AFFB180773D000EE723D /* libopencv_videostab.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA2AFEF180773D000EE723D /* libopencv_videostab.2.4.6.dylib */; };
-		5DC3642A89D2B15DF4D5464E /* LinearTransformation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5DC368C9142859E358E22EAD /* LinearTransformation.mm */; };
+		5DC360BBCF78CFE635B7F982 /* Transformation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36D2938032CD0DFC3D880 /* Transformation.mm */; };
+		5DC36360E94747E7B7FEE49C /* GrayScale.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36A34EC97D84E9026AAC3 /* GrayScale.cpp */; };
+		5DC365518AD97E7FE4321798 /* LinearTransformation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36A7F3037716509228B8A /* LinearTransformation.mm */; };
+		5DC36A0F36FB5D0F8814326A /* FilterWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36B3AB901CE739CFD4529 /* FilterWindow.mm */; };
 		5DC36B75B1B810AB27803D3F /* App.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5DC360FD17ADE40BAE522528 /* App.mm */; };
-		5DC36BF677A2B2BDDAEC81C6 /* Negative.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36D3BB4AE6492BB742FA7 /* Negative.mm */; };
+		5DC36BF677A2B2BDDAEC81C6 /* ManipulationWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36D3BB4AE6492BB742FA7 /* ManipulationWindow.mm */; };
+		5DC36CE064F0A58AE02CDDBA /* HighestValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC3670520A452F6C9B9D232 /* HighestValue.cpp */; };
 		5DC36F44CAB9E365CBF15AEE /* ImageWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5DC3625CCF0949035D321526 /* ImageWindow.mm */; };
 /* End PBXBuildFile section */
 
@@ -41,16 +45,16 @@
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
-				1CA2AFCF1807711B00EE723D /* OpenCV_1.1 in CopyFiles */,
+				1CA2AFCF1807711B00EE723D /* Image Analysis.1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1CA2AFC91807711B00EE723D /* OpenCV-1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "OpenCV-1"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CA2AFC91807711B00EE723D /* Image Analysis */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Image Analysis"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CA2AFCC1807711B00EE723D /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		1CA2AFCE1807711B00EE723D /* OpenCV_1.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = OpenCV_1.1; sourceTree = "<group>"; };
+		1CA2AFCE1807711B00EE723D /* Image Analysis.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = "Image Analysis.1"; sourceTree = "<group>"; };
 		1CA2AFD61807731B00EE723D /* libopencv_calib3d.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_calib3d.2.4.6.dylib; path = ../../../../../usr/local/Cellar/opencv/2.4.6.1/lib/libopencv_calib3d.2.4.6.dylib; sourceTree = "<group>"; };
 		1CA2AFD71807731B00EE723D /* libopencv_core.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_core.2.4.6.dylib; path = ../../../../../usr/local/Cellar/opencv/2.4.6.1/lib/libopencv_core.2.4.6.dylib; sourceTree = "<group>"; };
 		1CA2AFD81807731B00EE723D /* libopencv_features2d.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_features2d.2.4.6.dylib; path = ../../../../../usr/local/Cellar/opencv/2.4.6.1/lib/libopencv_features2d.2.4.6.dylib; sourceTree = "<group>"; };
@@ -70,14 +74,22 @@
 		1CA2AFED180773D000EE723D /* libopencv_superres.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_superres.2.4.6.dylib; path = ../../../../../usr/local/Cellar/opencv/2.4.6.1/lib/libopencv_superres.2.4.6.dylib; sourceTree = "<group>"; };
 		1CA2AFEE180773D000EE723D /* libopencv_ts.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_ts.2.4.6.dylib; path = ../../../../../usr/local/Cellar/opencv/2.4.6.1/lib/libopencv_ts.2.4.6.dylib; sourceTree = "<group>"; };
 		1CA2AFEF180773D000EE723D /* libopencv_videostab.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_videostab.2.4.6.dylib; path = ../../../../../usr/local/Cellar/opencv/2.4.6.1/lib/libopencv_videostab.2.4.6.dylib; sourceTree = "<group>"; };
+		5DC36000FBEE59F8A831BD41 /* FilterWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterWindow.h; sourceTree = "<group>"; };
 		5DC360FD17ADE40BAE522528 /* App.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = App.mm; sourceTree = "<group>"; };
-		5DC3612402DB1BDB5967DE06 /* Negative.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Negative.h; sourceTree = "<group>"; };
+		5DC3612402DB1BDB5967DE06 /* ManipulationWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManipulationWindow.h; sourceTree = "<group>"; };
 		5DC3625CCF0949035D321526 /* ImageWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageWindow.mm; sourceTree = "<group>"; };
 		5DC3629C1CE319C8199CEEDB /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
-		5DC3635F1BA8831605590368 /* LinearTransformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinearTransformation.h; sourceTree = "<group>"; };
-		5DC368C9142859E358E22EAD /* LinearTransformation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LinearTransformation.mm; sourceTree = "<group>"; };
+		5DC363A71AD51A9B829303FE /* LinearTransformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinearTransformation.h; sourceTree = "<group>"; };
+		5DC3668E1470F4D672E87E26 /* Transformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transformation.h; sourceTree = "<group>"; };
+		5DC3670520A452F6C9B9D232 /* HighestValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HighestValue.cpp; sourceTree = "<group>"; };
+		5DC36A34EC97D84E9026AAC3 /* GrayScale.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GrayScale.cpp; sourceTree = "<group>"; };
+		5DC36A7F3037716509228B8A /* LinearTransformation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LinearTransformation.mm; sourceTree = "<group>"; };
+		5DC36B3AB901CE739CFD4529 /* FilterWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FilterWindow.mm; sourceTree = "<group>"; };
 		5DC36BDA80FA2FBC63D16365 /* ImageWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageWindow.h; sourceTree = "<group>"; };
-		5DC36D3BB4AE6492BB742FA7 /* Negative.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Negative.mm; sourceTree = "<group>"; };
+		5DC36D2938032CD0DFC3D880 /* Transformation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Transformation.mm; sourceTree = "<group>"; };
+		5DC36D3BB4AE6492BB742FA7 /* ManipulationWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ManipulationWindow.mm; sourceTree = "<group>"; };
+		5DC36F068C204CD4C117873B /* HighestValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighestValue.h; sourceTree = "<group>"; };
+		5DC36F5F03389F8F5A530888 /* GrayScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrayScale.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,7 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				1CA2AFD51807723200EE723D /* OpenCV Frameworks */,
-				1CA2AFCB1807711B00EE723D /* OpenCV-1 */,
+				1CA2AFCB1807711B00EE723D /* src */,
 				1CA2AFCA1807711B00EE723D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -122,25 +134,24 @@
 		1CA2AFCA1807711B00EE723D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1CA2AFC91807711B00EE723D /* OpenCV-1 */,
+				1CA2AFC91807711B00EE723D /* Image Analysis */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1CA2AFCB1807711B00EE723D /* OpenCV-1 */ = {
+		1CA2AFCB1807711B00EE723D /* src */ = {
 			isa = PBXGroup;
 			children = (
 				1CA2AFCC1807711B00EE723D /* main.cpp */,
-				1CA2AFCE1807711B00EE723D /* OpenCV_1.1 */,
+				1CA2AFCE1807711B00EE723D /* Image Analysis.1 */,
 				5DC360FD17ADE40BAE522528 /* App.mm */,
 				5DC3629C1CE319C8199CEEDB /* App.h */,
 				5DC3625CCF0949035D321526 /* ImageWindow.mm */,
 				5DC36BDA80FA2FBC63D16365 /* ImageWindow.h */,
-				5DC368C9142859E358E22EAD /* LinearTransformation.mm */,
-				5DC3635F1BA8831605590368 /* LinearTransformation.h */,
 				5DC3660D6A34D95F4421ECBB /* filterWindow */,
+				5DC366608E9C24CBC90632FA /* filter */,
 			);
-			path = "OpenCV-1";
+			path = src;
 			sourceTree = "<group>";
 		};
 		1CA2AFD51807723200EE723D /* OpenCV Frameworks */ = {
@@ -172,18 +183,35 @@
 		5DC3660D6A34D95F4421ECBB /* filterWindow */ = {
 			isa = PBXGroup;
 			children = (
-				5DC36D3BB4AE6492BB742FA7 /* Negative.mm */,
-				5DC3612402DB1BDB5967DE06 /* Negative.h */,
+				5DC36D3BB4AE6492BB742FA7 /* ManipulationWindow.mm */,
+				5DC3612402DB1BDB5967DE06 /* ManipulationWindow.h */,
+				5DC36B3AB901CE739CFD4529 /* FilterWindow.mm */,
+				5DC36000FBEE59F8A831BD41 /* FilterWindow.h */,
 			);
 			path = filterWindow;
+			sourceTree = "<group>";
+		};
+		5DC366608E9C24CBC90632FA /* filter */ = {
+			isa = PBXGroup;
+			children = (
+				5DC363A71AD51A9B829303FE /* LinearTransformation.h */,
+				5DC36A7F3037716509228B8A /* LinearTransformation.mm */,
+				5DC36D2938032CD0DFC3D880 /* Transformation.mm */,
+				5DC3668E1470F4D672E87E26 /* Transformation.h */,
+				5DC3670520A452F6C9B9D232 /* HighestValue.cpp */,
+				5DC36F068C204CD4C117873B /* HighestValue.h */,
+				5DC36A34EC97D84E9026AAC3 /* GrayScale.cpp */,
+				5DC36F5F03389F8F5A530888 /* GrayScale.h */,
+			);
+			path = filter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1CA2AFC81807711B00EE723D /* OpenCV-1 */ = {
+		1CA2AFC81807711B00EE723D /* Image Analysis */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1CA2AFD21807711B00EE723D /* Build configuration list for PBXNativeTarget "OpenCV-1" */;
+			buildConfigurationList = 1CA2AFD21807711B00EE723D /* Build configuration list for PBXNativeTarget "Image Analysis" */;
 			buildPhases = (
 				1CA2AFC51807711B00EE723D /* Sources */,
 				1CA2AFC61807711B00EE723D /* Frameworks */,
@@ -193,9 +221,9 @@
 			);
 			dependencies = (
 			);
-			name = "OpenCV-1";
+			name = "Image Analysis";
 			productName = "OpenCV-1";
-			productReference = 1CA2AFC91807711B00EE723D /* OpenCV-1 */;
+			productReference = 1CA2AFC91807711B00EE723D /* Image Analysis */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -207,7 +235,7 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Kuba Sławiński";
 			};
-			buildConfigurationList = 1CA2AFC41807711B00EE723D /* Build configuration list for PBXProject "OpenCV-1" */;
+			buildConfigurationList = 1CA2AFC41807711B00EE723D /* Build configuration list for PBXProject "Image Analysis" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -219,7 +247,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1CA2AFC81807711B00EE723D /* OpenCV-1 */,
+				1CA2AFC81807711B00EE723D /* Image Analysis */,
 			);
 		};
 /* End PBXProject section */
@@ -232,8 +260,12 @@
 				1CA2AFCD1807711B00EE723D /* main.cpp in Sources */,
 				5DC36B75B1B810AB27803D3F /* App.mm in Sources */,
 				5DC36F44CAB9E365CBF15AEE /* ImageWindow.mm in Sources */,
-				5DC3642A89D2B15DF4D5464E /* LinearTransformation.mm in Sources */,
-				5DC36BF677A2B2BDDAEC81C6 /* Negative.mm in Sources */,
+				5DC36BF677A2B2BDDAEC81C6 /* ManipulationWindow.mm in Sources */,
+				5DC36A0F36FB5D0F8814326A /* FilterWindow.mm in Sources */,
+				5DC365518AD97E7FE4321798 /* LinearTransformation.mm in Sources */,
+				5DC360BBCF78CFE635B7F982 /* Transformation.mm in Sources */,
+				5DC36CE064F0A58AE02CDDBA /* HighestValue.cpp in Sources */,
+				5DC36360E94747E7B7FEE49C /* GrayScale.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,7 +351,7 @@
 					/usr/local/Cellar/opencv/2.4.6.1/include,
 				);
 				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/opencv/2.4.6.1/lib;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Image Analysis";
 			};
 			name = Debug;
 		};
@@ -334,14 +366,14 @@
 					/usr/local/Cellar/opencv/2.4.6.1/include,
 				);
 				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/opencv/2.4.6.1/lib;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Image Analysis";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1CA2AFC41807711B00EE723D /* Build configuration list for PBXProject "OpenCV-1" */ = {
+		1CA2AFC41807711B00EE723D /* Build configuration list for PBXProject "Image Analysis" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1CA2AFD01807711B00EE723D /* Debug */,
@@ -350,13 +382,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1CA2AFD21807711B00EE723D /* Build configuration list for PBXNativeTarget "OpenCV-1" */ = {
+		1CA2AFD21807711B00EE723D /* Build configuration list for PBXNativeTarget "Image Analysis" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1CA2AFD31807711B00EE723D /* Debug */,
 				1CA2AFD41807711B00EE723D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

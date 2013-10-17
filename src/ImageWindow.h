@@ -16,6 +16,7 @@
 
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
+#include "App.h"
 
 
 class ImageWindow {
@@ -25,6 +26,8 @@ class ImageWindow {
     ImageWindow(std::string title);
 
     virtual void show(cv::Mat mat);
+
+    virtual void control(char key);
 };
 
 

@@ -13,16 +13,18 @@
 #include <iostream>
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
+#import "Transformation.h"
 
 
-class LinearTransformation {
+class LinearTransformation : public Transformation {
 
     public:
+
     int add;
     float mult;
 
     LinearTransformation();
-    cv::Mat transform(cv::Mat mat);
+    virtual cv::Mat transform(cv::Mat image);
 
 };
 

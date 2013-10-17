@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1CA2AFC81807711B00EE723D"
-               BuildableName = "OpenCV-1"
-               BlueprintName = "OpenCV-1"
-               ReferencedContainer = "container:OpenCV-1.xcodeproj">
+               BuildableName = "Image Analysis"
+               BlueprintName = "Image Analysis"
+               ReferencedContainer = "container:Image Analysis.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1CA2AFC81807711B00EE723D"
-            BuildableName = "OpenCV-1"
-            BlueprintName = "OpenCV-1"
-            ReferencedContainer = "container:OpenCV-1.xcodeproj">
+            BuildableName = "Image Analysis"
+            BlueprintName = "Image Analysis"
+            ReferencedContainer = "container:Image Analysis.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -52,9 +52,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1CA2AFC81807711B00EE723D"
-            BuildableName = "OpenCV-1"
-            BlueprintName = "OpenCV-1"
-            ReferencedContainer = "container:OpenCV-1.xcodeproj">
+            BuildableName = "Image Analysis"
+            BlueprintName = "Image Analysis"
+            ReferencedContainer = "container:Image Analysis.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -70,9 +70,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1CA2AFC81807711B00EE723D"
-            BuildableName = "OpenCV-1"
-            BlueprintName = "OpenCV-1"
-            ReferencedContainer = "container:OpenCV-1.xcodeproj">
+            BuildableName = "Image Analysis"
+            BlueprintName = "Image Analysis"
+            ReferencedContainer = "container:Image Analysis.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

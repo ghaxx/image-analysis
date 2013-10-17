@@ -16,5 +16,10 @@ ImageWindow::ImageWindow(std::string title) {
 }
 
 void ImageWindow::show(cv::Mat mat) {
+    App::debug("Image\n");
     imshow(title.c_str(), mat);
+}
+
+void ImageWindow::control(char key) {
+
 }
