@@ -28,13 +28,13 @@
 		1CA2AFF9180773D000EE723D /* libopencv_superres.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA2AFED180773D000EE723D /* libopencv_superres.2.4.6.dylib */; };
 		1CA2AFFA180773D000EE723D /* libopencv_ts.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA2AFEE180773D000EE723D /* libopencv_ts.2.4.6.dylib */; };
 		1CA2AFFB180773D000EE723D /* libopencv_videostab.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA2AFEF180773D000EE723D /* libopencv_videostab.2.4.6.dylib */; };
-		5DC360BBCF78CFE635B7F982 /* Transformation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36D2938032CD0DFC3D880 /* Transformation.mm */; };
+		5DC360BBCF78CFE635B7F982 /* Transformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36D2938032CD0DFC3D880 /* Transformation.cpp */; };
 		5DC36360E94747E7B7FEE49C /* GrayScale.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36A34EC97D84E9026AAC3 /* GrayScale.cpp */; };
-		5DC364D5DE5E823E6091C9E2 /* ManipulationWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5DC365BC32AB9FD21B4399B2 /* ManipulationWindow.mm */; };
-		5DC365518AD97E7FE4321798 /* LinearTransformation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36A7F3037716509228B8A /* LinearTransformation.mm */; };
-		5DC36B75B1B810AB27803D3F /* App.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5DC360FD17ADE40BAE522528 /* App.mm */; };
+		5DC364D5DE5E823E6091C9E2 /* ManipulationWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC365BC32AB9FD21B4399B2 /* ManipulationWindow.cpp */; };
+		5DC365518AD97E7FE4321798 /* LinearTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36A7F3037716509228B8A /* LinearTransformation.cpp */; };
+		5DC36B75B1B810AB27803D3F /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC360FD17ADE40BAE522528 /* App.cpp */; };
 		5DC36CE064F0A58AE02CDDBA /* HighestValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC3670520A452F6C9B9D232 /* HighestValue.cpp */; };
-		5DC36D47ABB640823410C484 /* FilterWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36F6E9CDDED87149D46A8 /* FilterWindow.mm */; };
+		5DC36D47ABB640823410C484 /* FilterWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36F6E9CDDED87149D46A8 /* FilterWindow.cpp */; };
 		5DC36F49731F6EE075ED2340 /* ImageWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36AC7D70BE81FABB195B1 /* ImageWindow.mm */; };
 /* End PBXBuildFile section */
 
@@ -74,22 +74,22 @@
 		1CA2AFED180773D000EE723D /* libopencv_superres.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_superres.2.4.6.dylib; path = ../../../../../usr/local/Cellar/opencv/2.4.6.1/lib/libopencv_superres.2.4.6.dylib; sourceTree = "<group>"; };
 		1CA2AFEE180773D000EE723D /* libopencv_ts.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_ts.2.4.6.dylib; path = ../../../../../usr/local/Cellar/opencv/2.4.6.1/lib/libopencv_ts.2.4.6.dylib; sourceTree = "<group>"; };
 		1CA2AFEF180773D000EE723D /* libopencv_videostab.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_videostab.2.4.6.dylib; path = ../../../../../usr/local/Cellar/opencv/2.4.6.1/lib/libopencv_videostab.2.4.6.dylib; sourceTree = "<group>"; };
-		5DC360FD17ADE40BAE522528 /* App.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = App.mm; sourceTree = "<group>"; };
+		5DC360FD17ADE40BAE522528 /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App.cpp; sourceTree = "<group>"; };
 		5DC3619F57FA4083C6D0B468 /* ManipulationWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManipulationWindow.h; sourceTree = "<group>"; };
 		5DC3629C1CE319C8199CEEDB /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
 		5DC363A71AD51A9B829303FE /* LinearTransformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinearTransformation.h; sourceTree = "<group>"; };
-		5DC365BC32AB9FD21B4399B2 /* ManipulationWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ManipulationWindow.mm; sourceTree = "<group>"; };
+		5DC365BC32AB9FD21B4399B2 /* ManipulationWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ManipulationWindow.cpp; sourceTree = "<group>"; };
 		5DC3668E1470F4D672E87E26 /* Transformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transformation.h; sourceTree = "<group>"; };
 		5DC3670520A452F6C9B9D232 /* HighestValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HighestValue.cpp; sourceTree = "<group>"; };
 		5DC369B408B7B295E9867774 /* ImageWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageWindow.h; sourceTree = "<group>"; };
 		5DC36A34EC97D84E9026AAC3 /* GrayScale.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GrayScale.cpp; sourceTree = "<group>"; };
-		5DC36A7F3037716509228B8A /* LinearTransformation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LinearTransformation.mm; sourceTree = "<group>"; };
+		5DC36A7F3037716509228B8A /* LinearTransformation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LinearTransformation.cpp; sourceTree = "<group>"; };
 		5DC36AC7D70BE81FABB195B1 /* ImageWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageWindow.mm; sourceTree = "<group>"; };
 		5DC36C36609A45CD88B1F470 /* FilterWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterWindow.h; sourceTree = "<group>"; };
-		5DC36D2938032CD0DFC3D880 /* Transformation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Transformation.mm; sourceTree = "<group>"; };
+		5DC36D2938032CD0DFC3D880 /* Transformation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Transformation.cpp; sourceTree = "<group>"; };
 		5DC36F068C204CD4C117873B /* HighestValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighestValue.h; sourceTree = "<group>"; };
 		5DC36F5F03389F8F5A530888 /* GrayScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrayScale.h; sourceTree = "<group>"; };
-		5DC36F6E9CDDED87149D46A8 /* FilterWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FilterWindow.mm; sourceTree = "<group>"; };
+		5DC36F6E9CDDED87149D46A8 /* FilterWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FilterWindow.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,7 +144,7 @@
 			children = (
 				1CA2AFCC1807711B00EE723D /* main.cpp */,
 				1CA2AFCE1807711B00EE723D /* Image Analysis.1 */,
-				5DC360FD17ADE40BAE522528 /* App.mm */,
+				5DC360FD17ADE40BAE522528 /* App.cpp */,
 				5DC3629C1CE319C8199CEEDB /* App.h */,
 				5DC366608E9C24CBC90632FA /* filter */,
 				5DC36E32548D0E8137B48479 /* window */,
@@ -182,8 +182,8 @@
 			isa = PBXGroup;
 			children = (
 				5DC363A71AD51A9B829303FE /* LinearTransformation.h */,
-				5DC36A7F3037716509228B8A /* LinearTransformation.mm */,
-				5DC36D2938032CD0DFC3D880 /* Transformation.mm */,
+				5DC36A7F3037716509228B8A /* LinearTransformation.cpp */,
+				5DC36D2938032CD0DFC3D880 /* Transformation.cpp */,
 				5DC3668E1470F4D672E87E26 /* Transformation.h */,
 				5DC3670520A452F6C9B9D232 /* HighestValue.cpp */,
 				5DC36F068C204CD4C117873B /* HighestValue.h */,
@@ -196,9 +196,9 @@
 		5DC36CBF799E051EE54B3D02 /* filterWindow */ = {
 			isa = PBXGroup;
 			children = (
-				5DC365BC32AB9FD21B4399B2 /* ManipulationWindow.mm */,
+				5DC365BC32AB9FD21B4399B2 /* ManipulationWindow.cpp */,
 				5DC3619F57FA4083C6D0B468 /* ManipulationWindow.h */,
-				5DC36F6E9CDDED87149D46A8 /* FilterWindow.mm */,
+				5DC36F6E9CDDED87149D46A8 /* FilterWindow.cpp */,
 				5DC36C36609A45CD88B1F470 /* FilterWindow.h */,
 			);
 			path = filterWindow;
@@ -266,14 +266,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CA2AFCD1807711B00EE723D /* main.cpp in Sources */,
-				5DC36B75B1B810AB27803D3F /* App.mm in Sources */,
-				5DC365518AD97E7FE4321798 /* LinearTransformation.mm in Sources */,
-				5DC360BBCF78CFE635B7F982 /* Transformation.mm in Sources */,
+				5DC36B75B1B810AB27803D3F /* App.cpp in Sources */,
+				5DC365518AD97E7FE4321798 /* LinearTransformation.cpp in Sources */,
+				5DC360BBCF78CFE635B7F982 /* Transformation.cpp in Sources */,
 				5DC36CE064F0A58AE02CDDBA /* HighestValue.cpp in Sources */,
 				5DC36360E94747E7B7FEE49C /* GrayScale.cpp in Sources */,
 				5DC36F49731F6EE075ED2340 /* ImageWindow.mm in Sources */,
-				5DC364D5DE5E823E6091C9E2 /* ManipulationWindow.mm in Sources */,
-				5DC36D47ABB640823410C484 /* FilterWindow.mm in Sources */,
+				5DC364D5DE5E823E6091C9E2 /* ManipulationWindow.cpp in Sources */,
+				5DC36D47ABB640823410C484 /* FilterWindow.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

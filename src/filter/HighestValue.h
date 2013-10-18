@@ -10,8 +10,6 @@
 #define __HighestValue_H_
 
 #import "Transformation.h"
-#include <opencv/cv.h>
-#include <opencv/highgui.h>
 
 class HighestValue : public Transformation {
 

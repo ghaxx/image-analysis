@@ -4,22 +4,20 @@
 //
 
 
-#include "HighestValue.h"
-
-using namespace cv;
+#import "HighestValue.h"
 
 cv::Mat HighestValue::transform(cv::Mat image) {
 
-    Mat result(image);
+    cv::Mat result(image);
     for (int x = 0; x < image.cols; x++) {
         for (int y = 0; y < image.rows; y++) {
             float max = 0;
             for (int c = 0; c < image.channels(); c++)
-                if (max < image.at<Vec3b>(y, x)[c])
-                    max = image.at<Vec3b>(y, x)[c];
+                if (max < image.at<cv::Vec3b>(y, x)[c])
+                    max = image.at<cv::Vec3b>(y, x)[c];
 
             for (int c = 0; c < image.channels(); c++)
-                result.at<Vec3b>(y, x)[c] = max;
+                result.at<cv::Vec3b>(y, x)[c] = max;
         }
     }
     return result;

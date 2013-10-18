@@ -10,9 +10,6 @@
 #ifndef __LinearTransformation_H_
 #define __LinearTransformation_H_
 
-#include <iostream>
-#include <opencv/cv.h>
-#include <opencv/highgui.h>
 #import "Transformation.h"
 
 

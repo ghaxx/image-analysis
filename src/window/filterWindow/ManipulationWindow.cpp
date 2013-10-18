@@ -5,12 +5,13 @@
 
 
 #include "ManipulationWindow.h"
-#include "App.h"
+#import "App.h"
 
-filterWindow::ManipulationWindow::ManipulationWindow(std::string title) : FilterWindow(title, new LinearTransformation()) {
+
+ManipulationWindow::ManipulationWindow(std::string title) : FilterWindow(title, new LinearTransformation()) {
 }
 
-void filterWindow::ManipulationWindow::show(cv::Mat mat) {
+void ManipulationWindow::show(cv::Mat mat) {
     App::debug("Manipulation\n");
     cv::Mat image(getT()->transform(mat));
     char a[100];
@@ -22,7 +23,7 @@ void filterWindow::ManipulationWindow::show(cv::Mat mat) {
 }
 
 
-void filterWindow::ManipulationWindow::control(char key) {
+void ManipulationWindow::control(char key) {
     if (key == 'a')
         getLT()->mult -= 0.1;
     if (key == 'q')
@@ -35,11 +36,11 @@ void filterWindow::ManipulationWindow::control(char key) {
         reset();
 }
 
-void filterWindow::ManipulationWindow::reset() {
+void ManipulationWindow::reset() {
     getLT()->mult = 1;
     getLT()->add = 0;
 }
 
-LinearTransformation *filterWindow::ManipulationWindow::getLT() {
+LinearTransformation *ManipulationWindow::getLT() {
     return (LinearTransformation*) getT();
 }

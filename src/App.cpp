@@ -29,7 +29,7 @@ void App::run() {
     if (!cap.isOpened())
         return;
 
-    registerWindow(new filterWindow::ManipulationWindow("Manipulation Window"));
+    registerWindow(new ManipulationWindow("Manipulation Window"));
     registerWindow(new FilterWindow("Highest Value", new HighestValue()));
     registerWindow(new FilterWindow("Gray Scale", new GrayScale()));
 

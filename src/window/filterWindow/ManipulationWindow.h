@@ -8,26 +8,23 @@
 #ifndef __Negative_H_
 #define __Negative_H_
 
-#include <iostream>
 #import "FilterWindow.h"
 #import "LinearTransformation.h"
 
-namespace filterWindow {
-    class ManipulationWindow : public FilterWindow {
+class ManipulationWindow : public FilterWindow {
 
-    public:
+public:
 
-        ManipulationWindow(std::string title);
+    ManipulationWindow(std::string title);
 
-        virtual void show(cv::Mat mat) override;
+    virtual void show(cv::Mat mat) override;
 
-        virtual void control(char key) override;
+    virtual void control(char key) override;
 
-        void reset();
+    void reset();
 
-        LinearTransformation* getLT();
-    };
-}
+    LinearTransformation *getLT();
+};
 
 
 #endif //__Negative_H_

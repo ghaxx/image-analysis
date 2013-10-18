@@ -13,9 +13,7 @@ class Transformation {
 public:
     virtual cv::Mat transform(cv::Mat image) = 0;
 
-
-    virtual ~Transformation() {
-    }
+    virtual ~Transformation();
 };
 
 

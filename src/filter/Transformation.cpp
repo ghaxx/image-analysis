@@ -4,4 +4,8 @@
 //
 
 
-#include "Transformation.h"
+#import "Transformation.h"
+
+Transformation::~Transformation() {
+
+}

@@ -4,8 +4,9 @@
 //
 
 
-#include "FilterWindow.h"
-#include "App.h"
+#import "FilterWindow.h"
+#import "App.h"
+
 
 FilterWindow::FilterWindow(const std::string title, Transformation *t):ImageWindow(title) {
     this->t = t;

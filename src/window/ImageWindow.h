@@ -10,18 +10,13 @@
 #ifndef __ImageWindow_H_
 #define __ImageWindow_H_
 
-#include <iostream>
 #include <string>
-#include <math.h>
-
 #include <opencv/cv.h>
-#include <opencv/highgui.h>
-
 
 class ImageWindow {
     std::string title;
 
-    public:
+public:
     ImageWindow(std::string title);
 
     virtual void show(cv::Mat mat);
