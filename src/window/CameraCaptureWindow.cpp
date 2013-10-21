@@ -19,7 +19,7 @@ CameraCaptureWindow::CameraCaptureWindow(std::string title):DisplayWindow(title)
         timeout = atof(AppConfig::argv[1]);
         printf ("Timeout: %f\n", timeout);
     } else {
-        timeout = 5000000;
+        timeout = 5;
     }
 }
 
@@ -39,7 +39,7 @@ void CameraCaptureWindow::show() {
         captureFrame = false;
     } else if (elapsed <= timeout) {
         char msg[100];
-        sprintf(msg, "Captureing in: %.6f", elapsed / 1000);
+        sprintf(msg, "Captureing in: %.0f", elapsed);
         cv::putText(image, msg, cvPoint(10,30), cv::FONT_HERSHEY_PLAIN, 1, cvScalar(120,120,250), 1, CV_AA);
     }
     imshow(getTitle().c_str(), image);
