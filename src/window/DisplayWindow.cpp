@@ -4,7 +4,7 @@
 //
 
 
-#include "ImageWindow.h"
+#include "DisplayWindow.h"
 #include "App.h"
 
 using namespace cv;
@@ -14,11 +14,18 @@ ImageWindow::ImageWindow(std::string title) {
     namedWindow(title.c_str(), CV_WINDOW_AUTOSIZE);
 }
 
-void ImageWindow::show(cv::Mat mat) {
-    App::debug("Image\n");
-    imshow(title.c_str(), mat);
-}
-
 void ImageWindow::control(char key) {
 
+}
+
+App *ImageWindow::getApp() const {
+    return app;
+}
+
+void ImageWindow::setApp(App *app) {
+    ImageWindow::app = app;
+}
+
+const std::string &ImageWindow::getTitle() const {
+    return title;
 }

@@ -10,16 +10,28 @@
 
 #include <string>
 #include <opencv/cv.h>
+#import "main.h"
+#include "App.h"
+#include "SynchronizedVideoCapture.h"
 
 class ImageWindow {
     std::string title;
 
+    SynchronizedVideoCapture capture;
+    App* app;
+
 public:
     ImageWindow(std::string title);
 
-    virtual void show(cv::Mat mat);
+    virtual void show() = 0;
 
     virtual void control(char key);
+
+    App * getApp() const;
+
+    void setApp(App *app);
+
+    const std::string & getTitle() const;
 };
 
 

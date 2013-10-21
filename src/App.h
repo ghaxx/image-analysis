@@ -18,12 +18,15 @@
 
 
 #import "LinearTransformation.h"
-#import "ImageWindow.h"
+#import "DisplayWindow.h"
+#include "SynchronizedVideoCapture.h"
 
 class App {
-    static const int logLevel = 2;
+    static const int logLevel = 0;
     bool done;
     std::vector<ImageWindow *> windows;
+    double timeout;
+    SynchronizedVideoCapture capture;
 
 public:
     App();
@@ -35,6 +38,10 @@ public:
     void registerWindow(ImageWindow *window);
 
     static void debug(const char *format, ...);
+
+
+    int argc;
+    char** argv;
 };
 
 

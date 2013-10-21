@@ -11,7 +11,9 @@
 ManipulationWindow::ManipulationWindow(std::string title) : FilterWindow(title, new LinearTransformation()) {
 }
 
-void ManipulationWindow::show(cv::Mat mat) {
+void ManipulationWindow::show() {
+    cv::Mat mat;
+    capture.read(mat);
     App::debug("Manipulation\n");
     cv::Mat image(getT()->transform(mat));
     char a[100];
@@ -19,7 +21,8 @@ void ManipulationWindow::show(cv::Mat mat) {
     cv::putText(image, a, cvPoint(10,30), cv::FONT_HERSHEY_COMPLEX_SMALL, 0.8, cvScalar(200,200,250), 1, CV_AA);
     sprintf(a, "Add: %d", getLT()->add);
     cv::putText(image, a, cvPoint(10,70), cv::FONT_HERSHEY_COMPLEX_SMALL, 0.8, cvScalar(200,200,250), 1, CV_AA);
-    ImageWindow::show(image);
+
+    imshow(getTitle().c_str(), image);
 }
 
 

@@ -5,9 +5,12 @@
 
 
 #include "App.h"
-#import "ManipulationWindow.h"
+#include "VideoWindow.h"
+#include "CameraCaptureWindow.h"
+#include "SynchronizedVideoCapture.h"
+#include "ManipulationWindow.h"
 #include "HighestValue.h"
-#include "GrayScale.h"
+#include "AppConfig.h"
 
 using namespace cv;
 
@@ -16,29 +19,23 @@ App::App() {
 }
 
 void App::run() {
-    Mat image;
-    VideoCapture cap;
-    for (int i = 0; i < 1500; i++) {
-        if (cap.open(i)) {
-            std::cout << "Found camera " << i << "\n";
-            break;
-        }
-    }
-    if (!cap.isOpened())
-        return;
-
     registerWindow(new ManipulationWindow("Manipulation Window"));
     registerWindow(new FilterWindow("Highest Value", new HighestValue()));
-    registerWindow(new FilterWindow("Gray Scale", new GrayScale()));
+//    registerWindow(new FilterWindow("Gray Scale", new GrayScale()));
+//    registerWindow(new VideoWindow("Video", "/Users/ghaxx/a.avi"));
+    CameraCaptureWindow *window = new CameraCaptureWindow("SynchronizedVideoCapture Capture");
+    window->timeout = timeout;
+    registerWindow(window);
 
     do {
         debug("-- Loop -------------\n");
-        try {
-            cap >> image;
-            for(std::vector<ImageWindow*>::iterator it = windows.begin(); it != windows.end(); ++it) {
-                (*it)->show(image);
-            }
-        } catch (Exception ignore) {}
+        capture.refresh();
+
+        for(std::vector<ImageWindow*>::iterator it = windows.begin(); it != windows.end(); ++it) {
+            try {
+                (*it)->show();
+            } catch (Exception ignore) {}
+        }
         this->catchAction();
     } while (!this->done);
 }
@@ -54,6 +51,7 @@ void App::catchAction() {
 }
 
 void App::registerWindow(ImageWindow* window) {
+    window->setApp(this);
     windows.push_back(window);
 }
 

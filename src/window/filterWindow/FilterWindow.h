@@ -7,12 +7,13 @@
 #ifndef __FilterWindow_H_
 #define __FilterWindow_H_
 
-#import "ImageWindow.h"
+#import "DisplayWindow.h"
 #import "Transformation.h"
 
 class FilterWindow : public ImageWindow {
     Transformation *t;
 
+    SynchronizedVideoCapture capture;
 public:
 
     FilterWindow(const std::string title, Transformation *t);
@@ -20,7 +21,7 @@ public:
     virtual ~FilterWindow();
 
 
-    virtual void show(cv::Mat mat) override;
+    virtual void show() override;
 
 
     Transformation *getT() const;
