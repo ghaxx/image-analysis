@@ -43,6 +43,7 @@ void CameraCaptureWindow::show() {
     }
 
     imshow(getTitle().c_str(), image);
+    image.release();
 }
 
 void CameraCaptureWindow::control(char key) {

@@ -24,6 +24,8 @@ void ManipulationWindow::show() {
     cv::putText(image, a, cvPoint(10,70), cv::FONT_HERSHEY_COMPLEX_SMALL, 0.8, cvScalar(200,200,250), 1, CV_AA);
 
     imshow(getTitle().c_str(), image);
+    mat.release();
+    image.release();
 }
 
 

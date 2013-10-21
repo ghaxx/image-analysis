@@ -21,7 +21,7 @@ App::App() {
 
 void App::run() {
     registerWindow(new ManipulationWindow("Manipulation Window"));
-    registerWindow(new FilterWindow("Highest Value", new HighestValue()));
+//    registerWindow(new FilterWindow("Highest Value", new HighestValue()));
 //    registerWindow(new FilterWindow("Gray Scale", new GrayScale()));
 //    registerWindow(new VideoWindow("Video", "/Users/ghaxx/a.avi"));
 //    registerWindow(new CameraCaptureWindow("SynchronizedVideoCapture Capture"));

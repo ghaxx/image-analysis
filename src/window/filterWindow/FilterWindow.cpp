@@ -21,7 +21,10 @@ void FilterWindow::show() {
     cv::Mat mat;
     capture->read(mat);
     App::debug("Filter\n");
-    imshow(getTitle().c_str(), t->transform(mat));
+    cv::Mat transformed = t->transform(mat);
+    imshow(getTitle().c_str(), transformed);
+    mat.release();
+    transformed.release();
 }
 
 Transformation* FilterWindow::getT() const {
