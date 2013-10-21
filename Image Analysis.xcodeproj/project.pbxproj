@@ -28,6 +28,7 @@
 		1CA2AFF9180773D000EE723D /* libopencv_superres.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA2AFED180773D000EE723D /* libopencv_superres.2.4.6.dylib */; };
 		1CA2AFFA180773D000EE723D /* libopencv_ts.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA2AFEE180773D000EE723D /* libopencv_ts.2.4.6.dylib */; };
 		1CA2AFFB180773D000EE723D /* libopencv_videostab.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA2AFEF180773D000EE723D /* libopencv_videostab.2.4.6.dylib */; };
+		1CF722731815DF120058447C /* libboost_timer-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CF722721815DF120058447C /* libboost_timer-mt.dylib */; };
 		32672E3BF9170984EC1D9E1D /* AppConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 32672AD57FD2A1DE9D646E5E /* AppConfig.cpp */; };
 		5DC360BBCF78CFE635B7F982 /* Transformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36D2938032CD0DFC3D880 /* Transformation.cpp */; };
 		5DC36360E94747E7B7FEE49C /* GrayScale.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36A34EC97D84E9026AAC3 /* GrayScale.cpp */; };
@@ -78,6 +79,7 @@
 		1CA2AFED180773D000EE723D /* libopencv_superres.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_superres.2.4.6.dylib; path = ../../../../../usr/local/Cellar/opencv/2.4.6.1/lib/libopencv_superres.2.4.6.dylib; sourceTree = "<group>"; };
 		1CA2AFEE180773D000EE723D /* libopencv_ts.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_ts.2.4.6.dylib; path = ../../../../../usr/local/Cellar/opencv/2.4.6.1/lib/libopencv_ts.2.4.6.dylib; sourceTree = "<group>"; };
 		1CA2AFEF180773D000EE723D /* libopencv_videostab.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_videostab.2.4.6.dylib; path = ../../../../../usr/local/Cellar/opencv/2.4.6.1/lib/libopencv_videostab.2.4.6.dylib; sourceTree = "<group>"; };
+		1CF722721815DF120058447C /* libboost_timer-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "libboost_timer-mt.dylib"; sourceTree = "<group>"; };
 		3267260C3DF12B0F898CAA80 /* AppConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConfig.h; sourceTree = "<group>"; };
 		32672AD57FD2A1DE9D646E5E /* AppConfig.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppConfig.cpp; sourceTree = "<group>"; };
 		5DC360FD17ADE40BAE522528 /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App.cpp; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CA2AFF3180773D000EE723D /* libopencv_legacy.2.4.6.dylib in Frameworks */,
+				1CF722731815DF120058447C /* libboost_timer-mt.dylib in Frameworks */,
 				1CA2AFF9180773D000EE723D /* libopencv_superres.2.4.6.dylib in Frameworks */,
 				1CA2AFFA180773D000EE723D /* libopencv_ts.2.4.6.dylib in Frameworks */,
 				1CA2AFF5180773D000EE723D /* libopencv_objdetect.2.4.6.dylib in Frameworks */,
@@ -138,6 +141,7 @@
 		1CA2AFC01807711B00EE723D = {
 			isa = PBXGroup;
 			children = (
+				1CF722711815DEBF0058447C /* Boost */,
 				1CA2AFD51807723200EE723D /* OpenCV Frameworks */,
 				1CA2AFCB1807711B00EE723D /* src */,
 				1CA2AFCA1807711B00EE723D /* Products */,
@@ -193,6 +197,14 @@
 				1CA2AFDC1807731B00EE723D /* libopencv_video.2.4.6.dylib */,
 			);
 			name = "OpenCV Frameworks";
+			sourceTree = "<group>";
+		};
+		1CF722711815DEBF0058447C /* Boost */ = {
+			isa = PBXGroup;
+			children = (
+				1CF722721815DF120058447C /* libboost_timer-mt.dylib */,
+			);
+			name = Boost;
 			sourceTree = "<group>";
 		};
 		5DC366608E9C24CBC90632FA /* filter */ = {
@@ -391,8 +403,13 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/local/Cellar/opencv/2.4.6.1/include,
+					/usr/local/Cellar/boost/1.54.0/include,
 				);
-				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/opencv/2.4.6.1/lib;
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/Cellar/opencv/2.4.6.1/lib,
+					/usr/local/Cellar/boost/1.54.0/lib,
+					"/Users/ghaxx/Development/Image\\ Processing/Image\\ Analysis",
+				);
 				PRODUCT_NAME = "Image Analysis";
 			};
 			name = Debug;
@@ -406,8 +423,13 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/local/Cellar/opencv/2.4.6.1/include,
+					/usr/local/Cellar/boost/1.54.0/include,
 				);
-				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/opencv/2.4.6.1/lib;
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/Cellar/opencv/2.4.6.1/lib,
+					/usr/local/Cellar/boost/1.54.0/lib,
+					"/Users/ghaxx/Development/Image\\ Processing/Image\\ Analysis",
+				);
 				PRODUCT_NAME = "Image Analysis";
 			};
 			name = Release;

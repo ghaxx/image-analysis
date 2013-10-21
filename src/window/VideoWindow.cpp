@@ -29,7 +29,8 @@ void VideoWindow::show() {
         params.push_back(80);
 
         char name[100];
-        sprintf(name, strcat(AppConfig::outputDir, "image_%04d.jpg"), frameNumber);
+
+        sprintf(name, "%s/image_%04d.jpg", AppConfig::outputDir, frameNumber);
         imwrite(name, image, params);
         cv::putText(image, "Saving...", cvPoint(10,30), cv::FONT_HERSHEY_PLAIN, 1, cvScalar(120,120,250), 1, CV_AA);
     }
