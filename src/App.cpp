@@ -20,11 +20,11 @@ App::App() {
 }
 
 void App::run() {
-    registerWindow(new ManipulationWindow("Manipulation Window"));
+//    registerWindow(new ManipulationWindow("Manipulation Window"));
 //    registerWindow(new FilterWindow("Highest Value", new HighestValue()));
 //    registerWindow(new FilterWindow("Gray Scale", new GrayScale()));
 //    registerWindow(new VideoWindow("Video", "/Users/ghaxx/a.avi"));
-//    registerWindow(new CameraCaptureWindow("SynchronizedVideoCapture Capture"));
+    registerWindow(new CameraCaptureWindow("Video Capture"));
 
     do {
         debug("-- Loop -------------\n");
@@ -37,6 +37,10 @@ void App::run() {
         }
         this->catchAction();
     } while (!this->done);
+
+    for(std::vector<DisplayWindow *>::iterator it = windows.begin(); it != windows.end(); ++it) {
+        delete *it;
+    }
 }
 
 void App::catchAction() {

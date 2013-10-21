@@ -9,11 +9,12 @@
 #define __CameraCaptureWindow_H_
 
 #import "DisplayWindow.h"
+#include <boost/progress.hpp>
 
 
 class CameraCaptureWindow : public DisplayWindow {
     bool captureFrame;
-    clock_t start;
+    boost::progress_timer* timer;
 
     SynchronizedVideoCapture* capture;
 
@@ -25,6 +26,11 @@ public:
     virtual void control(char key) override;
 
     double timeout;
+
+
+    virtual ~CameraCaptureWindow() {
+        delete timer;
+    }
 };
 
 
