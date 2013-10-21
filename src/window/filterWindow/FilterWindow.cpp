@@ -8,8 +8,9 @@
 #import "App.h"
 
 
-FilterWindow::FilterWindow(const std::string title, Transformation *t):ImageWindow(title) {
+FilterWindow::FilterWindow(const std::string title, Transformation *t):DisplayWindow(title) {
     this->t = t;
+    capture = SynchronizedVideoCapture::getInstance();
 }
 
 FilterWindow::~FilterWindow() {
@@ -18,7 +19,7 @@ FilterWindow::~FilterWindow() {
 
 void FilterWindow::show() {
     cv::Mat mat;
-    capture.read(mat);
+    capture->read(mat);
     App::debug("Filter\n");
     imshow(getTitle().c_str(), t->transform(mat));
 }

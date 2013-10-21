@@ -12,7 +12,7 @@
 #import "LinearTransformation.h"
 
 class ManipulationWindow : public FilterWindow {
-    SynchronizedVideoCapture capture;
+    SynchronizedVideoCapture* capture;
 
 public:
 

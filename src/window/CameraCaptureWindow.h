@@ -11,11 +11,11 @@
 #import "DisplayWindow.h"
 
 
-class CameraCaptureWindow : public ImageWindow {
+class CameraCaptureWindow : public DisplayWindow {
     bool captureFrame;
     clock_t start;
 
-    SynchronizedVideoCapture capture;
+    SynchronizedVideoCapture* capture;
 
 public:
     CameraCaptureWindow(std::string title);

@@ -9,7 +9,7 @@
 
 #import "DisplayWindow.h"
 
-class VideoWindow : public ImageWindow {
+class VideoWindow : public DisplayWindow {
     cv::VideoCapture* capture;
     int frameNumber;
 

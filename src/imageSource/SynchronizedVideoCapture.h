@@ -14,15 +14,18 @@
 
 class SynchronizedVideoCapture : public cv::VideoCapture {
     static bool readNew;
+    static SynchronizedVideoCapture* instance;
+
     cv::Mat lastRead;
+    SynchronizedVideoCapture();
 
 public:
-
-    SynchronizedVideoCapture();
 
     virtual bool read(cv::Mat &image) override;
 
     void refresh();
+
+    static SynchronizedVideoCapture* getInstance();
 
 };
 

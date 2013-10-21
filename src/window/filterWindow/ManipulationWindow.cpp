@@ -9,11 +9,12 @@
 
 
 ManipulationWindow::ManipulationWindow(std::string title) : FilterWindow(title, new LinearTransformation()) {
+    capture = SynchronizedVideoCapture::getInstance();
 }
 
 void ManipulationWindow::show() {
     cv::Mat mat;
-    capture.read(mat);
+    capture->read(mat);
     App::debug("Manipulation\n");
     cv::Mat image(getT()->transform(mat));
     char a[100];

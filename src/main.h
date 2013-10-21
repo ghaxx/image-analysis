@@ -1,2 +1,2 @@
 class App;
-class ImageWindow;
+class DisplayWindow;

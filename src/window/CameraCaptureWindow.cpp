@@ -9,7 +9,8 @@
 
 using namespace cv;
 
-CameraCaptureWindow::CameraCaptureWindow(std::string title):ImageWindow(title) {
+CameraCaptureWindow::CameraCaptureWindow(std::string title):DisplayWindow(title) {
+    capture = SynchronizedVideoCapture::getInstance();
     captureFrame = false;
     start = clock();
 
@@ -17,13 +18,13 @@ CameraCaptureWindow::CameraCaptureWindow(std::string title):ImageWindow(title) {
         timeout = atof(AppConfig::argv[1]);
         printf ("Timeout: %f\n", timeout);
     } else {
-        timeout = 5000;
+        timeout = 5000000;
     }
 }
 
 void CameraCaptureWindow::show() {
     cv::Mat image;
-    capture.read(image);
+    capture->read(image);
     double milliseconds = 1000.0 * (clock() - start) / CLOCKS_PER_SEC;
     if (captureFrame || milliseconds > timeout) {
         vector<int> params;

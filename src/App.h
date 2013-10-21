@@ -24,9 +24,9 @@
 class App {
     static const int logLevel = 0;
     bool done;
-    std::vector<ImageWindow *> windows;
+    std::vector<DisplayWindow *> windows;
     double timeout;
-    SynchronizedVideoCapture capture;
+    SynchronizedVideoCapture* capture;
 
 public:
     App();
@@ -35,7 +35,7 @@ public:
 
     void catchAction();
 
-    void registerWindow(ImageWindow *window);
+    void registerWindow(DisplayWindow *window);
 
     static void debug(const char *format, ...);
 

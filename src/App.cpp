@@ -16,6 +16,7 @@ using namespace cv;
 
 App::App() {
     this->done = false;
+    capture = SynchronizedVideoCapture::getInstance();
 }
 
 void App::run() {
@@ -23,15 +24,13 @@ void App::run() {
     registerWindow(new FilterWindow("Highest Value", new HighestValue()));
 //    registerWindow(new FilterWindow("Gray Scale", new GrayScale()));
 //    registerWindow(new VideoWindow("Video", "/Users/ghaxx/a.avi"));
-    CameraCaptureWindow *window = new CameraCaptureWindow("SynchronizedVideoCapture Capture");
-    window->timeout = timeout;
-    registerWindow(window);
+//    registerWindow(new CameraCaptureWindow("SynchronizedVideoCapture Capture"));
 
     do {
         debug("-- Loop -------------\n");
-        capture.refresh();
+        capture->refresh();
 
-        for(std::vector<ImageWindow*>::iterator it = windows.begin(); it != windows.end(); ++it) {
+        for(std::vector<DisplayWindow *>::iterator it = windows.begin(); it != windows.end(); ++it) {
             try {
                 (*it)->show();
             } catch (Exception ignore) {}
@@ -45,12 +44,12 @@ void App::catchAction() {
     if (key == 27)
         done = true;
 
-    for(std::vector<ImageWindow*>::iterator it = windows.begin(); it != windows.end(); ++it) {
+    for(std::vector<DisplayWindow *>::iterator it = windows.begin(); it != windows.end(); ++it) {
         (*it)->control(key);
     }
 }
 
-void App::registerWindow(ImageWindow* window) {
+void App::registerWindow(DisplayWindow * window) {
     window->setApp(this);
     windows.push_back(window);
 }

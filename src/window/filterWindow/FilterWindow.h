@@ -10,10 +10,10 @@
 #import "DisplayWindow.h"
 #import "Transformation.h"
 
-class FilterWindow : public ImageWindow {
+class FilterWindow : public DisplayWindow {
     Transformation *t;
 
-    SynchronizedVideoCapture capture;
+    SynchronizedVideoCapture* capture;
 public:
 
     FilterWindow(const std::string title, Transformation *t);

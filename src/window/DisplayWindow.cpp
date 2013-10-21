@@ -9,23 +9,23 @@
 
 using namespace cv;
 
-ImageWindow::ImageWindow(std::string title) {
+DisplayWindow::DisplayWindow(std::string title) {
     this->title = title;
     namedWindow(title.c_str(), CV_WINDOW_AUTOSIZE);
 }
 
-void ImageWindow::control(char key) {
+void DisplayWindow::control(char key) {
 
 }
 
-App *ImageWindow::getApp() const {
+App *DisplayWindow::getApp() const {
     return app;
 }
 
-void ImageWindow::setApp(App *app) {
-    ImageWindow::app = app;
+void DisplayWindow::setApp(App *app) {
+    DisplayWindow::app = app;
 }
 
-const std::string &ImageWindow::getTitle() const {
+const std::string &DisplayWindow::getTitle() const {
     return title;
 }

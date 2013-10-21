@@ -14,14 +14,12 @@
 #include "App.h"
 #include "SynchronizedVideoCapture.h"
 
-class ImageWindow {
+class DisplayWindow {
     std::string title;
-
-    SynchronizedVideoCapture capture;
     App* app;
 
 public:
-    ImageWindow(std::string title);
+    DisplayWindow(std::string title);
 
     virtual void show() = 0;
 

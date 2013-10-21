@@ -9,7 +9,7 @@
 
 using namespace cv;
 
-VideoWindow::VideoWindow(const std::string &title, const char* path):ImageWindow(title) {
+VideoWindow::VideoWindow(const std::string &title, const char* path):DisplayWindow(title) {
     capture = new VideoCapture(path);
     frameNumber = 0;
 }
