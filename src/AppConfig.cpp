@@ -8,4 +8,4 @@
 
 int AppConfig::argc = 0;
 char** AppConfig::argv = 0;
-std::string AppConfig::outputDir = "./";
+char* AppConfig::outputDir = "./";

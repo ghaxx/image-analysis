@@ -14,7 +14,7 @@ class AppConfig {
 public:
     static int argc;
     static char** argv;
-    static std::string outputDir;
+    static char* outputDir;
 };
 
 
