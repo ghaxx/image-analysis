@@ -9,9 +9,9 @@
 
 using namespace cv;
 
-DisplayWindow::DisplayWindow(std::string title) {
+DisplayWindow::DisplayWindow(const char* title) {
     this->title = title;
-    namedWindow(title.c_str(), CV_WINDOW_AUTOSIZE);
+    namedWindow(title, CV_WINDOW_AUTOSIZE);
 }
 
 void DisplayWindow::control(char key) {
@@ -26,6 +26,10 @@ void DisplayWindow::setApp(App *app) {
     DisplayWindow::app = app;
 }
 
-const std::string &DisplayWindow::getTitle() const {
+const char* DisplayWindow::getTitle() const {
     return title;
+}
+
+DisplayWindow::~DisplayWindow() {
+    printf("Deleting window\n");
 }

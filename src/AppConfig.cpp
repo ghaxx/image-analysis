@@ -8,4 +8,4 @@
 
 int AppConfig::argc = 0;
 char** AppConfig::argv = 0;
-char* AppConfig::outputDir = "/Users/ghaxx/Development/Image Processing/Image Analysis/out";
+const char* AppConfig::outputDir = "/Users/ghaxx/Development/Image Processing/Image Analysis/out";

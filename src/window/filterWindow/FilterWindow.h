@@ -11,20 +11,16 @@
 #import "Transformation.h"
 
 class FilterWindow : public DisplayWindow {
-    Transformation *t;
+    std::vector<Transformation *> *t;
 
-    SynchronizedVideoCapture* capture;
 public:
+    FilterWindow(const char* title, Transformation *transformation);
 
-    FilterWindow(const std::string title, Transformation *t);
+    FilterWindow(const char* title, std::vector<Transformation *> *t = 0);
 
     virtual ~FilterWindow();
 
-
-    virtual void show() override;
-
-
-    Transformation *getT() const;
+    std::vector<Transformation *> *getT() const;
 };
 
 

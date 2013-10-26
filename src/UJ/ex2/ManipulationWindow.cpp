@@ -5,10 +5,12 @@
 
 
 #include "ManipulationWindow.h"
-#import "App.h"
+#include "App.h"
+#include "SharpenWithGaussian.h"
 
 
-ManipulationWindow::ManipulationWindow(std::string title) : FilterWindow(title, new LinearTransformation()) {
+ManipulationWindow::ManipulationWindow(const char* title) : FilterWindow(title, new std::vector<Transformation *>()) {
+    getT()->push_back(new LinearTransformation());
     capture = SynchronizedVideoCapture::getInstance();
 }
 
@@ -16,16 +18,21 @@ void ManipulationWindow::show() {
     cv::Mat mat;
     capture->read(mat);
     App::debug("Manipulation\n");
-    cv::Mat image(getT()->transform(mat));
+    cv::Mat transformed(mat);
+
+    for (std::vector<Transformation *>::iterator it = getT()->begin(); it != getT()->end(); ++it) {
+        transformed = (*it)->transform(transformed);
+    }
+
     char a[100];
     sprintf(a, "Multiply by %.2f", getLT()->mult);
-    cv::putText(image, a, cvPoint(10,30), cv::FONT_HERSHEY_COMPLEX_SMALL, 0.8, cvScalar(200,200,250), 1, CV_AA);
+    cv::putText(transformed, a, cvPoint(10, 30), cv::FONT_HERSHEY_COMPLEX_SMALL, 0.8, cvScalar(200, 200, 250), 1, CV_AA);
     sprintf(a, "Add: %d", getLT()->add);
-    cv::putText(image, a, cvPoint(10,70), cv::FONT_HERSHEY_COMPLEX_SMALL, 0.8, cvScalar(200,200,250), 1, CV_AA);
-
-    imshow(getTitle().c_str(), image);
+    cv::putText(transformed, a, cvPoint(10, 70), cv::FONT_HERSHEY_COMPLEX_SMALL, 0.8, cvScalar(200, 200, 250), 1, CV_AA);
+    SharpenWithGaussian s;
+    imshow(getTitle(), s.transform(transformed));
     mat.release();
-    image.release();
+    transformed.release();
 }
 
 
@@ -48,5 +55,5 @@ void ManipulationWindow::reset() {
 }
 
 LinearTransformation *ManipulationWindow::getLT() {
-    return (LinearTransformation*) getT();
+    return (LinearTransformation *) getT();
 }

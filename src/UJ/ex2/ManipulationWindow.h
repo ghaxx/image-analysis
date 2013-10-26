@@ -12,11 +12,10 @@
 #import "LinearTransformation.h"
 
 class ManipulationWindow : public FilterWindow {
-    SynchronizedVideoCapture* capture;
+    SynchronizedVideoCapture *capture;
 
 public:
-
-    ManipulationWindow(std::string title);
+    ManipulationWindow(const char* title);
 
     virtual void show() override;
 

@@ -8,9 +8,18 @@
 #include "VideoWindow.h"
 #include "CameraCaptureWindow.h"
 #include "SynchronizedVideoCapture.h"
-#include "ManipulationWindow.h"
 #include "HighestValue.h"
 #include "AppConfig.h"
+#include "GrayScale.h"
+#include "Lightness.h"
+#include "ImageFilterWindow.h"
+#include "SharpenWithGaussian.h"
+#include "SharpenWithMatrix.h"
+#include "VideoFilterWindow.h"
+#include "CameraFilterWindow.h"
+#include "TransformVideo.h"
+#include "Image4.h"
+#include "Window4.h"
 
 using namespace cv;
 
@@ -20,14 +29,37 @@ App::App() {
 }
 
 void App::run() {
+    // Ex. 2
 //    registerWindow(new ManipulationWindow("Manipulation Window"));
+//    registerWindow(new CameraFilterWindow("Original", new Lightness()));
 //    registerWindow(new FilterWindow("Highest Value", new HighestValue()));
+//    registerWindow(new FilterWindow("Lightness", new Lightness()));
 //    registerWindow(new FilterWindow("Gray Scale", new GrayScale()));
+
+    // Ex. 3
 //    registerWindow(new VideoWindow("Video", "/Users/ghaxx/a.avi"));
-    registerWindow(new CameraCaptureWindow("Video Capture"));
+
+    // Ex. 4
+//    registerWindow(new ImageFilterWindow("Zamek", "/Users/ghaxx/4.jpg", 1, t));
+//    registerWindow(new ImageFilterWindow("Zamek - sharpened", "/Users/ghaxx/4.jpg", 2, t2));
+//    registerWindow(new VideoFilterWindow("Video", "/Users/ghaxx/4.avi", 1, t));
+//    registerWindow(new VideoFilterWindow("Video - sharpened", "/Users/ghaxx/4.avi", t2));
+//    new TransformVideo(2, t2, "/Users/ghaxx/4.avi", "/Users/ghaxx/4-t.avi");
+
+    std::vector<Transformation*> *t1 = new std::vector<Transformation*>();
+    t1->push_back(new Lightness());
+
+    std::vector<Transformation*> *t2 = new std::vector<Transformation*>();
+    t2->push_back(new Lightness());
+    t2->push_back(new SharpenWithMatrix());
+
+//    registerWindow(new CameraFilterWindow("Camera", t1));
+//    registerWindow(new CameraFilterWindow("Camera - sharpened", t2));
+    registerWindow(new Window4());
+//    registerWindow(new Image4());
+//    registerWindow(new CameraCaptureWindow("Video Capture"));
 
     do {
-        debug("-- Loop -------------\n");
         capture->refresh();
 
         for(std::vector<DisplayWindow *>::iterator it = windows.begin(); it != windows.end(); ++it) {

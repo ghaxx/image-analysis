@@ -9,7 +9,7 @@
 
 using namespace cv;
 
-VideoWindow::VideoWindow(const std::string &title, const char* path):DisplayWindow(title) {
+VideoWindow::VideoWindow(const char* title, const char* path):DisplayWindow(title) {
     capture = new VideoCapture(path);
     frameNumber = 0;
 }
@@ -39,7 +39,7 @@ void VideoWindow::show() {
     sprintf(a, "%.0fx%.0f@%.2fFPS", width, height, fps);
     cv::putText(image, a, cvPoint(10,15), cv::FONT_HERSHEY_PLAIN, 1, cvScalar(120,120,250), 1, CV_AA);
 
-    imshow(getTitle().c_str(), image);
+    imshow(getTitle(), image);
     frameNumber++;
 }
 

@@ -8,18 +8,17 @@
 #ifndef __ImageWindow_H_
 #define __ImageWindow_H_
 
-#include <string>
 #include <opencv/cv.h>
 #import "main.h"
 #include "App.h"
 #include "SynchronizedVideoCapture.h"
 
 class DisplayWindow {
-    std::string title;
+    const char* title;
     App* app;
 
 public:
-    DisplayWindow(std::string title);
+    DisplayWindow(const char* title);
 
     virtual void show() = 0;
 
@@ -29,7 +28,9 @@ public:
 
     void setApp(App *app);
 
-    const std::string & getTitle() const;
+    const char* getTitle() const;
+
+    virtual ~DisplayWindow();
 };
 
 

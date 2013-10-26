@@ -8,26 +8,19 @@
 #import "App.h"
 
 
-FilterWindow::FilterWindow(const std::string title, Transformation *t):DisplayWindow(title) {
+FilterWindow::FilterWindow(const char* title, std::vector<Transformation*>* t):DisplayWindow(title) {
     this->t = t;
-    capture = SynchronizedVideoCapture::getInstance();
 }
 
 FilterWindow::~FilterWindow() {
     delete t;
 }
 
-void FilterWindow::show() {
-    cv::Mat mat;
-    capture->read(mat);
-    App::debug("Filter\n");
-    cv::Mat transformed = t->transform(mat);
-    imshow(getTitle().c_str(), transformed);
-    mat.release();
-    transformed.release();
-}
-
-Transformation* FilterWindow::getT() const {
+std::vector<Transformation*>* FilterWindow::getT() const {
     return t;
 }
 
+FilterWindow::FilterWindow(const char* title, Transformation* transformation):DisplayWindow(title) {
+    this->t = new std::vector<Transformation*>();
+    this->t->push_back(transformation);
+}

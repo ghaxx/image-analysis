@@ -8,13 +8,11 @@
 #ifndef __AppArgs_H_
 #define __AppArgs_H_
 
-#include <string>
-
 class AppConfig {
 public:
     static int argc;
     static char** argv;
-    static char* outputDir;
+    static const char* outputDir;
 };
 
 

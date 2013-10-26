@@ -14,7 +14,7 @@ class VideoWindow : public DisplayWindow {
     int frameNumber;
 
 public:
-    VideoWindow(const std::string &title, const char* path);
+    VideoWindow(const char* title, const char* path);
 
     virtual ~VideoWindow();
 

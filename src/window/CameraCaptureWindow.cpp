@@ -10,7 +10,7 @@
 using namespace boost;
 using namespace cv;
 
-CameraCaptureWindow::CameraCaptureWindow(std::string title):DisplayWindow(title) {
+CameraCaptureWindow::CameraCaptureWindow(const char* title):DisplayWindow(title) {
     capture = SynchronizedVideoCapture::getInstance();
     captureFrame = false;
     timer = new progress_timer();
@@ -33,7 +33,7 @@ void CameraCaptureWindow::show() {
         params.push_back(80);
 
         char name[100];
-        sprintf(name, "%s/capture_%d.jpg", AppConfig::outputDir, time(0));
+        sprintf(name, "%s/capture_%li.jpg", AppConfig::outputDir, time(0));
         imwrite(name, image, params);
         cv::putText(image, "Saving...", cvPoint(10,30), cv::FONT_HERSHEY_PLAIN, 1, cvScalar(120,120,250), 1, CV_AA);
         captureFrame = false;
@@ -42,7 +42,7 @@ void CameraCaptureWindow::show() {
         sprintf(msg, "Captureing in: %.0f", timeout - elapsed);
         cv::putText(image, msg, cvPoint(10,30), cv::FONT_HERSHEY_PLAIN, 1, cvScalar(120,120,250), 1, CV_AA);
     }
-    imshow(getTitle().c_str(), image);
+    imshow(getTitle(), image);
     image.release();
 }
 
