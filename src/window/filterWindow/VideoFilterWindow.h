@@ -13,6 +13,8 @@
 
 
 class VideoFilterWindow : public FilterWindow {
+protected:
+    const char* path;
     cv::VideoCapture *capture;
 
 public:

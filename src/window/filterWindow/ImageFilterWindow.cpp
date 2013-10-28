@@ -17,7 +17,6 @@ ImageFilterWindow::ImageFilterWindow(const char* title, const char *imageFile, T
 void ImageFilterWindow::show() {
     if (_refresh) {
         _refresh = 0;
-        App::debug(getTitle());
         preprocess(image);
         if (getT() == 0) {
             postprocess(image);

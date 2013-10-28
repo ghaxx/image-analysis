@@ -12,9 +12,12 @@
 
 
 class ImageFilterWindow : public FilterWindow {
-    const char *imageFile;
-    cv::Mat image;
     bool _refresh;
+    cv::Mat image;
+
+protected:
+    const char *imageFile;
+
 public:
     ImageFilterWindow(const char* title, char const *imageFile, Transformation* transformation);
 

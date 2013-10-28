@@ -20,7 +20,6 @@ public:
 
     void saveImage();
 
-
     virtual void postprocess(cv::Mat &image) override;
 };
 

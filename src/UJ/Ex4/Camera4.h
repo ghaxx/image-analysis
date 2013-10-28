@@ -13,13 +13,17 @@
 #ifndef __Window4_H_
 #define __Window4_H_
 
-class Window4 : public CameraFilterWindow {
+class Camera4 : public CameraFilterWindow {
+    bool record;
+    cv::VideoWriter* writer;
+
 public:
 
-    Window4();
+    Camera4();
+
+    virtual ~Camera4();
 
     virtual void control(char key) override;
-
 
     virtual void postprocess(cv::Mat &image) override;
 };

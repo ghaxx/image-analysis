@@ -4,17 +4,18 @@
 //
 
 
-#include "Window4.h"
+#include "Camera4.h"
 #include "FilterChain.h"
 #include "AppConfig.h"
 
 using namespace cv;
 
-Window4::Window4():CameraFilterWindow("Camera - sharpened", new FilterChain(3, new LinearTransformation(), new Lightness(), new SharpenWithMatrix())) {
+Camera4::Camera4():CameraFilterWindow("Camera - sharpened", new FilterChain(3, new LinearTransformation(), new Lightness(), new SharpenWithMatrix())) {
     record = false;
+    writer = new VideoWriter();
 }
 
-void Window4::control(char key) {
+void Camera4::control(char key) {
     if (key == 'q')
         ((LinearTransformation *) (((FilterChain*) this->getT())->getTransformations()->at(0)))->add += 10;
     if (key == 'a')
@@ -41,8 +42,16 @@ void Window4::control(char key) {
     }
 }
 
-void Window4::postprocess(cv::Mat &image) {
-    if (record) {
+void Camera4::postprocess(cv::Mat &image) {
+    if (record && writer->isOpened()) {
+        writer->write(image);
         cv::putText(image, "Recording...", cvPoint(10, 30), cv::FONT_HERSHEY_COMPLEX_SMALL, 0.8, cvScalar(255, 255, 255), 1, CV_AA);
     }
+}
+
+Camera4::~Camera4() {
+    printf("Releasing video writer\n");
+    if (writer->isOpened())
+        writer->release();
+    delete writer;
 }

@@ -37,7 +37,8 @@
 		5DC3655017BA7017B2B99F21 /* ManipulationWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC3696117681871CD7D7151 /* ManipulationWindow.cpp */; };
 		5DC365518AD97E7FE4321798 /* LinearTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36A7F3037716509228B8A /* LinearTransformation.cpp */; };
 		5DC365905F8EF9C82B6743AF /* ImageFilterWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC3684FB6C8A1FD35CF0D45 /* ImageFilterWindow.cpp */; };
-		5DC3664C54CA2A6D4786C391 /* Window4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC3688B326BF801010A5898 /* Window4.cpp */; };
+		5DC365DF1A6542234793C785 /* Video4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36545F590D54057C20FBD /* Video4.cpp */; };
+		5DC3664C54CA2A6D4786C391 /* Camera4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC3688B326BF801010A5898 /* Camera4.cpp */; };
 		5DC36655D29BAF554E7994F7 /* SharpenWithGaussian.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC3680F1AB8DACF936B97BE /* SharpenWithGaussian.cpp */; };
 		5DC367F13DB406193CD35405 /* VideoWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36AECC8A7E5B725EB537D /* VideoWindow.cpp */; };
 		5DC3687E95E7305E4F50F936 /* VideoFilterWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36E2B046B390A9A06C89C /* VideoFilterWindow.cpp */; };
@@ -93,6 +94,7 @@
 		5DC360482377F56A6E1A5F5C /* FilterChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterChain.h; sourceTree = "<group>"; };
 		5DC360FD17ADE40BAE522528 /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App.cpp; sourceTree = "<group>"; };
 		5DC361394E335C9D5AEF7BFD /* SynchronizedVideoCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynchronizedVideoCapture.h; sourceTree = "<group>"; };
+		5DC362714BFEE335FC3E9C4D /* Video4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Video4.h; path = Ex4/Video4.h; sourceTree = "<group>"; };
 		5DC3629C1CE319C8199CEEDB /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
 		5DC362DE8AC3DAD3F11CDBD5 /* SharpenWithMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SharpenWithMatrix.cpp; sourceTree = "<group>"; };
 		5DC363A71AD51A9B829303FE /* LinearTransformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinearTransformation.h; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 		5DC364B4CC564D90D424FAC9 /* TransformVideo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TransformVideo.cpp; sourceTree = "<group>"; };
 		5DC364DF2F5EC889AC69063D /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
 		5DC3651BB2DA6C845CFD5DAE /* FilterChain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FilterChain.cpp; sourceTree = "<group>"; };
+		5DC36545F590D54057C20FBD /* Video4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Video4.cpp; path = Ex4/Video4.cpp; sourceTree = "<group>"; };
 		5DC365E409391739474F8FC0 /* CameraCaptureWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraCaptureWindow.cpp; sourceTree = "<group>"; };
 		5DC36633DB1CC31A10A7E4AE /* Lightness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lightness.h; sourceTree = "<group>"; };
 		5DC3668E1470F4D672E87E26 /* Transformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transformation.h; sourceTree = "<group>"; };
@@ -112,7 +115,7 @@
 		5DC368138B13DE5909E73F7A /* ManipulationWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManipulationWindow.h; sourceTree = "<group>"; };
 		5DC36821F7A0DAF81AFA0946 /* Image4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Image4.h; path = Ex4/Image4.h; sourceTree = "<group>"; };
 		5DC3684FB6C8A1FD35CF0D45 /* ImageFilterWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageFilterWindow.cpp; sourceTree = "<group>"; };
-		5DC3688B326BF801010A5898 /* Window4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Window4.cpp; path = Ex4/Window4.cpp; sourceTree = "<group>"; };
+		5DC3688B326BF801010A5898 /* Camera4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera4.cpp; path = Ex4/Camera4.cpp; sourceTree = "<group>"; };
 		5DC368A4223D59EEFD44FA9D /* VideoWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoWindow.h; sourceTree = "<group>"; };
 		5DC368E267CCCDD2BC7D1C0D /* SynchronizedVideoCapture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SynchronizedVideoCapture.cpp; sourceTree = "<group>"; };
 		5DC3696117681871CD7D7151 /* ManipulationWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ManipulationWindow.cpp; sourceTree = "<group>"; };
@@ -125,7 +128,7 @@
 		5DC36BAFB2902A8660FA019E /* CameraFilterWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraFilterWindow.cpp; sourceTree = "<group>"; };
 		5DC36BBCD35B02BDE4E06F6E /* VideoFilterWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoFilterWindow.h; sourceTree = "<group>"; };
 		5DC36C36609A45CD88B1F470 /* FilterWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterWindow.h; sourceTree = "<group>"; };
-		5DC36CD10CEFE1B4F0871BDF /* Window4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Window4.h; path = Ex4/Window4.h; sourceTree = "<group>"; };
+		5DC36CD10CEFE1B4F0871BDF /* Camera4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Camera4.h; path = Ex4/Camera4.h; sourceTree = "<group>"; };
 		5DC36D2938032CD0DFC3D880 /* Transformation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Transformation.cpp; sourceTree = "<group>"; };
 		5DC36E2B046B390A9A06C89C /* VideoFilterWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VideoFilterWindow.cpp; sourceTree = "<group>"; };
 		5DC36E8500E4F19C0025677D /* TransformVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransformVideo.h; sourceTree = "<group>"; };
@@ -298,10 +301,12 @@
 		5DC36B5A61F78C7C0644BB90 /* ex4 */ = {
 			isa = PBXGroup;
 			children = (
-				5DC3688B326BF801010A5898 /* Window4.cpp */,
-				5DC36CD10CEFE1B4F0871BDF /* Window4.h */,
+				5DC3688B326BF801010A5898 /* Camera4.cpp */,
+				5DC36CD10CEFE1B4F0871BDF /* Camera4.h */,
 				5DC36821F7A0DAF81AFA0946 /* Image4.h */,
 				5DC368066CE9B06B31DBC4C2 /* Image4.cpp */,
+				5DC362714BFEE335FC3E9C4D /* Video4.h */,
+				5DC36545F590D54057C20FBD /* Video4.cpp */,
 			);
 			name = ex4;
 			sourceTree = "<group>";
@@ -410,12 +415,13 @@
 				5DC3687E95E7305E4F50F936 /* VideoFilterWindow.cpp in Sources */,
 				5DC36453F7977B23D0D0988D /* CameraFilterWindow.cpp in Sources */,
 				5DC36B62C32C564FBAD9D30C /* TransformVideo.cpp in Sources */,
-				5DC3664C54CA2A6D4786C391 /* Window4.cpp in Sources */,
+				5DC3664C54CA2A6D4786C391 /* Camera4.cpp in Sources */,
 				5DC36A1E862BAF4B3C65E0C7 /* Image4.cpp in Sources */,
 				5DC3655017BA7017B2B99F21 /* ManipulationWindow.cpp in Sources */,
 				5DC36C9782F6E8DD2981445D /* FilterChain.cpp in Sources */,
 				5DC367F13DB406193CD35405 /* VideoWindow.cpp in Sources */,
 				5DC36F8D57C5C44A605800C5 /* CameraCaptureWindow.cpp in Sources */,
+				5DC365DF1A6542234793C785 /* Video4.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

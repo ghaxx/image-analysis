@@ -8,13 +8,13 @@
 using namespace cv;
 
 VideoFilterWindow::VideoFilterWindow(const char* title, const char *path, Transformation* transformation):FilterWindow(title, transformation) {
+    this->path = path;
     capture = new VideoCapture(path);
 }
 
 void VideoFilterWindow::show() {
     Mat image;
     capture->read(image);
-    App::debug(getTitle());
     preprocess(image);
     if (getT() == 0) {
         postprocess(image);
