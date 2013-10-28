@@ -13,9 +13,10 @@
 class FilterWindow : public DisplayWindow {
     Transformation* t;
 
-public:
+protected:
     FilterWindow(const char* title, Transformation *transformation);
 
+public:
     virtual ~FilterWindow();
 
     Transformation* getT() const;

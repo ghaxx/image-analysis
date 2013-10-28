@@ -12,13 +12,16 @@
 
 
 class Image4:public ImageFilterWindow {
-
+    bool save;
 public:
     Image4();
 
     virtual void control(char key) override;
 
     void saveImage();
+
+
+    virtual void postprocess(cv::Mat &image) override;
 };
 
 

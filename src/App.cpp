@@ -39,24 +39,10 @@ void App::run() {
 //    registerWindow(new VideoWindow("Video", "/Users/ghaxx/a.avi"));
 
     // Ex. 4
-//    registerWindow(new ImageFilterWindow("Zamek", "/Users/ghaxx/4.jpg", c1));
-//    registerWindow(new ImageFilterWindow("Zamek - sharpened", "/Users/ghaxx/4.jpg", c2));
-//    registerWindow(new VideoFilterWindow("Video", "/Users/ghaxx/4.avi", c));
-//    registerWindow(new VideoFilterWindow("Video - sharpened", "/Users/ghaxx/4.avi", c2));
-//    new TransformVideo(2, t2, "/Users/ghaxx/4.avi", "/Users/ghaxx/4-t.avi");
-
-    std::vector<Transformation *> *t1 = new std::vector<Transformation *>();
-    t1->push_back(new Lightness());
-    FilterChain* c1 = new FilterChain(t1);
-
-    FilterChain* c2 = new FilterChain(2, new Lightness(), new SharpenWithMatrix());
-
-    new TransformVideo(c2, AppConfig::inputDir + "/4.avi", AppConfig::outputDir + "/4-new.avi");
-//    registerWindow(new CameraFilterWindow("Camera", c1));
-//    registerWindow(new CameraFilterWindow("Camera - sharpened", c2));
+//    FilterChain* c2 = new FilterChain(2, new Lightness(), new SharpenWithMatrix());
+//    new TransformVideo(c2, AppConfig::inputDir + "/4.avi", AppConfig::outputDir + "/4-new.avi");
 //    registerWindow(new Window4());
-//    registerWindow(new Image4());
-//    registerWindow(new CameraCaptureWindow("Video Capture"));
+    registerWindow(new Image4());
 
     if (windows.size() > 0)
         do {

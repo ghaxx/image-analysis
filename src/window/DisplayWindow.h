@@ -17,9 +17,10 @@ class DisplayWindow {
     const char* title;
     App* app;
 
-public:
+protected:
     DisplayWindow(const char* title);
 
+public:
     virtual void show() = 0;
 
     virtual void control(char key);

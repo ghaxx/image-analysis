@@ -12,7 +12,8 @@
 
 using namespace std;
 
-Image4::Image4():ImageFilterWindow("Zamek", "/Users/ghaxx/4.jpg", new FilterChain(3, new LinearTransformation(), new Lightness(), new SharpenWithMatrix())) {
+Image4::Image4():ImageFilterWindow("Zamek", (AppConfig::inputDir + "/4.jpg").c_str(), new FilterChain(3, new LinearTransformation(), new Lightness(), new SharpenWithMatrix())) {
+    save = false;
 }
 
 void Image4::control(char key) {
@@ -36,6 +37,7 @@ void Image4::control(char key) {
 }
 
 void Image4::saveImage() {
+    save = true;
     cv::Mat transformed(getT()->transform(getImage()));
 
     vector<int> params;
@@ -45,4 +47,12 @@ void Image4::saveImage() {
     sprintf(name, "%s/zamek_%li.jpg", AppConfig::outputDir.c_str(), time(0));
     imwrite(name, transformed, params);
     transformed.release();
+}
+
+void Image4::postprocess(cv::Mat &image) {
+    if (save) {
+        save = false;
+        cv::putText(image, "Saved", cvPoint(10, 30), cv::FONT_HERSHEY_COMPLEX_SMALL, 0.8, cvScalar(0, 0, 0), 1, CV_AA);
+        refresh();
+    }
 }
