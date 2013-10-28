@@ -56,11 +56,11 @@ void App::run() {
     t2->push_back(new SharpenWithMatrix());
     FilterChain* c2 = new FilterChain(t2);
 
-    new TransformVideo(c2, "/Users/ghaxx/4.avi", "/Users/ghaxx/4-new.avi");
+//    new TransformVideo(c2, "/Users/ghaxx/4.avi", "/Users/ghaxx/4-new.avi");
 
 //    registerWindow(new CameraFilterWindow("Camera", c1));
 //    registerWindow(new CameraFilterWindow("Camera - sharpened", c2));
-//    registerWindow(new Window4());
+    registerWindow(new Window4());
 //    registerWindow(new Image4());
 //    registerWindow(new CameraCaptureWindow("Video Capture"));
 
