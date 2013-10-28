@@ -8,28 +8,26 @@
 #include "Lightness.h"
 #include "SharpenWithMatrix.h"
 #include "AppConfig.h"
+#include "FilterChain.h"
 
 using namespace std;
 
-Image4::Image4():ImageFilterWindow("Zamek", "/Users/ghaxx/4.jpg", new vector<Transformation *>()) {
-    getT()->push_back(new LinearTransformation());
-    getT()->push_back(new Lightness());
-    getT()->push_back(new SharpenWithMatrix());
+Image4::Image4():ImageFilterWindow("Zamek", "/Users/ghaxx/4.jpg", new FilterChain(3, new LinearTransformation(), new Lightness(), new SharpenWithMatrix())) {
 }
 
 void Image4::control(char key) {
     if (key == 'q')
-        ((LinearTransformation *) (this->getT()->at(0)))->add += 10;
+        ((LinearTransformation *) (((FilterChain*) this->getT())->getTransformations()->at(0)))->add += 10;
     if (key == 'a')
-        ((LinearTransformation *) (this->getT()->at(0)))->add -= 10;
+        ((LinearTransformation *) (((FilterChain*) this->getT())->getTransformations()->at(0)))->add -= 10;
     if (key == 'w')
-        ((LinearTransformation *) (this->getT()->at(0)))->mult += 0.1;
+        ((LinearTransformation *) (((FilterChain*) this->getT())->getTransformations()->at(0)))->mult += 0.1;
     if (key == 's')
-        ((LinearTransformation *) (this->getT()->at(0)))->mult -= 0.1;
+        ((LinearTransformation *) (((FilterChain*) this->getT())->getTransformations()->at(0)))->mult -= 0.1;
     if (key == 'e')
-        ((SharpenWithMatrix *) (this->getT()->at(2)))->mult += 0.1;
+        ((SharpenWithMatrix *) (((FilterChain*) this->getT())->getTransformations()->at(2)))->mult += 0.1;
     if (key == 'd')
-        ((SharpenWithMatrix *) (this->getT()->at(2)))->mult -= 0.1;
+        ((SharpenWithMatrix *) (((FilterChain*) this->getT())->getTransformations()->at(2)))->mult -= 0.1;
     if (key == ' ')
         saveImage();
 
@@ -38,11 +36,7 @@ void Image4::control(char key) {
 }
 
 void Image4::saveImage() {
-    cv::Mat transformed(getImage());
-
-    for (std::vector<Transformation *>::iterator it = getT()->begin(); it != getT()->end(); ++it) {
-        transformed = (*it)->transform(transformed);
-    }
+    cv::Mat transformed(getT()->transform(getImage()));
 
     vector<int> params;
     params.push_back(CV_IMWRITE_JPEG_QUALITY);

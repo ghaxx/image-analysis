@@ -13,9 +13,9 @@
 #include <stdio.h>
 #include <math.h>
 
-#include <opencv/cv.h>
-#include <opencv/highgui.h>
-
+//#include <opencv/cv.h>
+//#include <opencv/highgui.h>
+#include <opencv2/opencv.hpp>
 
 #import "LinearTransformation.h"
 #import "DisplayWindow.h"

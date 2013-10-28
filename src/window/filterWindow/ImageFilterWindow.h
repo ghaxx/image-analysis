@@ -16,7 +16,7 @@ class ImageFilterWindow : public FilterWindow {
     cv::Mat image;
     bool _refresh;
 public:
-    ImageFilterWindow(const char* title, char const *imageFile, std::vector<Transformation *> *transformations);
+    ImageFilterWindow(const char* title, char const *imageFile, Transformation* transformation);
 
     virtual void show() override;
 

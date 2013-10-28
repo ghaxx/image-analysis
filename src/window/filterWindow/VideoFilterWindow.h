@@ -16,7 +16,7 @@ class VideoFilterWindow : public FilterWindow {
     cv::VideoCapture *capture;
 
 public:
-    VideoFilterWindow(const char* title, char const *path, std::vector<Transformation *> *transformations);
+    VideoFilterWindow(const char* title, char const *path, Transformation* transformation);
 
     virtual void show() override;
 };

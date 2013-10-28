@@ -44,6 +44,7 @@
 		5DC36A1E862BAF4B3C65E0C7 /* Image4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC368066CE9B06B31DBC4C2 /* Image4.cpp */; };
 		5DC36B62C32C564FBAD9D30C /* TransformVideo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC364B4CC564D90D424FAC9 /* TransformVideo.cpp */; };
 		5DC36B75B1B810AB27803D3F /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC360FD17ADE40BAE522528 /* App.cpp */; };
+		5DC36C9782F6E8DD2981445D /* FilterChain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC3651BB2DA6C845CFD5DAE /* FilterChain.cpp */; };
 		5DC36CB456BA08CDC0DD51DE /* SynchronizedVideoCapture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC368E267CCCDD2BC7D1C0D /* SynchronizedVideoCapture.cpp */; };
 		5DC36CE064F0A58AE02CDDBA /* HighestValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC3670520A452F6C9B9D232 /* HighestValue.cpp */; };
 		5DC36D47ABB640823410C484 /* FilterWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36F6E9CDDED87149D46A8 /* FilterWindow.cpp */; };
@@ -89,6 +90,7 @@
 		1CED0A0B181BA6BC00C2BB0D /* libopencv_videostab.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_videostab.2.4.6.dylib; path = ../../../../../usr/local/Cellar/opencv/2.4.6.1/lib/libopencv_videostab.2.4.6.dylib; sourceTree = "<group>"; };
 		3267260C3DF12B0F898CAA80 /* AppConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConfig.h; sourceTree = "<group>"; };
 		32672AD57FD2A1DE9D646E5E /* AppConfig.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppConfig.cpp; sourceTree = "<group>"; };
+		5DC360482377F56A6E1A5F5C /* FilterChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterChain.h; sourceTree = "<group>"; };
 		5DC360FD17ADE40BAE522528 /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App.cpp; sourceTree = "<group>"; };
 		5DC361394E335C9D5AEF7BFD /* SynchronizedVideoCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynchronizedVideoCapture.h; sourceTree = "<group>"; };
 		5DC3629C1CE319C8199CEEDB /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 		5DC364B4CC564D90D424FAC9 /* TransformVideo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TransformVideo.cpp; sourceTree = "<group>"; };
 		5DC364DF2F5EC889AC69063D /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
 		5DC3651B0CCE505FFBC56C95 /* VideoWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoWindow.h; sourceTree = "<group>"; };
+		5DC3651BB2DA6C845CFD5DAE /* FilterChain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FilterChain.cpp; sourceTree = "<group>"; };
 		5DC36633DB1CC31A10A7E4AE /* Lightness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lightness.h; sourceTree = "<group>"; };
 		5DC3668E1470F4D672E87E26 /* Transformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transformation.h; sourceTree = "<group>"; };
 		5DC366A5CCEB6143F570152C /* Lightness.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Lightness.cpp; sourceTree = "<group>"; };
@@ -267,6 +270,8 @@
 				5DC369AD7A486DBAD6AEA661 /* SharpenWithGaussian.h */,
 				5DC362DE8AC3DAD3F11CDBD5 /* SharpenWithMatrix.cpp */,
 				5DC363DADE280DA12371CA46 /* SharpenWithMatrix.h */,
+				5DC3651BB2DA6C845CFD5DAE /* FilterChain.cpp */,
+				5DC360482377F56A6E1A5F5C /* FilterChain.h */,
 			);
 			path = filter;
 			sourceTree = "<group>";
@@ -402,6 +407,7 @@
 				5DC3664C54CA2A6D4786C391 /* Window4.cpp in Sources */,
 				5DC36A1E862BAF4B3C65E0C7 /* Image4.cpp in Sources */,
 				5DC3655017BA7017B2B99F21 /* ManipulationWindow.cpp in Sources */,
+				5DC36C9782F6E8DD2981445D /* FilterChain.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,7 +487,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
-				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_CXX_LIBRARY = "libc++";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -503,7 +509,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
-				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_CXX_LIBRARY = "libc++";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,

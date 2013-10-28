@@ -9,8 +9,7 @@
 #include "SharpenWithGaussian.h"
 
 
-ManipulationWindow::ManipulationWindow(const char* title) : FilterWindow(title, new std::vector<Transformation *>()) {
-    getT()->push_back(new LinearTransformation());
+ManipulationWindow::ManipulationWindow(const char* title) : FilterWindow(title, new LinearTransformation()) {
     capture = SynchronizedVideoCapture::getInstance();
 }
 
@@ -18,11 +17,7 @@ void ManipulationWindow::show() {
     cv::Mat mat;
     capture->read(mat);
     App::debug("Manipulation\n");
-    cv::Mat transformed(mat);
-
-    for (std::vector<Transformation *>::iterator it = getT()->begin(); it != getT()->end(); ++it) {
-        transformed = (*it)->transform(transformed);
-    }
+    cv::Mat transformed(getT()->transform(mat));
 
     char a[100];
     sprintf(a, "Multiply by %.2f", getLT()->mult);

@@ -11,16 +11,14 @@
 #import "Transformation.h"
 
 class FilterWindow : public DisplayWindow {
-    std::vector<Transformation *> *t;
+    Transformation* t;
 
 public:
     FilterWindow(const char* title, Transformation *transformation);
 
-    FilterWindow(const char* title, std::vector<Transformation *> *t = 0);
-
     virtual ~FilterWindow();
 
-    std::vector<Transformation *> *getT() const;
+    Transformation* getT() const;
 };
 
 

@@ -20,6 +20,7 @@
 #include "TransformVideo.h"
 #include "Image4.h"
 #include "Window4.h"
+#include "FilterChain.h"
 
 using namespace cv;
 
@@ -40,37 +41,42 @@ void App::run() {
 //    registerWindow(new VideoWindow("Video", "/Users/ghaxx/a.avi"));
 
     // Ex. 4
-//    registerWindow(new ImageFilterWindow("Zamek", "/Users/ghaxx/4.jpg", 1, t));
-//    registerWindow(new ImageFilterWindow("Zamek - sharpened", "/Users/ghaxx/4.jpg", 2, t2));
-//    registerWindow(new VideoFilterWindow("Video", "/Users/ghaxx/4.avi", 1, t));
-//    registerWindow(new VideoFilterWindow("Video - sharpened", "/Users/ghaxx/4.avi", t2));
+//    registerWindow(new ImageFilterWindow("Zamek", "/Users/ghaxx/4.jpg", c1));
+//    registerWindow(new ImageFilterWindow("Zamek - sharpened", "/Users/ghaxx/4.jpg", c2));
+//    registerWindow(new VideoFilterWindow("Video", "/Users/ghaxx/4.avi", c));
+//    registerWindow(new VideoFilterWindow("Video - sharpened", "/Users/ghaxx/4.avi", c2));
 //    new TransformVideo(2, t2, "/Users/ghaxx/4.avi", "/Users/ghaxx/4-t.avi");
 
-    std::vector<Transformation*> *t1 = new std::vector<Transformation*>();
+    std::vector<Transformation *> *t1 = new std::vector<Transformation *>();
     t1->push_back(new Lightness());
+    FilterChain* c1 = new FilterChain(t1);
 
-    std::vector<Transformation*> *t2 = new std::vector<Transformation*>();
+    std::vector<Transformation *> *t2 = new std::vector<Transformation *>();
     t2->push_back(new Lightness());
     t2->push_back(new SharpenWithMatrix());
+    FilterChain* c2 = new FilterChain(t2);
 
-//    registerWindow(new CameraFilterWindow("Camera", t1));
-//    registerWindow(new CameraFilterWindow("Camera - sharpened", t2));
-    registerWindow(new Window4());
+    new TransformVideo(c2, "/Users/ghaxx/4.avi", "/Users/ghaxx/4-new.avi");
+
+//    registerWindow(new CameraFilterWindow("Camera", c1));
+//    registerWindow(new CameraFilterWindow("Camera - sharpened", c2));
+//    registerWindow(new Window4());
 //    registerWindow(new Image4());
 //    registerWindow(new CameraCaptureWindow("Video Capture"));
 
-    do {
-        capture->refresh();
+    if (windows.size() > 0)
+        do {
+            capture->refresh();
 
-        for(std::vector<DisplayWindow *>::iterator it = windows.begin(); it != windows.end(); ++it) {
-            try {
-                (*it)->show();
-            } catch (Exception ignore) {}
-        }
-        this->catchAction();
-    } while (!this->done);
+            for (std::vector<DisplayWindow *>::iterator it = windows.begin(); it != windows.end(); ++it) {
+                try {
+                    (*it)->show();
+                } catch (Exception ignore) {}
+            }
+            this->catchAction();
+        } while (!this->done);
 
-    for(std::vector<DisplayWindow *>::iterator it = windows.begin(); it != windows.end(); ++it) {
+    for (std::vector<DisplayWindow *>::iterator it = windows.begin(); it != windows.end(); ++it) {
         delete *it;
     }
 }
@@ -80,12 +86,12 @@ void App::catchAction() {
     if (key == 27)
         done = true;
 
-    for(std::vector<DisplayWindow *>::iterator it = windows.begin(); it != windows.end(); ++it) {
+    for (std::vector<DisplayWindow *>::iterator it = windows.begin(); it != windows.end(); ++it) {
         (*it)->control(key);
     }
 }
 
-void App::registerWindow(DisplayWindow * window) {
+void App::registerWindow(DisplayWindow *window) {
     window->setApp(this);
     windows.push_back(window);
 }

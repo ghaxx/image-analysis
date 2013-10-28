@@ -12,13 +12,13 @@
 
 
 class TransformVideo {
-    int number;
-    Transformation** transformations;
+    Transformation* transformation;
     const char* source;
     const char* dest;
+
 public:
 
-    TransformVideo(int number, Transformation **transformations, char const *source, char const *dest);
+    TransformVideo(Transformation *transformation, char const *source, char const *dest);
 };
 
 

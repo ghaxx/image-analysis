@@ -7,7 +7,7 @@
 #include "VideoFilterWindow.h"
 using namespace cv;
 
-VideoFilterWindow::VideoFilterWindow(const char* title, const char *path, std::vector<Transformation*>* transformations):FilterWindow(title, transformations) {
+VideoFilterWindow::VideoFilterWindow(const char* title, const char *path, Transformation* transformation):FilterWindow(title, transformation) {
     capture = new VideoCapture(path);
 }
 
@@ -19,11 +19,7 @@ void VideoFilterWindow::show() {
         imshow(getTitle(), image);
         image.release();
     } else {
-        cv::Mat transformed(image);
-
-        for(std::vector<Transformation *>::iterator it = getT()->begin(); it != getT()->end(); ++it) {
-            transformed = (*it)->transform(transformed);
-        }
+        cv::Mat transformed = getT()->transform(image);
         imshow(getTitle(), transformed);
         image.release();
         transformed.release();
