@@ -9,25 +9,28 @@
 using namespace cv;
 
 CameraFilterWindow::CameraFilterWindow(const char* title, Transformation* transformation):FilterWindow(title, transformation) {
-
     capture = SynchronizedVideoCapture::getInstance();
     printf("Opening video writer\n");
     writer = new VideoWriter();
-    writer->open("/Users/ghaxx/camera.avi", 0, 15.0, Size(640, 480), true);
 }
 
 void CameraFilterWindow::show() {
     Mat image;
     capture->read(image);
+    preprocess(image);
     App::debug(getTitle());
     if (getT() == 0) {
+        if (record && writer->isOpened())
+            writer->write(image);
+        postprocess(image);
         imshow(getTitle(), image);
         image.release();
     } else {
         cv::Mat transformed = getT()->transform(image);
-
         cv::resize(transformed, transformed, cv::Size(640, 480));
-        writer->write(transformed);
+        if (record)
+            writer->write(transformed);
+        postprocess(transformed);
         imshow(getTitle(), transformed);
         image.release();
         transformed.release();
@@ -36,6 +39,7 @@ void CameraFilterWindow::show() {
 
 CameraFilterWindow::~CameraFilterWindow() {
     printf("Releasing video writer\n");
-    writer->release();
+    if (writer->isOpened())
+        writer->release();
     delete writer;
 }

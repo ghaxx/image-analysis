@@ -19,6 +19,9 @@ public:
     virtual ~FilterWindow();
 
     Transformation* getT() const;
+
+    virtual void preprocess(cv::Mat &image);
+    virtual void postprocess(cv::Mat &image);
 };
 
 

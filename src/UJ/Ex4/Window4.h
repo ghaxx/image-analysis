@@ -14,12 +14,16 @@
 #define __Window4_H_
 
 class Window4 : public CameraFilterWindow {
+    bool record;
 
 public:
 
     Window4();
 
     virtual void control(char key) override;
+
+
+    virtual void postprocess(cv::Mat &image) override;
 };
 
 

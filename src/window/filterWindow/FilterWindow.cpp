@@ -20,3 +20,11 @@ Transformation* FilterWindow::getT() const {
 FilterWindow::FilterWindow(const char* title, Transformation* transformation):DisplayWindow(title) {
     this->t = transformation;
 }
+
+void FilterWindow::preprocess(cv::Mat &image) {
+
+}
+
+void FilterWindow::postprocess(cv::Mat &image) {
+
+}

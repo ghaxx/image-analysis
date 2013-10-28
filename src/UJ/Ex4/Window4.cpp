@@ -7,7 +7,10 @@
 #include "Window4.h"
 #include "FilterChain.h"
 
+using namespace cv;
+
 Window4::Window4():CameraFilterWindow("Camera - sharpened", new FilterChain(3, new LinearTransformation(), new Lightness(), new SharpenWithMatrix())) {
+    record = false;
 }
 
 void Window4::control(char key) {
@@ -23,4 +26,16 @@ void Window4::control(char key) {
         ((SharpenWithMatrix *) (((FilterChain*) this->getT())->getTransformations()->at(2)))->mult += 0.1;
     if (key == 'd')
         ((SharpenWithMatrix *) (((FilterChain*) this->getT())->getTransformations()->at(2)))->mult -= 0.1;
+    if (key == ' ')
+        record = !record;
+    if (record)
+        writer->open("/Users/ghaxx/camera.avi", 0, 30.0, Size(640, 480), true);
+    else
+        writer->release();
+}
+
+void Window4::postprocess(cv::Mat &image) {
+    if (record) {
+        cv::putText(image, "Recording...", cvPoint(10, 30), cv::FONT_HERSHEY_COMPLEX_SMALL, 0.8, cvScalar(255, 255, 255), 1, CV_AA);
+    }
 }

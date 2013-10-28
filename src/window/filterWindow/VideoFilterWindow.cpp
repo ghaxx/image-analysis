@@ -15,11 +15,14 @@ void VideoFilterWindow::show() {
     Mat image;
     capture->read(image);
     App::debug(getTitle());
+    preprocess(image);
     if (getT() == 0) {
+        postprocess(image);
         imshow(getTitle(), image);
         image.release();
     } else {
         cv::Mat transformed = getT()->transform(image);
+        postprocess(transformed);
         imshow(getTitle(), transformed);
         image.release();
         transformed.release();

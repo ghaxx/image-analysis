@@ -24,11 +24,11 @@ TransformVideo::TransformVideo(Transformation *transformation, char const *sourc
     printf("fourcc: %d\n", fourcc);
 
     VideoWriter writer(dest, fourcc, fps, Size(width, height), true);
-//    writer.open(dest, fourcc, fps, Size(width, height), true);
 
     vector<int> params;
     params.push_back(CV_IMWRITE_JPEG_QUALITY);
     params.push_back(80);
+
     cv::Mat transformed;
     while (capture.get(CV_CAP_PROP_POS_FRAMES) < capture.get(CV_CAP_PROP_FRAME_COUNT)) {
         capture.read(transformed);
@@ -39,9 +39,6 @@ TransformVideo::TransformVideo(Transformation *transformation, char const *sourc
         writer.write(transformed);
     }
     writer.release();
-//    char a[300];
-//    sprintf(a, "/usr/local/bin/ffmpeg -y -r 25 -q:v 2 -i /Users/ghaxx/img/capture_%%d.000000.jpg %s", dest);
-//    system(a);
     t = ((double) getTickCount() - t) / getTickFrequency();
-    printf("Sharpened in %fs\n", t);
+    printf("Sharpened in %.3fs\n", t);
 }
