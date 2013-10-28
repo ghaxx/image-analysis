@@ -14,7 +14,7 @@ class FilterWindow : public DisplayWindow {
     Transformation* t;
 
 protected:
-    FilterWindow(const char* title, Transformation *transformation);
+    FilterWindow(std::string title, Transformation *transformation);
 
 public:
     virtual ~FilterWindow();

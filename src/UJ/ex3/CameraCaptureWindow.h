@@ -19,7 +19,7 @@ class CameraCaptureWindow : public DisplayWindow {
     SynchronizedVideoCapture* capture;
 
 public:
-    CameraCaptureWindow(const char* title);
+    CameraCaptureWindow(std::string title);
 
     virtual void show() override;
 

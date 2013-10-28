@@ -8,7 +8,7 @@
 
 using namespace cv;
 
-ImageFilterWindow::ImageFilterWindow(const char* title, const char *imageFile, Transformation* transformation):FilterWindow(title, transformation) {
+ImageFilterWindow::ImageFilterWindow(std::string title, std::string imageFile, Transformation* transformation):FilterWindow(title, transformation) {
     this->imageFile = imageFile;
     image = imread(imageFile, CV_LOAD_IMAGE_COLOR);
     _refresh = TRUE;

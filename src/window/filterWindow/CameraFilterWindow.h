@@ -17,7 +17,7 @@ class CameraFilterWindow : public FilterWindow {
     SynchronizedVideoCapture *capture;
 
 public:
-    CameraFilterWindow(const char* title, Transformation* transformation);
+    CameraFilterWindow(std::string title, Transformation* transformation);
 
     virtual void show() override;
 

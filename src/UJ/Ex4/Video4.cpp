@@ -40,7 +40,7 @@ void Video4::control(char key) {
 void Video4::transformVideo() {
     char name[100];
     sprintf(name, (AppConfig::outputDir + "/4_%li.avi").c_str(), time(0));
-    new TransformVideo(getT(), (AppConfig::inputDir + "/4.avi"), string(name));
+    new TransformVideo(getT(), path, string(name));
 }
 
 void Video4::startRecording() {

@@ -9,7 +9,7 @@
 #include "SharpenWithGaussian.h"
 
 
-ManipulationWindow::ManipulationWindow(const char* title) : FilterWindow(title, new LinearTransformation()) {
+ManipulationWindow::ManipulationWindow(std::string title) : FilterWindow(title, new LinearTransformation()) {
     capture = SynchronizedVideoCapture::getInstance();
 }
 

@@ -17,7 +17,7 @@ Transformation* FilterWindow::getT() const {
     return t;
 }
 
-FilterWindow::FilterWindow(const char* title, Transformation* transformation):DisplayWindow(title) {
+FilterWindow::FilterWindow(std::string title, Transformation* transformation):DisplayWindow(title) {
     this->t = transformation;
 }
 

@@ -10,7 +10,7 @@
 using namespace boost;
 using namespace cv;
 
-CameraCaptureWindow::CameraCaptureWindow(const char* title):DisplayWindow(title) {
+CameraCaptureWindow::CameraCaptureWindow(std::string title):DisplayWindow(title) {
     capture = SynchronizedVideoCapture::getInstance();
     captureFrame = false;
     timer = new progress_timer();

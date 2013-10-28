@@ -8,7 +8,7 @@
 
 using namespace cv;
 
-CameraFilterWindow::CameraFilterWindow(const char* title, Transformation* transformation):FilterWindow(title, transformation) {
+CameraFilterWindow::CameraFilterWindow(std::string title, Transformation* transformation):FilterWindow(title, transformation) {
     capture = SynchronizedVideoCapture::getInstance();
 }
 

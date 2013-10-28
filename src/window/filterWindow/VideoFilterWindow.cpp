@@ -7,7 +7,7 @@
 #include "VideoFilterWindow.h"
 using namespace cv;
 
-VideoFilterWindow::VideoFilterWindow(const char* title, const char *path, Transformation* transformation):FilterWindow(title, transformation) {
+VideoFilterWindow::VideoFilterWindow(std::string title, std::string path, Transformation* transformation):FilterWindow(title, transformation) {
     this->path = path;
     capture = new VideoCapture(path);
 }

@@ -14,11 +14,11 @@
 
 class VideoFilterWindow : public FilterWindow {
 protected:
-    const char* path;
+    std::string path;
     cv::VideoCapture *capture;
 
 public:
-    VideoFilterWindow(const char* title, char const *path, Transformation* transformation);
+    VideoFilterWindow(std::string title, std::string path, Transformation* transformation);
 
     virtual void show() override;
 };

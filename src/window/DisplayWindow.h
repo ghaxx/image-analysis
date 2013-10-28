@@ -14,11 +14,11 @@
 #include "SynchronizedVideoCapture.h"
 
 class DisplayWindow {
-    const char* title;
+    std::string title;
     App* app;
 
 protected:
-    DisplayWindow(const char* title);
+    DisplayWindow(std::string title);
 
 public:
     virtual void show() = 0;
@@ -29,7 +29,7 @@ public:
 
     void setApp(App *app);
 
-    const char* getTitle() const;
+    std::string getTitle() const;
 
     virtual ~DisplayWindow();
 };

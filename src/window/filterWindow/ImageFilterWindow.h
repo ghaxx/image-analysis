@@ -16,10 +16,10 @@ class ImageFilterWindow : public FilterWindow {
     cv::Mat image;
 
 protected:
-    const char *imageFile;
+    std::string imageFile;
 
 public:
-    ImageFilterWindow(const char* title, char const *imageFile, Transformation* transformation);
+    ImageFilterWindow(std::string title, std::string imageFile, Transformation* transformation);
 
     virtual void show() override;
 

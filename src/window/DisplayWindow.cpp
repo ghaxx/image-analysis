@@ -9,7 +9,7 @@
 
 using namespace cv;
 
-DisplayWindow::DisplayWindow(const char* title) {
+DisplayWindow::DisplayWindow(string title) {
     this->title = title;
     namedWindow(title, CV_WINDOW_AUTOSIZE);
 }
@@ -26,7 +26,7 @@ void DisplayWindow::setApp(App *app) {
     DisplayWindow::app = app;
 }
 
-const char* DisplayWindow::getTitle() const {
+std::string DisplayWindow::getTitle() const {
     return title;
 }
 

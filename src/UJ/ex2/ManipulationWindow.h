@@ -15,7 +15,7 @@ class ManipulationWindow : public FilterWindow {
     SynchronizedVideoCapture *capture;
 
 public:
-    ManipulationWindow(const char* title);
+    ManipulationWindow(std::string title);
 
     virtual void show() override;
 
