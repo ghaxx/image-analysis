@@ -10,7 +10,6 @@ using namespace cv;
 
 CameraFilterWindow::CameraFilterWindow(const char* title, Transformation* transformation):FilterWindow(title, transformation) {
     capture = SynchronizedVideoCapture::getInstance();
-    printf("Opening video writer\n");
     writer = new VideoWriter();
 }
 
@@ -28,7 +27,7 @@ void CameraFilterWindow::show() {
     } else {
         cv::Mat transformed = getT()->transform(image);
         cv::resize(transformed, transformed, cv::Size(640, 480));
-        if (record)
+        if (record && writer->isOpened())
             writer->write(transformed);
         postprocess(transformed);
         imshow(getTitle(), transformed);

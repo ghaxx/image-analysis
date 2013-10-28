@@ -9,8 +9,9 @@
 #include <unistd.h>
 
 using namespace cv;
+using namespace std;
 
-TransformVideo::TransformVideo(Transformation *transformation, char const *source, char const *dest):transformation(transformation), source(source), dest(dest) {
+TransformVideo::TransformVideo(Transformation *transformation, string source, string dest):transformation(transformation), source(source), dest(dest) {
     double t = (double) getTickCount();
 
     Mat frame;

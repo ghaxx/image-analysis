@@ -12,15 +12,17 @@
 #define __FilterChain_H_
 
 
-class FilterChain: public Transformation {
-    std::vector<Transformation*>* transformations;
+class FilterChain : public Transformation {
+    std::vector<Transformation *> *transformations;
 
 public:
-    FilterChain(std::vector<Transformation*>* transformations);
+    FilterChain(std::vector<Transformation *> *transformations);
+
     FilterChain(int count, ...);
+
     virtual cv::Mat transform(cv::Mat image);
 
-    std::vector<Transformation *> * getTransformations() const;
+    std::vector<Transformation *> *getTransformations() const;
 };
 
 

@@ -8,11 +8,14 @@
 #ifndef __AppArgs_H_
 #define __AppArgs_H_
 
+#include <string>
+
 class AppConfig {
 public:
     static int argc;
     static char** argv;
-    static const char* outputDir;
+    static const std::string outputDir;
+    static const std::string inputDir;
 };
 
 

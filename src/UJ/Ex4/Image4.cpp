@@ -42,7 +42,7 @@ void Image4::saveImage() {
     params.push_back(CV_IMWRITE_JPEG_QUALITY);
     params.push_back(80);
     char name[100];
-    sprintf(name, "%s/zamek_%li.jpg", AppConfig::outputDir, time(0));
+    sprintf(name, "%s/zamek_%li.jpg", AppConfig::outputDir.c_str(), time(0));
     imwrite(name, transformed, params);
     transformed.release();
 }

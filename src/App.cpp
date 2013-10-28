@@ -33,11 +33,9 @@ void App::run() {
     // Ex. 2
 //    registerWindow(new ManipulationWindow("Manipulation Window"));
 //    registerWindow(new CameraFilterWindow("Original", new Lightness()));
-//    registerWindow(new FilterWindow("Highest Value", new HighestValue()));
-//    registerWindow(new FilterWindow("Lightness", new Lightness()));
-//    registerWindow(new FilterWindow("Gray Scale", new GrayScale()));
 
     // Ex. 3
+//    registerWindow(new CameraCaptureWindow("Video", "/Users/ghaxx/a.avi"));
 //    registerWindow(new VideoWindow("Video", "/Users/ghaxx/a.avi"));
 
     // Ex. 4
@@ -51,16 +49,12 @@ void App::run() {
     t1->push_back(new Lightness());
     FilterChain* c1 = new FilterChain(t1);
 
-    std::vector<Transformation *> *t2 = new std::vector<Transformation *>();
-    t2->push_back(new Lightness());
-    t2->push_back(new SharpenWithMatrix());
-    FilterChain* c2 = new FilterChain(t2);
+    FilterChain* c2 = new FilterChain(2, new Lightness(), new SharpenWithMatrix());
 
-//    new TransformVideo(c2, "/Users/ghaxx/4.avi", "/Users/ghaxx/4-new.avi");
-
+    new TransformVideo(c2, AppConfig::inputDir + "/4.avi", AppConfig::outputDir + "/4-new.avi");
 //    registerWindow(new CameraFilterWindow("Camera", c1));
 //    registerWindow(new CameraFilterWindow("Camera - sharpened", c2));
-    registerWindow(new Window4());
+//    registerWindow(new Window4());
 //    registerWindow(new Image4());
 //    registerWindow(new CameraCaptureWindow("Video Capture"));
 

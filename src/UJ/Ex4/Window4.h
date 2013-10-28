@@ -14,8 +14,6 @@
 #define __Window4_H_
 
 class Window4 : public CameraFilterWindow {
-    bool record;
-
 public:
 
     Window4();

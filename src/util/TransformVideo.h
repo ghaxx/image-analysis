@@ -13,12 +13,12 @@
 
 class TransformVideo {
     Transformation* transformation;
-    const char* source;
-    const char* dest;
+    std::string source;
+    std::string dest;
 
 public:
 
-    TransformVideo(Transformation *transformation, char const *source, char const *dest);
+    TransformVideo(Transformation *transformation, std::string source, std::string dest);
 };
 
 

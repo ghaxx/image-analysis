@@ -6,6 +6,7 @@
 
 #include "Window4.h"
 #include "FilterChain.h"
+#include "AppConfig.h"
 
 using namespace cv;
 
@@ -26,12 +27,18 @@ void Window4::control(char key) {
         ((SharpenWithMatrix *) (((FilterChain*) this->getT())->getTransformations()->at(2)))->mult += 0.1;
     if (key == 'd')
         ((SharpenWithMatrix *) (((FilterChain*) this->getT())->getTransformations()->at(2)))->mult -= 0.1;
-    if (key == ' ')
+    if (key == ' ') {
         record = !record;
-    if (record)
-        writer->open("/Users/ghaxx/camera.avi", 0, 30.0, Size(640, 480), true);
-    else
-        writer->release();
+        if (record) {
+            printf("Recording started\n");
+            char name[100];
+            sprintf(name, (AppConfig::inputDir + "/camera%li.avi").c_str(), time(0));
+            writer->open(name, 0, 15.0, Size(640, 480), true);
+        } else {
+            printf("Recording ended\n");
+            writer->release();
+        }
+    }
 }
 
 void Window4::postprocess(cv::Mat &image) {

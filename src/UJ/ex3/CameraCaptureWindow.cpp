@@ -33,7 +33,7 @@ void CameraCaptureWindow::show() {
         params.push_back(80);
 
         char name[100];
-        sprintf(name, "%s/capture_%li.jpg", AppConfig::outputDir, time(0));
+        sprintf(name, "%s/capture_%li.jpg", AppConfig::outputDir.c_str(), time(0));
         imwrite(name, image, params);
         cv::putText(image, "Saving...", cvPoint(10,30), cv::FONT_HERSHEY_PLAIN, 1, cvScalar(120,120,250), 1, CV_AA);
         captureFrame = false;

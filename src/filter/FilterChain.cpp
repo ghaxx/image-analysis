@@ -9,8 +9,6 @@
 using namespace cv;
 using namespace std;
 
-typedef Transformation* TYPE_TR_PTR;
-
 Mat FilterChain::transform(Mat image) {
     Mat transformed(image);
 
@@ -30,7 +28,7 @@ FilterChain::FilterChain(int count, ...) {
     va_list arguments;
     va_start(arguments, count);
     for (int i = 0; i < count; i++)
-        transformations->push_back(va_arg(arguments, TYPE_TR_PTR));
+        transformations->push_back(va_arg(arguments, Transformation *));
 }
 
 std::vector<Transformation *> *FilterChain::getTransformations() const {

@@ -8,4 +8,5 @@
 
 int AppConfig::argc = 0;
 char** AppConfig::argv = 0;
-const char* AppConfig::outputDir = "/Users/ghaxx/Development/Image Processing/Image Analysis/out";
+const std::string AppConfig::outputDir = std::string("/Users/ghaxx/Development/Image Processing/Image Analysis/out");
+const std::string AppConfig::inputDir = std::string("/Users/ghaxx/Development/Image Processing/Image Analysis/in");
