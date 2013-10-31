@@ -53,7 +53,7 @@ void App::run() {
             for (std::vector<DisplayWindow *>::iterator it = windows.begin(); it != windows.end(); ++it) {
                 try {
                     (*it)->show();
-                } catch (Exception ignore) {}
+                } catch (...) {}
             }
             this->catchAction();
         } while (!this->done);
