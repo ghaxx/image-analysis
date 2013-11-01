@@ -13,10 +13,8 @@ SynchronizedVideoCapture* SynchronizedVideoCapture::instance = 0;
 bool SynchronizedVideoCapture::read(cv::Mat &image) {
     bool result;
     if (!readNew) {
-        App::debug("Getting from buffer\n");
         result = true;
     } else {
-        App::debug("Getting new image from camera\n");
         readNew = false;
         result = VideoCapture::read(lastRead);
     }

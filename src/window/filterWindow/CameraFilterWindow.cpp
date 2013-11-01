@@ -22,7 +22,6 @@ void CameraFilterWindow::show() {
         image.release();
     } else {
         cv::Mat transformed = getT()->transform(image);
-        cv::resize(transformed, transformed, cv::Size(640, 480));
         postprocess(transformed);
         imshow(getTitle(), transformed);
         image.release();

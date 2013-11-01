@@ -22,6 +22,7 @@
 #include "Camera4.h"
 #include "FilterChain.h"
 #include "Video4.h"
+#include "SeeHandWindow.h"
 
 using namespace cv;
 
@@ -42,10 +43,11 @@ void App::run() {
     // Ex. 4
 //    FilterChain* c2 = new FilterChain(2, new Lightness(), new SharpenWithMatrix());
 //    new TransformVideo(c2, AppConfig::inputDir + "/4.avi", AppConfig::outputDir + "/4-new.avi");
-    registerWindow(new Camera4());
-    registerWindow(new Image4());
-    registerWindow(new Video4());
+//    registerWindow(new Camera4());
+//    registerWindow(new Image4());
+//    registerWindow(new Video4());
 
+    registerWindow(new SeeHandWindow());
     if (windows.size() > 0)
         do {
             capture->refresh();
@@ -64,7 +66,7 @@ void App::run() {
 }
 
 void App::catchAction() {
-    int key = waitKey(34);
+    int key = waitKey(10);
     if (key == 27)
         done = true;
 
