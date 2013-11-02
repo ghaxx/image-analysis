@@ -13,6 +13,7 @@
 
 class SeeHandWindow: public DisplayWindow {
     cv::Mat image;
+    cv::Mat result;
     SynchronizedVideoCapture* capture;
     cv::VideoWriter* writer;
     bool record = false;
@@ -30,6 +31,22 @@ public:
     virtual ~SeeHandWindow();
 
     void findObjects(cv::Mat &image);
+
+//    void onMouse( int event, int x, int y, int c, void* p);
+
+    cv::Mat const & getResult() const;
+
+    int getMinHue() const;
+
+    void setMinHue(int minHue);
+
+    int getMaxHue() const;
+
+    void setMaxHue(int maxHue);
+
+    int getBlurRadius() const;
+
+    void setBlurRadius(int blurRadius);
 };
 
 
