@@ -30,7 +30,7 @@ public:
 
     virtual ~SeeHandWindow();
 
-    void findObjects(cv::Mat &image);
+    void findObjects(cv::Mat &image, cv::Mat &thresh);
 
 //    void onMouse( int event, int x, int y, int c, void* p);
 

@@ -18,12 +18,15 @@ const int MAX_OBJECT_AREA = FRAME_HEIGHT * FRAME_WIDTH / 1.5;
 using namespace cv;
 int x = 0, y = 0;
 
-void SeeHandWindow::findObjects(Mat &thresh) {
-    //create structuring element that will be used to "dilate" and "erode" image.
-    //the element chosen here is a 3px by 3px rectangle
+// From image to black and white
+void SeeHandWindow::findObjects(Mat &image, Mat &thresh) {
+    Mat hsv;
+    cvtColor(image, hsv, CV_RGB2HSV);
+    inRange(hsv, Scalar(minHue, 0, 0), Scalar(maxHue, 255, 255), thresh);
 
-    cv::GaussianBlur(thresh, thresh, cv::Size(0, 0), blurRadius);
-//    cv::GaussianBlur(thresh, thresh, cv::Size(0, 0), blurRadius);
+
+    if (blurRadius > 0)
+        cv::GaussianBlur(thresh, thresh, cv::Size(0, 0), blurRadius);
     threshold(thresh, thresh, 0, 255, CV_THRESH_BINARY | THRESH_OTSU);
 
     //dilate with larger element so make sure object is nicely visible
@@ -32,9 +35,14 @@ void SeeHandWindow::findObjects(Mat &thresh) {
     erode(thresh, thresh, erodeElement);
     erode(thresh, thresh, erodeElement);
 
-    Mat dilateElement = getStructuringElement(MORPH_ELLIPSE, Size(6, 6));
-    dilate(thresh, thresh, dilateElement);
-    dilate(thresh, thresh, dilateElement);
+//    Mat dilateElement = getStructuringElement(MORPH_ELLIPSE, Size(9, 9));
+//    dilate(thresh, thresh, dilateElement);
+//    dilate(thresh, thresh, dilateElement);
+
+    morphologyEx(thresh, thresh, MORPH_CLOSE, getStructuringElement(MORPH_ELLIPSE, Size(7, 7)));
+    bitwise_not(thresh, thresh);
+    morphologyEx(thresh, thresh, MORPH_OPEN, getStructuringElement(MORPH_ELLIPSE, Size(7, 7)));
+//    cvFillImage(<#(CvArr*)mat#>, <#(double)color#>)
 }
 
 string intToString(int number) {
@@ -148,7 +156,7 @@ void findCenterOfMaxObject(vector< vector<Point> > contours, vector<Vec4i> hiera
     }
 
     if (refArea != 0) {
-        drawObject(x, y, dest);
+//        drawObject(x, y, dest);
         findFingers(contours, hierarchy, dest, x, y);
     }
 }
@@ -206,7 +214,7 @@ void addMaxBoundingBox(vector< vector<Point> > contours, vector<Vec4i> hierarchy
     approxPolyDP(Mat(contours[max]), contours_poly, 3, true);
     boundRect = boundingRect(Mat(contours_poly));
     minEnclosingCircle((Mat) contours_poly, center, radius);
-    drawObject(center.x, center.y, dest);
+//    drawObject(center.x, center.y, dest);
     rectangle(drawing, boundRect.tl(), boundRect.br(), Scalar(100, 255, 255), 1, 8, 0);
     circle(drawing, center, (int) radius, Scalar(255, 255, 100), 1, 8, 0);
 
@@ -263,6 +271,10 @@ bool sortConvDef(Vec4i &p1, Vec4i &p2) {
 }
 
 void findMaxHull(vector<vector<Point> > contours, vector<Vec4i> hierarchy, Mat &dest) {
+
+    if (contours.size() < 1)
+        return;
+
     vector<vector<Point> > hull(1);
     cv::vector<cv::vector<int> > hull_i(1);
 
@@ -282,50 +294,50 @@ void findMaxHull(vector<vector<Point> > contours, vector<Vec4i> hierarchy, Mat &
     drawContours(drawing, hull, 0, Scalar(1, 1, 50), 2, 8, vector<Vec4i>(), 0, Point());
     drawContours(drawing, hull, 0, Scalar(20, 20, 200), 1, 8, vector<Vec4i>(), 0, Point());
 
+    addAlphaMat(drawing, dest, 0.4);
+    drawing = Mat::zeros(dest.size(), CV_8UC3);
 
     std::vector<Vec4i> convDef;
-    vector< vector<Point> > hull_points(1);
-    vector< vector<Point> > defect_points(1);
 
-    if (hull_i[0].size() > 3)
+    if (hull_i[0].size() > 3) {
         convexityDefects(contours[max], hull_i[0], convDef);
 
-    int max4[convDef.size()];
-    int max4p[convDef.size()];
-    for (int k = 0; k < convDef.size(); k++) {
-        int ind_0 = convDef[k][0];
-        int ind_1 = convDef[k][1];
-        int ind_2 = convDef[k][2];
-        max4[k] = convDef[k][3];
-        max4p[k] = convDef[k][2];
-        cv::line(drawing, contours[max][ind_2], contours[max][ind_0], Scalar(1, 0, 25), 2);
-        cv::line(drawing, contours[max][ind_2], contours[max][ind_0], Scalar(1, 0, 255), 1);
-        cv::line(drawing, contours[max][ind_2], contours[max][ind_1], Scalar(1, 0, 25), 2);
-        cv::line(drawing, contours[max][ind_2], contours[max][ind_1], Scalar(1, 0, 255), 1);
-        cv::circle(drawing, contours[max][ind_0], 7, Scalar(1, 25, 0), -1);
-        cv::circle(drawing, contours[max][ind_1], 7, Scalar(1, 25, 0), -1);
-        cv::circle(drawing, contours[max][ind_2], 7, Scalar(1, 0, 25), -1);
-        cv::circle(drawing, contours[max][ind_0], 5, Scalar(1, 255, 0), -1);
-        cv::circle(drawing, contours[max][ind_1], 5, Scalar(1, 255, 0), -1);
-        cv::circle(drawing, contours[max][ind_2], 5, Scalar(1, 0, 255), -1);
-    }
-    std::sort(convDef.begin(), convDef.end(), sortConvDef);
-    int maxc = 0;
-    for (int k = 0; k < 4; k++) {
-        int ind_0 = convDef[k][0];
-        int ind_1 = convDef[k][1];
-        int ind_2 = convDef[k][2];
-        cv::circle(drawing, contours[max][ind_0], 11, Scalar(1, 255, 25), -1);
-        cv::circle(drawing, contours[max][ind_0], 9, Scalar(1, 255, 255), -1);
-        cv::circle(drawing, contours[max][ind_2], 11, Scalar(1, 255, 25), -1);
-        cv::circle(drawing, contours[max][ind_2], 9, Scalar(1, 255, 255), -1);
-        if (ind_1 > maxc)
-            maxc = ind_1;
-    }
-    cv::circle(drawing, contours[max][maxc], 11, Scalar(1, 255, 25), -1);
-    cv::circle(drawing, contours[max][maxc], 9, Scalar(1, 255, 255), -1);
+        int max4[convDef.size()];
+        int max4p[convDef.size()];
+        for (int k = 0; k < convDef.size(); k++) {
+            int ind_0 = convDef[k][0];
+            int ind_1 = convDef[k][1];
+            int ind_2 = convDef[k][2];
+            max4[k] = convDef[k][3];
+            max4p[k] = convDef[k][2];
+            cv::line(drawing, contours[max][ind_2], contours[max][ind_0], Scalar(1, 0, 25), 2);
+            cv::line(drawing, contours[max][ind_2], contours[max][ind_0], Scalar(1, 0, 255), 1);
+            cv::line(drawing, contours[max][ind_2], contours[max][ind_1], Scalar(1, 0, 25), 2);
+            cv::line(drawing, contours[max][ind_2], contours[max][ind_1], Scalar(1, 0, 255), 1);
+            cv::circle(drawing, contours[max][ind_0], 7, Scalar(1, 25, 0), -1);
+            cv::circle(drawing, contours[max][ind_1], 7, Scalar(1, 25, 0), -1);
+            cv::circle(drawing, contours[max][ind_2], 7, Scalar(1, 0, 25), -1);
+            cv::circle(drawing, contours[max][ind_0], 5, Scalar(1, 255, 0), -1);
+            cv::circle(drawing, contours[max][ind_1], 5, Scalar(1, 255, 0), -1);
+            cv::circle(drawing, contours[max][ind_2], 5, Scalar(1, 0, 255), -1);
+        }
+        std::sort(convDef.begin(), convDef.end(), sortConvDef);
+        int maxc = 0;
+        for (int k = 0; k < 4 && k < convDef.size(); k++) {
+            int ind_0 = convDef[k][0];
+            int ind_1 = convDef[k][1];
+            int ind_2 = convDef[k][2];
+            cv::circle(drawing, contours[max][ind_0], 11, Scalar(1, 255, 25), -1);
+            cv::circle(drawing, contours[max][ind_0], 9, Scalar(1, 255, 255), -1);
+            cv::circle(drawing, contours[max][ind_2], 11, Scalar(1, 255, 25), -1);
+            cv::circle(drawing, contours[max][ind_2], 9, Scalar(1, 255, 255), -1);
+            if (ind_1 > maxc)
+                maxc = ind_1;
+        }
+        cv::circle(drawing, contours[max][maxc], 11, Scalar(1, 255, 25), -1);
+        cv::circle(drawing, contours[max][maxc], 9, Scalar(1, 255, 255), -1);
 
-
+    }
     addAlphaMat(drawing, dest, 0.4);
 }
 
@@ -337,8 +349,10 @@ void addContours(Mat source, Mat &dest) {
 
     /// Detect edges using canny
     Canny(source, canny_output, 10, 100 * 2, 3);
+    findContours(canny_output, contours, hierarchy, RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE, Point(0, 0));
+
     /// Find contours
-    findContours(canny_output, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0));
+//    findContours(canny_output, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0));
 //    findContours(source, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0));
 
     /// Draw contours
@@ -350,28 +364,24 @@ void addContours(Mat source, Mat &dest) {
 //    addWeighted(drawing, 0.8, dest, 1, 1, dest); // add contours to color image
     addAlphaMat(drawing, dest, 0.4);
 
-    findCenterOfMaxObject(contours, hierarchy, dest);
+//    findCenterOfMaxObject(contours, hierarchy, dest);
     findMaxHull(contours, hierarchy, dest);
-    addMaxBoundingBox(contours, hierarchy, dest);
+//    addMaxBoundingBox(contours, hierarchy, dest);
 }
 
 void SeeHandWindow::show() {
     try {
         result = Mat::zeros(480, 640 + 320, image.type());
-//        capture->read(image);
-//        flip(image, image, 2);
-        image = imread(AppConfig::inputDir + "/h.jpg", CV_LOAD_IMAGE_COLOR);
-        Mat hsv;
+        capture->read(image);
+        flip(image, image, 2);
+//        image = imread(AppConfig::inputDir + "/h.jpg", CV_LOAD_IMAGE_COLOR);
         Mat thresholdMat;
-        cvtColor(image, hsv, CV_RGB2HSV);
 
-        inRange(hsv, Scalar(minHue, 0, 0), Scalar(maxHue, 255, 255), thresholdMat);
-
-        pictureInPicture(thresholdMat, result, 0, 240, 320, 240);
 
         if (morph) {
-            findObjects(thresholdMat);
+            findObjects(image, thresholdMat);
         }
+        pictureInPicture(thresholdMat, result, 0, 240, 320, 240);
 
 //        trackFilteredObject(x, y, thresholdMat, image);
 
@@ -389,7 +399,6 @@ void SeeHandWindow::show() {
 
         thresholdMat.release();
 //        result.release();
-        hsv.release();
     } catch(...) {}
 }
 
@@ -408,7 +417,7 @@ void onMouse(int event, int x, int y, int c, void *p) {
 
 SeeHandWindow::SeeHandWindow(std::string title):DisplayWindow(title) {
     capture = SynchronizedVideoCapture::getInstance();
-    image = imread("/Users/ghaxx/h.jpg", CV_LOAD_IMAGE_COLOR);
+//    image = imread("/Users/ghaxx/h.jpg", CV_LOAD_IMAGE_COLOR);
     writer = new VideoWriter();
 
     result = Mat::zeros(480, 640 + 320, 16);
@@ -416,8 +425,8 @@ SeeHandWindow::SeeHandWindow(std::string title):DisplayWindow(title) {
     record = false;
 //    minHue = 10;
 //    maxHue = 20;
-    minHue = 102;
-    maxHue = 103;
+    minHue = 99;
+    maxHue = 125;
     morph = true;
     blurRadius = 5;
 
@@ -486,7 +495,7 @@ int SeeHandWindow::getBlurRadius() const {
 }
 
 void SeeHandWindow::setBlurRadius(int blurRadius) {
-    if (blurRadius > 0) {
+    if (blurRadius >= 0) {
         this->blurRadius = blurRadius;
         setTrackbarPos("Blur radius", getTitle(), blurRadius);
     }
