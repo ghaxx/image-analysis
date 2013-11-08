@@ -177,20 +177,29 @@ void findHull(vector<Point> &contour, Mat &dest) {
             cv::circle(drawing, contour[ind_1], 2, Scalar(1, 255, 0), -1);
             cv::circle(drawing, contour[ind_2], 2, Scalar(1, 0, 255), -1);
         }
-        std::sort(convDef.begin(), convDef.end(), sortConvDef);
-        int maxc = 0;
+//        std::sort(convDef.begin(), convDef.end(), sortConvDef);
+//        int maxc = 0;
+        double average = 0;
         for (int k = 0; k < 4 && k < convDef.size(); k++) {
-            int ind_0 = convDef[k][0];
-            int ind_1 = convDef[k][1];
-            int ind_2 = convDef[k][2];
-            cv::circle(drawing, contour[ind_0], 11, Scalar(1, 255, 25), -1);
-            cv::circle(drawing, contour[ind_0], 9, Scalar(1, 255, 255), -1);
-            cv::circle(drawing, contour[ind_1], 11, Scalar(1, 255, 25), -1);
-            cv::circle(drawing, contour[ind_1], 9, Scalar(1, 255, 255), -1);
-            cv::circle(drawing, contour[ind_2], 11, Scalar(1, 255, 25), -1);
-            cv::circle(drawing, contour[ind_2], 9, Scalar(1, 255, 255), -1);
-            if (ind_1 > maxc)
-                maxc = ind_1;
+            average += convDef[k][3];
+        }
+        average = average / convDef.size();
+
+//        for (int k = 0; k < 4 && k < convDef.size(); k++) {
+        for (int k = 0; k < convDef.size(); k++) {
+            if (convDef[k][3] > 2 * average) {
+                int ind_0 = convDef[k][0];
+                int ind_1 = convDef[k][1];
+                int ind_2 = convDef[k][2];
+                cv::circle(drawing, contour[ind_0], 11, Scalar(1, 255, 25), -1);
+                cv::circle(drawing, contour[ind_0], 9, Scalar(1, 255, 255), -1);
+                cv::circle(drawing, contour[ind_1], 11, Scalar(1, 255, 25), -1);
+                cv::circle(drawing, contour[ind_1], 9, Scalar(1, 255, 255), -1);
+                cv::circle(drawing, contour[ind_2], 11, Scalar(1, 255, 25), -1);
+                cv::circle(drawing, contour[ind_2], 9, Scalar(1, 255, 255), -1);
+            }
+//            if (ind_1 > maxc)
+//                maxc = ind_1;
         }
 //        cv::circle(drawing, contour[maxc], 11, Scalar(1, 255, 25), -1);
 //        cv::circle(drawing, contour[maxc], 9, Scalar(1, 255, 255), -1);
