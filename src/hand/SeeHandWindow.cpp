@@ -9,48 +9,22 @@
 
 const int FRAME_WIDTH = 640;
 const int FRAME_HEIGHT = 480;
-//max number of objects to be detected in frame
-const int MAX_NUM_OBJECTS = 50;
-//minimum and maximum object area
-const int MIN_OBJECT_AREA = 20 * 20;
-const int MAX_OBJECT_AREA = FRAME_HEIGHT * FRAME_WIDTH / 1.5;
 
 using namespace cv;
-int x = 0, y = 0;
-
-// From image to black and white
-void SeeHandWindow::findObjects(Mat &image, Mat &thresh) {
-    Mat hsv;
-    cvtColor(image, hsv, CV_RGB2HSV);
-    inRange(hsv, Scalar(minHue, 0, 0), Scalar(maxHue, 255, 255), thresh);
-
-
-    if (blurRadius > 0)
-        cv::GaussianBlur(thresh, thresh, cv::Size(0, 0), blurRadius);
-    threshold(thresh, thresh, 0, 255, CV_THRESH_BINARY | THRESH_OTSU);
-
-    //dilate with larger element so make sure object is nicely visible
-
-    Mat erodeElement = getStructuringElement(MORPH_ELLIPSE, Size(3, 3));
-    erode(thresh, thresh, erodeElement);
-    erode(thresh, thresh, erodeElement);
-
-//    Mat dilateElement = getStructuringElement(MORPH_ELLIPSE, Size(9, 9));
-//    dilate(thresh, thresh, dilateElement);
-//    dilate(thresh, thresh, dilateElement);
-
-    morphologyEx(thresh, thresh, MORPH_CLOSE, getStructuringElement(MORPH_ELLIPSE, Size(7, 7)));
-    bitwise_not(thresh, thresh);
-    morphologyEx(thresh, thresh, MORPH_OPEN, getStructuringElement(MORPH_ELLIPSE, Size(7, 7)));
-//    cvFillImage(<#(CvArr*)mat#>, <#(double)color#>)
-}
 
 string intToString(int number) {
-
-
     std::stringstream ss;
     ss << number;
     return ss.str();
+}
+
+void pictureInPicture(Mat &source, Mat &destination, int x, int y, int w, int h) {
+    Mat small;
+    resize(source, small, Size(w, h));
+    Mat subView = destination(Rect(x, y, small.cols, small.rows));
+    if (small.type() != destination.type())
+        cvtColor(small, small, CV_GRAY2RGB);
+    small.copyTo(subView);
 }
 
 void addAlphaMat(Mat &src, Mat &dst, double alpha) {
@@ -78,16 +52,38 @@ void addAlphaMat(Mat &src, Mat &dst) {
     }
 }
 
+// From image to black and white
+void SeeHandWindow::extractShapesInBinary(Mat &image, Mat &thresh) {
+    Mat hsv;
+    cvtColor(image, hsv, CV_RGB2HSV);
+    inRange(hsv, Scalar(minHue, 0, 0), Scalar(maxHue, 255, 255), thresh);
+    pictureInPicture(thresh, result, 0, 240, 320, 240);
+
+    if (blurRadius > 0) {
+        cv::GaussianBlur(thresh, thresh, cv::Size(0, 0), 9);
+        cv::addWeighted(thresh, 1.5, thresh, -0.5, 0, thresh);
+        cv::GaussianBlur(thresh, thresh, cv::Size(0, 0), 9);
+        cv::addWeighted(thresh, 1.5, thresh, -0.5, 0, thresh);
+
+        cv::GaussianBlur(thresh, thresh, cv::Size(0, 0), blurRadius);
+    }
+    threshold(thresh, thresh, 0, 255, CV_THRESH_BINARY | THRESH_OTSU);
+
+    //dilate with larger element so make sure object is nicely visible
+
+    Mat erodeElement = getStructuringElement(MORPH_ELLIPSE, Size(3, 3));
+    erode(thresh, thresh, erodeElement);
+    erode(thresh, thresh, erodeElement);
+
+//    Mat dilateElement = getStructuringElement(MORPH_ELLIPSE, Size(9, 9));
+//    dilate(thresh, thresh, dilateElement);
+//    dilate(thresh, thresh, dilateElement);
+
+    morphologyEx(thresh, thresh, MORPH_CLOSE, getStructuringElement(MORPH_ELLIPSE, Size(7, 7)));
+}
+
 void drawObject(int x, int y, Mat &frame) {
-
-    //use some of the openCV drawing functions to draw crosshairs
-    //on your tracked image!
-
-    //UPDATE:JUNE 18TH, 2013
-    //added 'if' and 'else' statements to prevent
-    //memory errors from writing off the screen (ie. (-25,-25) is not within the window!)
-
-    circle(frame, Point(x, y), 20, Scalar(0, 255, 0), 1);
+    circle(frame, Point(x, y), 10, Scalar(0, 255, 0), 1);
     if (y - 25 > 0)
         line(frame, Point(x, y), Point(x, y - 25), Scalar(0, 255, 0), 1);
     else line(frame, Point(x, y), Point(x, 0), Scalar(0, 255, 0), 2);
@@ -104,95 +100,22 @@ void drawObject(int x, int y, Mat &frame) {
 //    putText(frame, intToString(x) + "," + intToString(y), Point(x, y + 30), CV_FONT_NORMAL, 0.2, Scalar(0, 255, 0), 2);
 }
 
-void findCenterOfObjects(vector< vector<Point> > contours, vector<Vec4i> hierarchy, Mat &dest) {
-    double refArea = 0;
-    bool objectFound = false;
-    if (hierarchy.size() > 0) {
-        int numObjects = hierarchy.size();
-        //if number of objects greater than MAX_NUM_OBJECTS we have a noisy filter
-        if (numObjects < MAX_NUM_OBJECTS) {
-            for (int index = 0; index >= 0; index = hierarchy[index][0]) {
-
-                Moments moment = moments((cv::Mat) contours[index]);
-                double area = moment.m00;
-
-                //if the area is less than 20 px by 20px then it is probably just noise
-                //if the area is the same as the 3/2 of the image size, probably just a bad filter
-                //we only want the object with the largest area so we safe a reference area each
-                //iteration and compare it to the area in the next iteration.
-                if (area > MIN_OBJECT_AREA && area < MAX_OBJECT_AREA && area > refArea) {
-                    x = moment.m10 / area;
-                    y = moment.m01 / area;
-                    objectFound = true;
-                    refArea = area;
-                } else objectFound = false;
-
-                if (objectFound == true) {
-                    //draw object location on screen
-                    drawObject(x, y, dest);
-                }
-            }
-
-        }
-    }
-}
-
-void findFingers(vector<vector<Point> > contours, vector<Vec4i> hierarchy, Mat &dest, int x, int y) {
-
-}
-
-void findCenterOfMaxObject(vector< vector<Point> > contours, vector<Vec4i> hierarchy, Mat &dest) {
+void findCenterOfObject(vector<Point> &contour, Mat &dest) {
     double refArea = 0;
     int x = 0;
     int y = 0;
-    for (int i = 0; i < contours.size(); i++) {
-        Moments moment = moments((cv::Mat) contours[i]);
-        double area = moment.m00;
-        if (area > refArea) {
-            x = (int) (moment.m10 / area);
-            y = (int) (moment.m01 / area);
-            refArea = area;
-        }
-    }
+
+    Moments moment = moments((cv::Mat) contour);
+    double area = moment.m00;
+    x = (int) (moment.m10 / area);
+    y = (int) (moment.m01 / area);
 
     if (refArea != 0) {
-//        drawObject(x, y, dest);
-        findFingers(contours, hierarchy, dest, x, y);
+        drawObject(x, y, dest);
     }
 }
 
-void addBoundingBoxes(vector< vector<Point> > contours, vector<Vec4i> hierarchy, Mat &dest) {
-    /// Approximate contours to polygons + get bounding rects and circles
-    vector<vector<Point> > contours_poly(contours.size());
-    Rect boundRect;
-    Point2f center;
-    float radius;
-
-    Mat drawing = Mat::zeros(dest.size(), CV_8UC3);
-    double refArea = 0;
-    for (int i = 0; i >= 0; i = hierarchy[i][0]) {
-        if (hierarchy[i][3] > -1)
-            continue;
-//    for (int i = 0; i < contours.size(); i++) {
-        approxPolyDP(Mat(contours[i]), contours_poly[i], 3, true);
-        boundRect = boundingRect(Mat(contours_poly[i]));
-        minEnclosingCircle((Mat) contours_poly[i], center, radius);
-//        }
-//        Moments moment = moments((cv::Mat) contours[i]);
-//        double area = moment.m00;
-//        if (area > MIN_OBJECT_AREA && area > refArea) {
-//            x = moment.m10 / area;
-//            y = moment.m01 / area;
-        rectangle(drawing, boundRect.tl(), boundRect.br(), Scalar(200, 255, 255), 1, 8, 0);
-        circle(drawing, center, (int) radius, Scalar(255, 255, 200), 1, 8, 0);
-//            refArea = area;
-//        }
-    }
-
-    addWeighted(drawing, 1, dest, 1, 1, dest); // add contours to color image
-}
-
-void addMaxBoundingBox(vector< vector<Point> > contours, vector<Vec4i> hierarchy, Mat &dest) {
+void addBoundingBox(vector<Point> &contour, Mat &dest) {
     /// Approximate contours to polygons + get bounding rects and circles
     vector<Point> contours_poly;
     Rect boundRect;
@@ -200,97 +123,29 @@ void addMaxBoundingBox(vector< vector<Point> > contours, vector<Vec4i> hierarchy
     float radius;
 
     Mat drawing = Mat::zeros(dest.size(), CV_8UC3);
-    double refArea = 0;
-    int max = 0;
-//    for (int i = 0; i >= 0; i = hierarchy[i][0]) {
-    for (int i = 0; i < contours.size(); i++) {
-        Moments moment = moments((cv::Mat) contours[i]);
-        double area = moment.m00;
-        if (area > refArea) {
-            refArea = area;
-            max = i;
-        }
-    }
-    approxPolyDP(Mat(contours[max]), contours_poly, 3, true);
+
+    approxPolyDP(Mat(contour), contours_poly, 3, true);
     boundRect = boundingRect(Mat(contours_poly));
     minEnclosingCircle((Mat) contours_poly, center, radius);
 //    drawObject(center.x, center.y, dest);
     rectangle(drawing, boundRect.tl(), boundRect.br(), Scalar(100, 255, 255), 1, 8, 0);
     circle(drawing, center, (int) radius, Scalar(255, 255, 100), 1, 8, 0);
 
-//    addWeighted(drawing, 0.2, dest, 1, 1, dest); // add contours to color image
     addAlphaMat(drawing, dest, 0.4);
-}
-
-void trackFilteredObject(int &x, int &y, Mat threshold, Mat &cameraFeed) {
-
-    Mat temp;
-    threshold.copyTo(temp);
-    //these two vectors needed for output of findContours
-    vector< vector<Point> > contours;
-    vector<Vec4i> hierarchy;
-    //find contours of filtered image using openCV findContours function
-    findContours(temp, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE);
-
-    Mat drawing = Mat::zeros(threshold.size(), CV_8UC3);
-//    for (int i = 0; i < contours.size(); i++) {
-    for (int i = 0; i >= 0; i = hierarchy[i][0]) {
-        Scalar color = Scalar(0, 0, 255);
-        drawContours(drawing, contours, i, color, 2, 8, hierarchy, 0, Point());
-    }
-    addWeighted(drawing, 1, cameraFeed, 1, 1, cameraFeed); // add contours to color image
-
-    //use moments method to find our filtered object
-    findCenterOfObjects(contours, hierarchy, cameraFeed);
-}
-
-void pictureInPicture(Mat &source, Mat &destination, int x, int y, int w, int h) {
-    Mat small;
-    resize(source, small, Size(w, h));
-    Mat subView = destination(Rect(x, y, small.cols, small.rows));
-    if (small.type() != destination.type())
-        cvtColor(small, small, CV_GRAY2RGB);
-    small.copyTo(subView);
-}
-
-void findHull(vector<vector<Point> > contours, vector<Vec4i> hierarchy, Mat &dest) {
-    vector<vector<Point> > hull(contours.size());
-    for (int i = 0; i >= 0; i = hierarchy[i][0]) {convexHull(Mat(contours[i]), hull[i], false);}
-
-    Mat drawing = Mat::zeros(dest.size(), CV_8UC3);
-    for (int i = 0; i >= 0; i = hierarchy[i][0]) {
-        Scalar color = Scalar(255, 200, 200);
-        drawContours(drawing, hull, i, color, 1, 8, vector<Vec4i>(), 0, Point());
-    }
-
-    addWeighted(drawing, 1, dest, 1, 1, dest); // add contours to color image
 }
 
 bool sortConvDef(Vec4i &p1, Vec4i &p2) {
     return p1[3] > p2[3];
 }
 
-void findMaxHull(vector<vector<Point> > contours, vector<Vec4i> hierarchy, Mat &dest) {
-
-    if (contours.size() < 1)
-        return;
-
+void findHull(vector<Point> &contour, Mat &dest) {
     vector<vector<Point> > hull(1);
     cv::vector<cv::vector<int> > hull_i(1);
 
     Mat drawing = Mat::zeros(dest.size(), CV_8UC3);
-    int max = 0;
-    double maxArea = 0;
-    for (int i = 0; i < contours.size(); i++) {
-        Moments moment = moments((cv::Mat) contours[i]);
-        double area = moment.m00;
-        if (area > maxArea) {
-            maxArea = area;
-            max = i;
-        }
-    }
-    convexHull(Mat(contours[max]), hull[0], false);
-    convexHull(Mat(contours[max]), hull_i[0], false);
+
+    convexHull(Mat(contour), hull[0], false);
+    convexHull(Mat(contour), hull_i[0], false);
     drawContours(drawing, hull, 0, Scalar(1, 1, 50), 2, 8, vector<Vec4i>(), 0, Point());
     drawContours(drawing, hull, 0, Scalar(20, 20, 200), 1, 8, vector<Vec4i>(), 0, Point());
 
@@ -300,7 +155,7 @@ void findMaxHull(vector<vector<Point> > contours, vector<Vec4i> hierarchy, Mat &
     std::vector<Vec4i> convDef;
 
     if (hull_i[0].size() > 3) {
-        convexityDefects(contours[max], hull_i[0], convDef);
+        convexityDefects(contour, hull_i[0], convDef);
 
         int max4[convDef.size()];
         int max4p[convDef.size()];
@@ -310,16 +165,17 @@ void findMaxHull(vector<vector<Point> > contours, vector<Vec4i> hierarchy, Mat &
             int ind_2 = convDef[k][2];
             max4[k] = convDef[k][3];
             max4p[k] = convDef[k][2];
-            cv::line(drawing, contours[max][ind_2], contours[max][ind_0], Scalar(1, 0, 25), 2);
-            cv::line(drawing, contours[max][ind_2], contours[max][ind_0], Scalar(1, 0, 255), 1);
-            cv::line(drawing, contours[max][ind_2], contours[max][ind_1], Scalar(1, 0, 25), 2);
-            cv::line(drawing, contours[max][ind_2], contours[max][ind_1], Scalar(1, 0, 255), 1);
-            cv::circle(drawing, contours[max][ind_0], 7, Scalar(1, 25, 0), -1);
-            cv::circle(drawing, contours[max][ind_1], 7, Scalar(1, 25, 0), -1);
-            cv::circle(drawing, contours[max][ind_2], 7, Scalar(1, 0, 25), -1);
-            cv::circle(drawing, contours[max][ind_0], 5, Scalar(1, 255, 0), -1);
-            cv::circle(drawing, contours[max][ind_1], 5, Scalar(1, 255, 0), -1);
-            cv::circle(drawing, contours[max][ind_2], 5, Scalar(1, 0, 255), -1);
+            cv::line(drawing, contour[ind_2], contour[ind_0], Scalar(1, 0, 25), 2);
+            cv::line(drawing, contour[ind_2], contour[ind_1], Scalar(1, 0, 25), 2);
+            cv::circle(drawing, contour[ind_0], 3, Scalar(1, 25, 0), -1);
+            cv::circle(drawing, contour[ind_1], 3, Scalar(1, 25, 0), -1);
+            cv::circle(drawing, contour[ind_2], 3, Scalar(1, 0, 25), -1);
+
+            cv::line(drawing, contour[ind_2], contour[ind_0], Scalar(1, 0, 255), 1);
+            cv::line(drawing, contour[ind_2], contour[ind_1], Scalar(1, 0, 255), 1);
+            cv::circle(drawing, contour[ind_0], 2, Scalar(1, 255, 0), -1);
+            cv::circle(drawing, contour[ind_1], 2, Scalar(1, 255, 0), -1);
+            cv::circle(drawing, contour[ind_2], 2, Scalar(1, 0, 255), -1);
         }
         std::sort(convDef.begin(), convDef.end(), sortConvDef);
         int maxc = 0;
@@ -327,22 +183,23 @@ void findMaxHull(vector<vector<Point> > contours, vector<Vec4i> hierarchy, Mat &
             int ind_0 = convDef[k][0];
             int ind_1 = convDef[k][1];
             int ind_2 = convDef[k][2];
-            cv::circle(drawing, contours[max][ind_0], 11, Scalar(1, 255, 25), -1);
-            cv::circle(drawing, contours[max][ind_0], 9, Scalar(1, 255, 255), -1);
-            cv::circle(drawing, contours[max][ind_2], 11, Scalar(1, 255, 25), -1);
-            cv::circle(drawing, contours[max][ind_2], 9, Scalar(1, 255, 255), -1);
+            cv::circle(drawing, contour[ind_0], 11, Scalar(1, 255, 25), -1);
+            cv::circle(drawing, contour[ind_0], 9, Scalar(1, 255, 255), -1);
+            cv::circle(drawing, contour[ind_1], 11, Scalar(1, 255, 25), -1);
+            cv::circle(drawing, contour[ind_1], 9, Scalar(1, 255, 255), -1);
+            cv::circle(drawing, contour[ind_2], 11, Scalar(1, 255, 25), -1);
+            cv::circle(drawing, contour[ind_2], 9, Scalar(1, 255, 255), -1);
             if (ind_1 > maxc)
                 maxc = ind_1;
         }
-        cv::circle(drawing, contours[max][maxc], 11, Scalar(1, 255, 25), -1);
-        cv::circle(drawing, contours[max][maxc], 9, Scalar(1, 255, 255), -1);
-
+//        cv::circle(drawing, contour[maxc], 11, Scalar(1, 255, 25), -1);
+//        cv::circle(drawing, contour[maxc], 9, Scalar(1, 255, 255), -1);
     }
     addAlphaMat(drawing, dest, 0.4);
 }
 
 
-void addContours(Mat source, Mat &dest) {
+void addContours(Mat &source, Mat &dest) {
     Mat canny_output;
     vector<vector<Point> > contours;
     vector<Vec4i> hierarchy;
@@ -357,16 +214,25 @@ void addContours(Mat source, Mat &dest) {
 
     /// Draw contours
     Mat drawing = Mat::zeros(canny_output.size(), CV_8UC3);
+    int max = 0;
+    double maxArea = 0;
     for (int i = 0; i < contours.size(); i++) {
-        drawContours(drawing, contours, i, Scalar(2, 20, 2), 2, 8, hierarchy, 0, Point());
-        drawContours(drawing, contours, i, Scalar(20, 240, 20), 1, 8, hierarchy, 0, Point());
+        Moments moment = moments((cv::Mat) contours[i]);
+        double area = moment.m00;
+        if (area > maxArea) {
+            maxArea = area;
+            max = i;
+        }
+//        findCenterOfObject(contours[i], dest);
+//        findHull(contours[i], dest);
     }
-//    addWeighted(drawing, 0.8, dest, 1, 1, dest); // add contours to color image
+    drawContours(drawing, contours, max, Scalar(20, 240, 20), 1, 8, hierarchy, 0, Point());
+    drawContours(drawing, contours, max, Scalar(2, 20, 2), 2, 8, hierarchy, 0, Point());
     addAlphaMat(drawing, dest, 0.4);
 
-//    findCenterOfMaxObject(contours, hierarchy, dest);
-    findMaxHull(contours, hierarchy, dest);
-//    addMaxBoundingBox(contours, hierarchy, dest);
+    findCenterOfObject(contours[max], dest);
+    findHull(contours[max], dest);
+//    addBoundingBox(contours[max], dest);
 }
 
 void SeeHandWindow::show() {
@@ -379,9 +245,8 @@ void SeeHandWindow::show() {
 
 
         if (morph) {
-            findObjects(image, thresholdMat);
+            extractShapesInBinary(image, thresholdMat);
         }
-        pictureInPicture(thresholdMat, result, 0, 240, 320, 240);
 
 //        trackFilteredObject(x, y, thresholdMat, image);
 
