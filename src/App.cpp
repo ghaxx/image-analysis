@@ -46,7 +46,7 @@ void App::run() {
 //    registerWindow(new Camera4());
 //    registerWindow(new Image4());
 //    registerWindow(new Video4());
-
+//    registerWindow(new Window5());
     registerWindow(new SeeHandWindow());
     if (windows.size() > 0)
         do {
