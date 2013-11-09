@@ -34,6 +34,24 @@ public:
 
 //    void onMouse( int event, int x, int y, int c, void* p);
 
+    void addContours(cv::Mat &source, cv::Mat &dest);
+
+    void findHull(std::vector<cv::Point_<int> > &contour, cv::Mat &dest);
+
+    void addBoundingBox(std::vector<cv::Point_<int> > &contour, cv::Mat &dest);
+
+    void findCenterOfObject(std::vector<cv::Point_<int> > &contour, cv::Mat &dest);
+
+    void drawObject(int x, int y, cv::Mat &frame);
+
+    void addAlphaMat(cv::Mat &src, cv::Mat &dst);
+
+    void addAlphaMat(cv::Mat &src, cv::Mat &dst, double alpha);
+
+    void pictureInPicture(cv::Mat &source, cv::Mat &destination, int x, int y, int w, int h);
+
+    std::string intToString(int number);
+
     cv::Mat const & getResult() const;
 
     int getMinHue() const;
@@ -47,6 +65,8 @@ public:
     int getBlurRadius() const;
 
     void setBlurRadius(int blurRadius);
+
+    static bool sortConvDef(cv::Vec<int, 4> &p1, cv::Vec<int, 4> &p2);
 };
 
 

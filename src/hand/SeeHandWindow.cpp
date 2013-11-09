@@ -12,13 +12,13 @@ const int FRAME_HEIGHT = 480;
 
 using namespace cv;
 
-string intToString(int number) {
+string SeeHandWindow::intToString(int number) {
     std::stringstream ss;
     ss << number;
     return ss.str();
 }
 
-void pictureInPicture(Mat &source, Mat &destination, int x, int y, int w, int h) {
+void SeeHandWindow::pictureInPicture(Mat &source, Mat &destination, int x, int y, int w, int h) {
     Mat small;
     resize(source, small, Size(w, h));
     Mat subView = destination(Rect(x, y, small.cols, small.rows));
@@ -27,7 +27,7 @@ void pictureInPicture(Mat &source, Mat &destination, int x, int y, int w, int h)
     small.copyTo(subView);
 }
 
-void addAlphaMat(Mat &src, Mat &dst, double alpha) {
+void SeeHandWindow::addAlphaMat(Mat &src, Mat &dst, double alpha) {
     for (int x = 0; x < dst.cols; x++) {
         for (int y = 0; y < dst.rows; y++) {
             if (src.at<Vec3b>(y, x)[0] != 0)
@@ -39,7 +39,7 @@ void addAlphaMat(Mat &src, Mat &dst, double alpha) {
     }
 }
 
-void addAlphaMat(Mat &src, Mat &dst) {
+void SeeHandWindow::addAlphaMat(Mat &src, Mat &dst) {
     for (int x = 0; x < dst.cols; x++) {
         for (int y = 0; y < dst.rows; y++) {
             if (src.at<Vec3b>(y, x)[3] != 0)
@@ -72,17 +72,15 @@ void SeeHandWindow::extractShapesInBinary(Mat &image, Mat &thresh) {
     //dilate with larger element so make sure object is nicely visible
 
     Mat erodeElement = getStructuringElement(MORPH_ELLIPSE, Size(3, 3));
-    erode(thresh, thresh, erodeElement);
-    erode(thresh, thresh, erodeElement);
+    erode(thresh, thresh, erodeElement, Point(-1, -1), 3);
 
-//    Mat dilateElement = getStructuringElement(MORPH_ELLIPSE, Size(9, 9));
-//    dilate(thresh, thresh, dilateElement);
-//    dilate(thresh, thresh, dilateElement);
+    Mat dilateElement = getStructuringElement(MORPH_ELLIPSE, Size(6, 6));
+    dilate(thresh, thresh, dilateElement, Point(-1, -1), 1);
 
     morphologyEx(thresh, thresh, MORPH_CLOSE, getStructuringElement(MORPH_ELLIPSE, Size(7, 7)));
 }
 
-void drawObject(int x, int y, Mat &frame) {
+void SeeHandWindow::drawObject(int x, int y, Mat &frame) {
     circle(frame, Point(x, y), 10, Scalar(0, 255, 0), 1);
     if (y - 25 > 0)
         line(frame, Point(x, y), Point(x, y - 25), Scalar(0, 255, 0), 1);
@@ -100,7 +98,7 @@ void drawObject(int x, int y, Mat &frame) {
 //    putText(frame, intToString(x) + "," + intToString(y), Point(x, y + 30), CV_FONT_NORMAL, 0.2, Scalar(0, 255, 0), 2);
 }
 
-void findCenterOfObject(vector<Point> &contour, Mat &dest) {
+void SeeHandWindow::findCenterOfObject(vector<Point> &contour, Mat &dest) {
     double refArea = 0;
     int x = 0;
     int y = 0;
@@ -115,7 +113,7 @@ void findCenterOfObject(vector<Point> &contour, Mat &dest) {
     }
 }
 
-void addBoundingBox(vector<Point> &contour, Mat &dest) {
+void SeeHandWindow::addBoundingBox(vector<Point> &contour, Mat &dest) {
     /// Approximate contours to polygons + get bounding rects and circles
     vector<Point> contours_poly;
     Rect boundRect;
@@ -134,11 +132,11 @@ void addBoundingBox(vector<Point> &contour, Mat &dest) {
     addAlphaMat(drawing, dest, 0.4);
 }
 
-bool sortConvDef(Vec4i &p1, Vec4i &p2) {
+bool SeeHandWindow::sortConvDef(Vec4i &p1, Vec4i &p2) {
     return p1[3] > p2[3];
 }
 
-void findHull(vector<Point> &contour, Mat &dest) {
+void SeeHandWindow::findHull(vector<Point> &contour, Mat &dest) {
     vector<vector<Point> > hull(1);
     cv::vector<cv::vector<int> > hull_i(1);
 
@@ -177,17 +175,18 @@ void findHull(vector<Point> &contour, Mat &dest) {
             cv::circle(drawing, contour[ind_1], 2, Scalar(1, 255, 0), -1);
             cv::circle(drawing, contour[ind_2], 2, Scalar(1, 0, 255), -1);
         }
-//        std::sort(convDef.begin(), convDef.end(), sortConvDef);
+        std::sort(convDef.begin(), convDef.end(), sortConvDef);
 //        int maxc = 0;
         double average = 0;
-        for (int k = 0; k < 4 && k < convDef.size(); k++) {
+        for (int k = 0; k < convDef.size(); k++) {
             average += convDef[k][3];
         }
         average = average / convDef.size();
+        printf("%f\r", average);
 
 //        for (int k = 0; k < 4 && k < convDef.size(); k++) {
         for (int k = 0; k < convDef.size(); k++) {
-            if (convDef[k][3] > 2 * average) {
+            if (convDef[k][3] > 3 * average) {
                 int ind_0 = convDef[k][0];
                 int ind_1 = convDef[k][1];
                 int ind_2 = convDef[k][2];
@@ -208,7 +207,7 @@ void findHull(vector<Point> &contour, Mat &dest) {
 }
 
 
-void addContours(Mat &source, Mat &dest) {
+void SeeHandWindow::addContours(Mat &source, Mat &dest) {
     Mat canny_output;
     vector<vector<Point> > contours;
     vector<Vec4i> hierarchy;
@@ -297,8 +296,6 @@ SeeHandWindow::SeeHandWindow(std::string title):DisplayWindow(title) {
     result = Mat::zeros(480, 640 + 320, 16);
 
     record = false;
-//    minHue = 10;
-//    maxHue = 20;
     minHue = 99;
     maxHue = 125;
     morph = true;
