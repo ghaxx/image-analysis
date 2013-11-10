@@ -6,6 +6,7 @@
 
 
 #include "DisplayWindow.h"
+#include "Util.h"
 
 #ifndef __SeeHandWindow_H_
 #define __SeeHandWindow_H_
@@ -21,6 +22,7 @@ class SeeHandWindow: public DisplayWindow {
     int maxHue;
     bool morph;
     int blurRadius;
+
 public:
     virtual void show() override;
 
@@ -43,14 +45,6 @@ public:
     void findCenterOfObject(std::vector<cv::Point_<int> > &contour, cv::Mat &dest);
 
     void drawObject(int x, int y, cv::Mat &frame);
-
-    void addAlphaMat(cv::Mat &src, cv::Mat &dst);
-
-    void addAlphaMat(cv::Mat &src, cv::Mat &dst, double alpha);
-
-    void pictureInPicture(cv::Mat &source, cv::Mat &destination, int x, int y, int w, int h);
-
-    std::string intToString(int number);
 
     cv::Mat const & getResult() const;
 

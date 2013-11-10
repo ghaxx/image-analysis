@@ -12,52 +12,13 @@ const int FRAME_HEIGHT = 480;
 
 using namespace cv;
 
-string SeeHandWindow::intToString(int number) {
-    std::stringstream ss;
-    ss << number;
-    return ss.str();
-}
-
-void SeeHandWindow::pictureInPicture(Mat &source, Mat &destination, int x, int y, int w, int h) {
-    Mat small;
-    resize(source, small, Size(w, h));
-    Mat subView = destination(Rect(x, y, small.cols, small.rows));
-    if (small.type() != destination.type())
-        cvtColor(small, small, CV_GRAY2RGB);
-    small.copyTo(subView);
-}
-
-void SeeHandWindow::addAlphaMat(Mat &src, Mat &dst, double alpha) {
-    for (int x = 0; x < dst.cols; x++) {
-        for (int y = 0; y < dst.rows; y++) {
-            if (src.at<Vec3b>(y, x)[0] != 0)
-                for (int c = 0; c < dst.channels(); c++) {
-                    double v = ((1 - alpha) * dst.at<Vec3b>(y, x)[c]) + ((alpha) * src.at<Vec3b>(y, x)[c]);
-                    dst.at<Vec3b>(y, x)[c] = max(0.0, min(v, 255.0));
-                }
-        }
-    }
-}
-
-void SeeHandWindow::addAlphaMat(Mat &src, Mat &dst) {
-    for (int x = 0; x < dst.cols; x++) {
-        for (int y = 0; y < dst.rows; y++) {
-            if (src.at<Vec3b>(y, x)[3] != 0)
-                for (int c = 0; c < dst.channels(); c++) {
-                    double alpha = (double) src.at<Vec4b>(y, x)[3] / 255;
-                    double v = ((1.0 - alpha) * dst.at<Vec3b>(y, x)[c]) + ((alpha) * src.at<Vec4b>(y, x)[c]);
-                    dst.at<Vec3b>(y, x)[c] = max(0.0, min(v, 255.0));
-                }
-        }
-    }
-}
 
 // From image to black and white
 void SeeHandWindow::extractShapesInBinary(Mat &image, Mat &thresh) {
     Mat hsv;
     cvtColor(image, hsv, CV_RGB2HSV);
     inRange(hsv, Scalar(minHue, 0, 0), Scalar(maxHue, 255, 255), thresh);
-    pictureInPicture(thresh, result, 0, 240, 320, 240);
+    Util::pictureInPicture(thresh, result, 0, 240, 320, 240);
 
     if (blurRadius > 0) {
         cv::GaussianBlur(thresh, thresh, cv::Size(0, 0), 9);
@@ -129,7 +90,7 @@ void SeeHandWindow::addBoundingBox(vector<Point> &contour, Mat &dest) {
     rectangle(drawing, boundRect.tl(), boundRect.br(), Scalar(100, 255, 255), 1, 8, 0);
     circle(drawing, center, (int) radius, Scalar(255, 255, 100), 1, 8, 0);
 
-    addAlphaMat(drawing, dest, 0.4);
+    Util::addAlphaMat(drawing, dest, 0.4);
 }
 
 bool SeeHandWindow::sortConvDef(Vec4i &p1, Vec4i &p2) {
@@ -147,7 +108,7 @@ void SeeHandWindow::findHull(vector<Point> &contour, Mat &dest) {
     drawContours(drawing, hull, 0, Scalar(1, 1, 50), 2, 8, vector<Vec4i>(), 0, Point());
     drawContours(drawing, hull, 0, Scalar(20, 20, 200), 1, 8, vector<Vec4i>(), 0, Point());
 
-    addAlphaMat(drawing, dest, 0.4);
+    Util::addAlphaMat(drawing, dest, 0.4);
     drawing = Mat::zeros(dest.size(), CV_8UC3);
 
     std::vector<Vec4i> convDef;
@@ -203,7 +164,7 @@ void SeeHandWindow::findHull(vector<Point> &contour, Mat &dest) {
 //        cv::circle(drawing, contour[maxc], 11, Scalar(1, 255, 25), -1);
 //        cv::circle(drawing, contour[maxc], 9, Scalar(1, 255, 255), -1);
     }
-    addAlphaMat(drawing, dest, 0.4);
+    Util::addAlphaMat(drawing, dest, 0.4);
 }
 
 
@@ -236,7 +197,7 @@ void SeeHandWindow::addContours(Mat &source, Mat &dest) {
     }
     drawContours(drawing, contours, max, Scalar(20, 240, 20), 1, 8, hierarchy, 0, Point());
     drawContours(drawing, contours, max, Scalar(2, 20, 2), 2, 8, hierarchy, 0, Point());
-    addAlphaMat(drawing, dest, 0.4);
+    Util::addAlphaMat(drawing, dest, 0.4);
 
     findCenterOfObject(contours[max], dest);
     findHull(contours[max], dest);
@@ -262,8 +223,8 @@ void SeeHandWindow::show() {
         //        multiply(thresholdMat, image, image, 1.0/255); // show only found objects
         addContours(thresholdMat, image);
 
-        pictureInPicture(thresholdMat, result, 0, 0, 320, 240);
-        pictureInPicture(image, result, 320, 0, 640, 480);
+        Util::pictureInPicture(thresholdMat, result, 0, 0, 320, 240);
+        Util::pictureInPicture(image, result, 320, 0, 640, 480);
 
         if (record) {
             writer->write(result);

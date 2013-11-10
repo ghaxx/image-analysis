@@ -49,6 +49,7 @@
 		5DC36C9782F6E8DD2981445D /* FilterChain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC3651BB2DA6C845CFD5DAE /* FilterChain.cpp */; };
 		5DC36CB456BA08CDC0DD51DE /* SynchronizedVideoCapture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC368E267CCCDD2BC7D1C0D /* SynchronizedVideoCapture.cpp */; };
 		5DC36CE064F0A58AE02CDDBA /* HighestValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC3670520A452F6C9B9D232 /* HighestValue.cpp */; };
+		5DC36D381F8C146083BF5725 /* Util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC366B942ABC82659C89538 /* Util.cpp */; };
 		5DC36D47ABB640823410C484 /* FilterWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36F6E9CDDED87149D46A8 /* FilterWindow.cpp */; };
 		5DC36F1C04621F14D4DBA62F /* Transformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36C243A46519949EEA949 /* Transformation.cpp */; };
 		5DC36F49731F6EE075ED2340 /* DisplayWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36AC7D70BE81FABB195B1 /* DisplayWindow.cpp */; };
@@ -99,6 +100,7 @@
 		5DC361FD4DC276C0FA2D7B43 /* Image4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image4.h; sourceTree = "<group>"; };
 		5DC3620716AAB35B82639274 /* Image4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Image4.cpp; sourceTree = "<group>"; };
 		5DC362084CFDC4C4FAF387D3 /* Window5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Window5.h; sourceTree = "<group>"; };
+		5DC36209E532DAB93131FDE4 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		5DC362538FE5BC2065E8D0F7 /* Video4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Video4.cpp; sourceTree = "<group>"; };
 		5DC3629C1CE319C8199CEEDB /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
 		5DC362DE8AC3DAD3F11CDBD5 /* SharpenWithMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SharpenWithMatrix.cpp; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 		5DC365E409391739474F8FC0 /* CameraCaptureWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraCaptureWindow.cpp; sourceTree = "<group>"; };
 		5DC36633DB1CC31A10A7E4AE /* Lightness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lightness.h; sourceTree = "<group>"; };
 		5DC366A5CCEB6143F570152C /* Lightness.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Lightness.cpp; sourceTree = "<group>"; };
+		5DC366B942ABC82659C89538 /* Util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Util.cpp; sourceTree = "<group>"; };
 		5DC3670520A452F6C9B9D232 /* HighestValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HighestValue.cpp; sourceTree = "<group>"; };
 		5DC3670B6664CCCD6AAB9B5F /* Transformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transformation.h; sourceTree = "<group>"; };
 		5DC36713509355FF1E1ABD37 /* CameraFilterWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraFilterWindow.h; sourceTree = "<group>"; };
@@ -250,6 +253,8 @@
 			children = (
 				5DC364B4CC564D90D424FAC9 /* TransformVideo.cpp */,
 				5DC36E8500E4F19C0025677D /* TransformVideo.h */,
+				5DC366B942ABC82659C89538 /* Util.cpp */,
+				5DC36209E532DAB93131FDE4 /* Util.h */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -450,6 +455,7 @@
 				5DC36585FA57888AAE545590 /* Video4.cpp in Sources */,
 				5DC362DCB98FE1D538C87B10 /* Camera4.cpp in Sources */,
 				5DC36B68881621596ACFBA4A /* Window5.cpp in Sources */,
+				5DC36D381F8C146083BF5725 /* Util.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

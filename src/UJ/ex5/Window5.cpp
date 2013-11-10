@@ -12,50 +12,10 @@ const int FRAME_HEIGHT = 480;
 
 using namespace cv;
 
-string Window5::intToString(int number) {
-    std::stringstream ss;
-    ss << number;
-    return ss.str();
-}
-
-void Window5::pictureInPicture(Mat &source, Mat &destination, int x, int y, int w, int h) {
-    Mat small;
-    resize(source, small, Size(w, h));
-    Mat subView = destination(Rect(x, y, small.cols, small.rows));
-    if (small.type() != destination.type())
-        cvtColor(small, small, CV_GRAY2RGB);
-    small.copyTo(subView);
-}
-
-void Window5::addAlphaMat(Mat &src, Mat &dst, double alpha) {
-    for (int x = 0; x < dst.cols; x++) {
-        for (int y = 0; y < dst.rows; y++) {
-            if (src.at<Vec3b>(y, x)[0] != 0)
-                for (int c = 0; c < dst.channels(); c++) {
-                    double v = ((1 - alpha) * dst.at<Vec3b>(y, x)[c]) + ((alpha) * src.at<Vec3b>(y, x)[c]);
-                    dst.at<Vec3b>(y, x)[c] = max(0.0, min(v, 255.0));
-                }
-        }
-    }
-}
-
-void Window5::addAlphaMat(Mat &src, Mat &dst) {
-    for (int x = 0; x < dst.cols; x++) {
-        for (int y = 0; y < dst.rows; y++) {
-            if (src.at<Vec3b>(y, x)[3] != 0)
-                for (int c = 0; c < dst.channels(); c++) {
-                    double alpha = (double) src.at<Vec4b>(y, x)[3] / 255;
-                    double v = ((1.0 - alpha) * dst.at<Vec3b>(y, x)[c]) + ((alpha) * src.at<Vec4b>(y, x)[c]);
-                    dst.at<Vec3b>(y, x)[c] = max(0.0, min(v, 255.0));
-                }
-        }
-    }
-}
-
 // From image to black and white
 void Window5::extractShapesInBinaryByDifference(Mat &image, Mat &thresh) {
     absdiff(image, background, thresh);
-    pictureInPicture(thresh, result, 0, 240, 320, 240);
+    Util::pictureInPicture(thresh, result, 0, 240, 320, 240);
     cvtColor(thresh, thresh, CV_RGB2GRAY);
     if (blurRadius > 0)
         cv::GaussianBlur(thresh, thresh, cv::Size(0, 0), blurRadius);
@@ -82,7 +42,7 @@ void Window5::findHull(vector<Point> &contour, Mat &dest) {
     drawContours(drawing, hull, 0, Scalar(1, 1, 50), 2, 8, vector<Vec4i>(), 0, Point());
     drawContours(drawing, hull, 0, Scalar(20, 20, 200), 1, 8, vector<Vec4i>(), 0, Point());
 
-    addAlphaMat(drawing, dest, 0.4);
+    Util::addAlphaMat(drawing, dest, 0.4);
     drawing = Mat::zeros(dest.size(), CV_8UC3);
 
     std::vector<Vec4i> convDef;
@@ -267,23 +227,11 @@ void Window5::control(char key) {
     }
 }
 
-cv::Mat const &Window5::getResult() const {
-    return result;
-}
-
-int Window5::getBlurRadius() const {
-    return blurRadius;
-}
-
 void Window5::setBlurRadius(int blurRadius) {
     if (blurRadius >= 0) {
         this->blurRadius = blurRadius;
         setTrackbarPos("Blur radius", getTitle(), blurRadius);
     }
-}
-
-int Window5::getThresholdMin() const {
-    return thresholdMin;
 }
 
 void Window5::setThresholdMin(int thresholdMin) {
