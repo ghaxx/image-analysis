@@ -21,12 +21,12 @@ void SeeHandWindow::extractShapesInBinary(Mat &image, Mat &thresh) {
     Util::pictureInPicture(thresh, result, 0, 240, 320, 240);
 
     if (blurRadius > 0) {
-        cv::GaussianBlur(thresh, thresh, cv::Size(0, 0), 9);
-        cv::addWeighted(thresh, 1.5, thresh, -0.5, 0, thresh);
-        cv::GaussianBlur(thresh, thresh, cv::Size(0, 0), 9);
-        cv::addWeighted(thresh, 1.5, thresh, -0.5, 0, thresh);
+        GaussianBlur(thresh, thresh, cv::Size(0, 0), 9);
+        addWeighted(thresh, 1.5, thresh, -0.5, 0, thresh);
+        GaussianBlur(thresh, thresh, cv::Size(0, 0), 9);
+        addWeighted(thresh, 1.5, thresh, -0.5, 0, thresh);
 
-        cv::GaussianBlur(thresh, thresh, cv::Size(0, 0), blurRadius);
+        GaussianBlur(thresh, thresh, cv::Size(0, 0), blurRadius);
     }
     threshold(thresh, thresh, 0, 255, CV_THRESH_BINARY | THRESH_OTSU);
 
@@ -64,14 +64,12 @@ void SeeHandWindow::findCenterOfObject(vector<Point> &contour, Mat &dest) {
     int x = 0;
     int y = 0;
 
-    Moments moment = moments((cv::Mat) contour);
+    Moments moment = moments((Mat) contour);
     double area = moment.m00;
     x = (int) (moment.m10 / area);
     y = (int) (moment.m01 / area);
 
-    if (refArea != 0) {
-        drawObject(x, y, dest);
-    }
+    drawObject(x, y, dest);
 }
 
 void SeeHandWindow::addBoundingBox(vector<Point> &contour, Mat &dest) {
@@ -195,13 +193,15 @@ void SeeHandWindow::addContours(Mat &source, Mat &dest) {
 //        findCenterOfObject(contours[i], dest);
 //        findHull(contours[i], dest);
     }
-    drawContours(drawing, contours, max, Scalar(20, 240, 20), 1, 8, hierarchy, 0, Point());
-    drawContours(drawing, contours, max, Scalar(2, 20, 2), 2, 8, hierarchy, 0, Point());
-    Util::addAlphaMat(drawing, dest, 0.4);
+    if (&(contours[max]) != 0) {
+        drawContours(drawing, contours, max, Scalar(20, 240, 20), 1, 8, hierarchy, 0, Point());
+        drawContours(drawing, contours, max, Scalar(2, 20, 2), 2, 8, hierarchy, 0, Point());
+        Util::addAlphaMat(drawing, dest, 0.4);
 
-    findCenterOfObject(contours[max], dest);
-    findHull(contours[max], dest);
-//    addBoundingBox(contours[max], dest);
+        findCenterOfObject(contours[max], dest);
+        findHull(contours[max], dest);
+//        addBoundingBox(contours[max], dest);
+    }
 }
 
 void SeeHandWindow::show() {
@@ -209,6 +209,7 @@ void SeeHandWindow::show() {
         result = Mat::zeros(480, 640 + 320, image.type());
         capture->read(image);
         flip(image, image, 2);
+        Scalar color = Scalar(0,0,0);
 //        image = imread(AppConfig::inputDir + "/h.jpg", CV_LOAD_IMAGE_COLOR);
         Mat thresholdMat;
 
@@ -216,6 +217,8 @@ void SeeHandWindow::show() {
         if (morph) {
             extractShapesInBinary(image, thresholdMat);
         }
+        Util::resizeCanvas(image, image, 10, color);
+        Util::resizeCanvas(thresholdMat, thresholdMat, 10, color);
 
 //        trackFilteredObject(x, y, thresholdMat, image);
 
@@ -223,8 +226,8 @@ void SeeHandWindow::show() {
         //        multiply(thresholdMat, image, image, 1.0/255); // show only found objects
         addContours(thresholdMat, image);
 
-        Util::pictureInPicture(thresholdMat, result, 0, 0, 320, 240);
-        Util::pictureInPicture(image, result, 320, 0, 640, 480);
+        Util::pictureInPicture(thresholdMat, result, 0, 0, 320, 240, 10, 10, 640, 480);
+        Util::pictureInPicture(image, result, 320, 0, 640, 480, 10, 10, 640, 480);
 
         if (record) {
             writer->write(result);

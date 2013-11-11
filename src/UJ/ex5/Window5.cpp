@@ -98,7 +98,7 @@ void Window5::findHull(vector<Point> &contour, Mat &dest) {
 //        cv::circle(drawing, contour[maxc], 11, Scalar(1, 255, 25), -1);
 //        cv::circle(drawing, contour[maxc], 9, Scalar(1, 255, 255), -1);
     }
-    addAlphaMat(drawing, dest, 0.4);
+    Util::addAlphaMat(drawing, dest, 0.4);
 }
 
 
@@ -131,7 +131,7 @@ void Window5::addContours(Mat &source, Mat &dest) {
     }
     drawContours(drawing, contours, max, Scalar(20, 240, 20), 1, 8, hierarchy, 0, Point());
     drawContours(drawing, contours, max, Scalar(2, 20, 2), 2, 8, hierarchy, 0, Point());
-    addAlphaMat(drawing, dest, 0.4);
+    Util::addAlphaMat(drawing, dest, 0.4);
 
     findHull(contours[max], dest);
 //    addBoundingBox(contours[max], dest);
@@ -158,8 +158,8 @@ void Window5::show() {
         //        multiply(thresholdMat, image, image, 1.0/255); // show only found objects
         addContours(thresholdMat, image);
 
-        pictureInPicture(thresholdMat, result, 0, 0, 320, 240);
-        pictureInPicture(image, result, 320, 0, 640, 480);
+        Util::pictureInPicture(thresholdMat, result, 0, 0, 320, 240);
+        Util::pictureInPicture(image, result, 320, 0, 640, 480);
 
         if (record) {
             writer->write(result);

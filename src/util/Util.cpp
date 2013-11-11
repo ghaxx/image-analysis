@@ -14,9 +14,16 @@ string Util::intToString(int number) {
     return ss.str();
 }
 
-void Util::pictureInPicture(Mat &source, Mat &destination, int x, int y, int w, int h) {
-    Mat small;
-    resize(source, small, Size(w, h));
+void Util::pictureInPicture(Mat &source, Mat &destination, int x, int y, int w, int h, int offsetX, int offsetY, int sourceWidth, int sourceHeight) {
+    Mat small(source);
+    if (sourceWidth == 0)
+        sourceWidth = source.cols - offsetX;
+    if (sourceHeight == 0)
+        sourceHeight = source.rows - offsetY;
+    if (offsetX * offsetY != 0) {
+        small = small(Rect(offsetX, offsetY, sourceWidth, sourceHeight));
+    }
+    resize(small, small, Size(w, h));
     Mat subView = destination(Rect(x, y, small.cols, small.rows));
     if (small.type() != destination.type())
         cvtColor(small, small, CV_GRAY2RGB);
@@ -47,3 +54,18 @@ void Util::addAlphaMat(Mat &src, Mat &dst) {
         }
     }
 }
+
+void Util::addFrame(Mat &dest, int width, Scalar &color) {
+    line(dest, Point(0, dest.rows), Point(dest.cols, dest.rows), color, width);
+    line(dest, Point(0, 0),         Point(dest.cols, 0),         color, width);
+    line(dest, Point(0, 0),         Point(0,         dest.rows), color, width);
+    line(dest, Point(dest.cols, 0), Point(dest.cols, dest.rows), color, width);
+}
+
+
+void Util::resizeCanvas(Mat &source, Mat &canvas, int width, Scalar &color) {
+    Mat tmp = source.clone();
+    canvas = Mat::zeros(source.rows + 2 * width, source.cols + 2 * width, source.type());
+    pictureInPicture(tmp, canvas, width, width, tmp.cols, tmp.rows);
+}
+
