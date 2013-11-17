@@ -184,24 +184,33 @@ void SeeHandWindow::addContours(Mat &source, Mat &dest) {
     int max = 0;
     double maxArea = 0;
     for (int i = 0; i < contours.size(); i++) {
-        Moments moment = moments((cv::Mat) contours[i]);
-        double area = moment.m00;
-        if (area > maxArea) {
-            maxArea = area;
-            max = i;
+//        Moments moment = moments((cv::Mat) contours[i]);
+//        double area = moment.m00;
+//        if (area > maxArea) {
+//            maxArea = area;
+//            max = i;
+//        }
+        if (&(contours[i]) != 0) {
+            drawContours(drawing, contours, i, Scalar(20, 240, 20), 1, 8, hierarchy, 0, Point());
+            drawContours(drawing, contours, i, Scalar(2, 20, 2), 2, 8, hierarchy, 0, Point());
+            Util::addAlphaMat(drawing, dest, 0.4);
+
+            findCenterOfObject(contours[i], dest);
+            findHull(contours[i], dest);
+            //        addBoundingBox(contours[max], dest);
         }
 //        findCenterOfObject(contours[i], dest);
 //        findHull(contours[i], dest);
     }
-    if (&(contours[max]) != 0) {
-        drawContours(drawing, contours, max, Scalar(20, 240, 20), 1, 8, hierarchy, 0, Point());
-        drawContours(drawing, contours, max, Scalar(2, 20, 2), 2, 8, hierarchy, 0, Point());
-        Util::addAlphaMat(drawing, dest, 0.4);
-
-        findCenterOfObject(contours[max], dest);
-        findHull(contours[max], dest);
-//        addBoundingBox(contours[max], dest);
-    }
+//    if (&(contours[max]) != 0) {
+//        drawContours(drawing, contours, max, Scalar(20, 240, 20), 1, 8, hierarchy, 0, Point());
+//        drawContours(drawing, contours, max, Scalar(2, 20, 2), 2, 8, hierarchy, 0, Point());
+//        Util::addAlphaMat(drawing, dest, 0.4);
+//
+//        findCenterOfObject(contours[max], dest);
+//        findHull(contours[max], dest);
+////        addBoundingBox(contours[max], dest);
+//    }
 }
 
 void SeeHandWindow::show() {
@@ -209,7 +218,7 @@ void SeeHandWindow::show() {
         result = Mat::zeros(480, 640 + 320, image.type());
         capture->read(image);
         flip(image, image, 2);
-        Scalar color = Scalar(0,0,0);
+        Scalar color = Scalar(0, 0, 0);
 //        image = imread(AppConfig::inputDir + "/h.jpg", CV_LOAD_IMAGE_COLOR);
         Mat thresholdMat;
 
