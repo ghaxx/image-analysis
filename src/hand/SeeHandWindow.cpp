@@ -21,10 +21,10 @@ void SeeHandWindow::extractShapesInBinary(Mat &image, Mat &thresh) {
     Util::pictureInPicture(thresh, result, 0, 240, 320, 240);
 
     if (blurRadius > 0) {
-        GaussianBlur(thresh, thresh, cv::Size(0, 0), 9);
-        addWeighted(thresh, 1.5, thresh, -0.5, 0, thresh);
-        GaussianBlur(thresh, thresh, cv::Size(0, 0), 9);
-        addWeighted(thresh, 1.5, thresh, -0.5, 0, thresh);
+//        GaussianBlur(thresh, thresh, cv::Size(0, 0), 9);
+//        addWeighted(thresh, 1.5, thresh, -0.5, 0, thresh);
+//        GaussianBlur(thresh, thresh, cv::Size(0, 0), 9);
+//        addWeighted(thresh, 1.5, thresh, -0.5, 0, thresh);
 
         GaussianBlur(thresh, thresh, cv::Size(0, 0), blurRadius);
     }

@@ -23,6 +23,7 @@
 #include "FilterChain.h"
 #include "Video4.h"
 #include "SeeHandWindow.h"
+#include "Ex7Contours.h"
 
 using namespace cv;
 
@@ -47,7 +48,8 @@ void App::run() {
 //    registerWindow(new Image4());
 //    registerWindow(new Video4());
 //    registerWindow(new Window5());
-    registerWindow(new SeeHandWindow());
+//    registerWindow(new SeeHandWindow());
+    registerWindow(new Ex7Contours("Ex. 7"));
     if (windows.size() > 0)
         do {
             capture->refresh();

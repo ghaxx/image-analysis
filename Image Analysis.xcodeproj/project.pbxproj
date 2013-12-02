@@ -51,6 +51,7 @@
 		5DC36CE064F0A58AE02CDDBA /* HighestValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC3670520A452F6C9B9D232 /* HighestValue.cpp */; };
 		5DC36D381F8C146083BF5725 /* Util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC366B942ABC82659C89538 /* Util.cpp */; };
 		5DC36D47ABB640823410C484 /* FilterWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36F6E9CDDED87149D46A8 /* FilterWindow.cpp */; };
+		5DC36E4A435DDB93424683D8 /* Ex7Contours.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36B3161DB294655450DC2 /* Ex7Contours.cpp */; };
 		5DC36F1C04621F14D4DBA62F /* Transformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36C243A46519949EEA949 /* Transformation.cpp */; };
 		5DC36F49731F6EE075ED2340 /* DisplayWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36AC7D70BE81FABB195B1 /* DisplayWindow.cpp */; };
 		5DC36F8D57C5C44A605800C5 /* CameraCaptureWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC365E409391739474F8FC0 /* CameraCaptureWindow.cpp */; };
@@ -104,6 +105,7 @@
 		5DC362538FE5BC2065E8D0F7 /* Video4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Video4.cpp; sourceTree = "<group>"; };
 		5DC3629C1CE319C8199CEEDB /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
 		5DC362DE8AC3DAD3F11CDBD5 /* SharpenWithMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SharpenWithMatrix.cpp; sourceTree = "<group>"; };
+		5DC36354958C3D8CB9973317 /* Ex7Contours.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ex7Contours.h; sourceTree = "<group>"; };
 		5DC363A71AD51A9B829303FE /* LinearTransformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinearTransformation.h; sourceTree = "<group>"; };
 		5DC363DADE280DA12371CA46 /* SharpenWithMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharpenWithMatrix.h; sourceTree = "<group>"; };
 		5DC364B4CC564D90D424FAC9 /* TransformVideo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TransformVideo.cpp; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 		5DC36A7F3037716509228B8A /* LinearTransformation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LinearTransformation.cpp; sourceTree = "<group>"; };
 		5DC36AC7D70BE81FABB195B1 /* DisplayWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DisplayWindow.cpp; sourceTree = "<group>"; };
 		5DC36AECC8A7E5B725EB537D /* VideoWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VideoWindow.cpp; sourceTree = "<group>"; };
+		5DC36B3161DB294655450DC2 /* Ex7Contours.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ex7Contours.cpp; sourceTree = "<group>"; };
 		5DC36BAFB2902A8660FA019E /* CameraFilterWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraFilterWindow.cpp; sourceTree = "<group>"; };
 		5DC36BBCD35B02BDE4E06F6E /* VideoFilterWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoFilterWindow.h; sourceTree = "<group>"; };
 		5DC36BD8C191C91D9DA406E4 /* SeeHandWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SeeHandWindow.cpp; sourceTree = "<group>"; };
@@ -268,6 +271,15 @@
 			path = ex2;
 			sourceTree = "<group>";
 		};
+		5DC364388F3318EF6A7FD13A /* ex7 */ = {
+			isa = PBXGroup;
+			children = (
+				5DC36B3161DB294655450DC2 /* Ex7Contours.cpp */,
+				5DC36354958C3D8CB9973317 /* Ex7Contours.h */,
+			);
+			path = ex7;
+			sourceTree = "<group>";
+		};
 		5DC366608E9C24CBC90632FA /* filter */ = {
 			isa = PBXGroup;
 			children = (
@@ -338,6 +350,7 @@
 				5DC36DA94FDB338C55D182EF /* ex3 */,
 				5DC36A0CA86B874CE97C90B3 /* ex4 */,
 				5DC36A170E60203754D716F1 /* ex5 */,
+				5DC364388F3318EF6A7FD13A /* ex7 */,
 			);
 			path = UJ;
 			sourceTree = "<group>";
@@ -456,6 +469,7 @@
 				5DC362DCB98FE1D538C87B10 /* Camera4.cpp in Sources */,
 				5DC36B68881621596ACFBA4A /* Window5.cpp in Sources */,
 				5DC36D381F8C146083BF5725 /* Util.cpp in Sources */,
+				5DC36E4A435DDB93424683D8 /* Ex7Contours.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
