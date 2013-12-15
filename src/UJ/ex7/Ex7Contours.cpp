@@ -52,7 +52,7 @@ void Ex7Contours::show() {
 
     // Canny
     Mat canny_output;
-    Canny(gaussian_output, canny_output, minThreshold, maxThreshold, 3);
+    Canny(gaussian_output, canny_output, minThreshold, maxThreshold, 5);
     Util::pictureInPicture(canny_output, result, 320, 0, 320, 240);
 
     // Sobel
@@ -84,7 +84,7 @@ void Ex7Contours::show() {
 //    cartToPolar(grad_x, grad_y, mag, ori, true);
 
     convertScaleAbs(mag, mag);
-    threshold(mag, mag, minThreshold, maxThreshold, binaryType);
+    threshold(mag, mag, minThreshold, 255, binaryType);
     Mat oriMap = orientationMap(mag, ori);
     Util::pictureInPicture(oriMap, result, 640, 0, 320, 240);
     Util::pictureInPicture(mag, result, 640, 240, 320, 240);

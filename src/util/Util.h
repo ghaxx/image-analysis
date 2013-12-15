@@ -11,7 +11,16 @@
 #include <opencv2/opencv.hpp>
 
 class Util {
+    static std::map<std::string, int*> trackbarValues;
+
 public:
+
+    static void trackbarChanged(int c, void *p);
+    static void createTrackbar(std::string& trackbarName, std::string& windowName,
+                                  double* value, int count, int factor,
+                                  cv::TrackbarCallback onChange = 0,
+                                  void* userdata = 0);
+
     static void addAlphaMat(cv::Mat &src, cv::Mat &dst);
 
     static void addAlphaMat(cv::Mat &src, cv::Mat &dst, double alpha);

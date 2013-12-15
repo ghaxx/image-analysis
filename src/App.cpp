@@ -24,6 +24,9 @@
 #include "Video4.h"
 #include "SeeHandWindow.h"
 #include "Ex7Contours.h"
+#include "Ex8ContourCamera.h"
+#include "Ex8ContourVideo.h"
+#include "Ex9Window.h"
 
 using namespace cv;
 
@@ -49,7 +52,11 @@ void App::run() {
 //    registerWindow(new Video4());
 //    registerWindow(new Window5());
 //    registerWindow(new SeeHandWindow());
-    registerWindow(new Ex7Contours("Ex. 7"));
+//    registerWindow(new Ex7Contours("Ex. 7"));
+    registerWindow(new Ex8ContourCamera("Camera1"));
+//    registerWindow(new Ex8ContourVideo("Camera2", AppConfig::inputDir + "/1.avi"));
+//    registerWindow(new Ex8ContourVideo("Camera3", AppConfig::inputDir + "/2.avi"));
+//    registerWindow(new Ex9Window("Camera"));
     if (windows.size() > 0)
         do {
             capture->refresh();
@@ -68,7 +75,7 @@ void App::run() {
 }
 
 void App::catchAction() {
-    int key = waitKey(10);
+    int key = waitKey(67);
     if (key == 27)
         done = true;
 

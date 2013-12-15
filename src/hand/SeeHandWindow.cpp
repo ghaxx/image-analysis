@@ -217,6 +217,8 @@ void SeeHandWindow::show() {
     try {
         result = Mat::zeros(480, 640 + 320, image.type());
         capture->read(image);
+        if (image.empty())
+            return;
         flip(image, image, 2);
         Scalar color = Scalar(0, 0, 0);
 //        image = imread(AppConfig::inputDir + "/h.jpg", CV_LOAD_IMAGE_COLOR);

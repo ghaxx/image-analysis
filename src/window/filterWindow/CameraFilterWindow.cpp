@@ -15,6 +15,10 @@ CameraFilterWindow::CameraFilterWindow(std::string title, Transformation* transf
 void CameraFilterWindow::show() {
     Mat image;
     capture->read(image);
+    if (image.empty())
+        return;
+
+    flip(image, image, 2);
     preprocess(image);
     if (getT() == 0) {
         postprocess(image);

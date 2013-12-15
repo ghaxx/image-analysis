@@ -16,8 +16,12 @@ bool SynchronizedVideoCapture::read(cv::Mat &image) {
         result = true;
     } else {
         readNew = false;
-        result = VideoCapture::read(lastRead);
+        lastRead.release();
+//        do {
+            result = VideoCapture::read(lastRead);
+//        } while(lastRead.empty());
     }
+    result = VideoCapture::read(lastRead);
     lastRead.copyTo(image);
     return result;
 }
