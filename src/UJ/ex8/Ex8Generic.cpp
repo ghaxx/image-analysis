@@ -25,38 +25,16 @@ void Ex8Generic::show() {
     if (accumulated.empty())
         cameraImageGray.convertTo(accumulated, CV_32F);
 
-    try {
-        accumulated.convertTo(accumulated8U, CV_8U);
-        try {
-            absdiff(accumulated8U, cameraImageGray, difference);
-            try {
-                threshold(difference, difference, thresh, 255, cv::THRESH_BINARY);
-                try {
-                    accumulateWeighted(cameraImageGray, accumulated, (double) learningRate / 1000);
+    accumulated.convertTo(accumulated8U, CV_8U);
+    absdiff(accumulated8U, cameraImageGray, difference);
+    threshold(difference, difference, thresh, 255, cv::THRESH_BINARY);
+    accumulateWeighted(cameraImageGray, accumulated, (double) learningRate / 1000);
 
-                    Mat accumulatedAbs;
-                    try {
-                        convertScaleAbs(accumulated, accumulatedAbs);
-                        Util::pictureInPicture(accumulatedAbs, result, 0, 0, 320, 240);
-                        Util::pictureInPicture(difference, result, 320, 0, 320, 240);
-                        imshow(getTitle(), result);
-                    } catch(...) {
-                        printf("convertScaleAbs\n");
-                    }
-
-
-                } catch(...) {
-                    printf("accumulate\n");
-                }
-            } catch(...) {
-                printf("threshold\n");
-            }
-        } catch(...) {
-            printf("absdiff\n");
-        }
-    } catch(...) {
-        printf("convertTo\n");
-    }
+    Mat accumulatedAbs;
+    convertScaleAbs(accumulated, accumulatedAbs);
+    Util::pictureInPicture(accumulatedAbs, result, 0, 0, 320, 240);
+    Util::pictureInPicture(difference, result, 320, 0, 320, 240);
+    imshow(getTitle(), result);
 
     difference.release();
 
