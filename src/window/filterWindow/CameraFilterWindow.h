@@ -15,12 +15,16 @@
 class CameraFilterWindow : public FilterWindow {
     int number;
     SynchronizedVideoCapture *capture;
+    bool record;
+    cv::VideoWriter* writer;
 
 public:
     CameraFilterWindow(std::string title, Transformation* transformation);
 
     virtual void show() override;
 
+
+    virtual void control(char key) override;
 };
 
 

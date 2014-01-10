@@ -5,11 +5,13 @@
 
 
 #include "CameraFilterWindow.h"
+#include "AppConfig.h"
 
 using namespace cv;
 
-CameraFilterWindow::CameraFilterWindow(std::string title, Transformation* transformation):FilterWindow(title, transformation) {
+CameraFilterWindow::CameraFilterWindow(std::string title, Transformation *transformation):FilterWindow(title, transformation) {
     capture = SynchronizedVideoCapture::getInstance();
+    writer = new VideoWriter();
 }
 
 void CameraFilterWindow::show() {
@@ -23,12 +25,34 @@ void CameraFilterWindow::show() {
     if (getT() == 0) {
         postprocess(image);
         imshow(getTitle(), image);
+        if (record && writer->isOpened()) {
+            writer->write(image);
+        }
         image.release();
     } else {
         cv::Mat transformed = getT()->transform(image);
         postprocess(transformed);
         imshow(getTitle(), transformed);
+        if (record && writer->isOpened()) {
+            writer->write(transformed);
+        }
         image.release();
         transformed.release();
     }
+}
+
+void CameraFilterWindow::control(char key) {
+    if (key == ' ') {
+        record = !record;
+        if (record) {
+            char name[100];
+            sprintf(name, (AppConfig::outputDir + "/camera %li.avi").c_str(), time(0));
+            printf("Recording started and will be saved as %s\n", name);
+            writer->open(name, 0, 15.0, Size(640, 480), true);
+        } else {
+            printf("Recording ended\n");
+            writer->release();
+        }
+    }
+    FilterWindow::control(key);
 }
