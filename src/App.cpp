@@ -27,6 +27,7 @@
 #include "Ex8ContourCamera.h"
 #include "Ex8ContourVideo.h"
 #include "Ex9Window.h"
+#include "HaarFaceWindow.h"
 
 using namespace cv;
 
@@ -56,7 +57,8 @@ void App::run() {
 //    registerWindow(new Ex8ContourCamera("Camera1"));
 //    registerWindow(new Ex8ContourVideo("Camera2", AppConfig::inputDir + "/1.avi"));
 //    registerWindow(new Ex8ContourVideo("Camera3", AppConfig::inputDir + "/2.avi"));
-    registerWindow(new Ex9Window("Camera"));
+//    registerWindow(new Ex9Window("Camera"));
+    registerWindow(new HaarFaceWindow("Camera"));
     if (windows.size() > 0)
         do {
             capture->refresh();

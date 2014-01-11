@@ -30,6 +30,7 @@
 		1CED0A1E181BA6BC00C2BB0D /* libopencv_videostab.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CED0A0B181BA6BC00C2BB0D /* libopencv_videostab.2.4.6.dylib */; };
 		32672E3BF9170984EC1D9E1D /* AppConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 32672AD57FD2A1DE9D646E5E /* AppConfig.cpp */; };
 		5DC3603D8AFE6283BEF3867C /* Ex9Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC3674942A4DCB61F5885A3 /* Ex9Window.cpp */; };
+		5DC36164F7A81D6FF2B0CFCC /* HaarFaceWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC365C3A5471BC1F2B93441 /* HaarFaceWindow.cpp */; };
 		5DC3626BA1261E65237A5D5B /* Lightness.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC366A5CCEB6143F570152C /* Lightness.cpp */; };
 		5DC362DCB98FE1D538C87B10 /* Camera4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC3696522F0313309ED8184 /* Camera4.cpp */; };
 		5DC36360E94747E7B7FEE49C /* GrayScale.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36A34EC97D84E9026AAC3 /* GrayScale.cpp */; };
@@ -51,6 +52,7 @@
 		5DC36B62C32C564FBAD9D30C /* TransformVideo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC364B4CC564D90D424FAC9 /* TransformVideo.cpp */; };
 		5DC36B68881621596ACFBA4A /* Window5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36C0ED10CEAB2897B02A7 /* Window5.cpp */; };
 		5DC36B75B1B810AB27803D3F /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC360FD17ADE40BAE522528 /* App.cpp */; };
+		5DC36C30B1E9E9F353DD2189 /* HaarFaceTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36E4B6B71453B68436EDB /* HaarFaceTransformation.cpp */; };
 		5DC36C9782F6E8DD2981445D /* FilterChain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC3651BB2DA6C845CFD5DAE /* FilterChain.cpp */; };
 		5DC36CB456BA08CDC0DD51DE /* SynchronizedVideoCapture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC368E267CCCDD2BC7D1C0D /* SynchronizedVideoCapture.cpp */; };
 		5DC36CE064F0A58AE02CDDBA /* HighestValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC3670520A452F6C9B9D232 /* HighestValue.cpp */; };
@@ -117,10 +119,13 @@
 		5DC363A753C48AA5B4797F12 /* Ex8ContourCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ex8ContourCamera.h; sourceTree = "<group>"; };
 		5DC363DADE280DA12371CA46 /* SharpenWithMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharpenWithMatrix.h; sourceTree = "<group>"; };
 		5DC363FB572B9480EA734A02 /* Ex8ContourVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ex8ContourVideo.h; sourceTree = "<group>"; };
+		5DC36479CF64D882326B61CF /* HaarFaceWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HaarFaceWindow.h; sourceTree = "<group>"; };
 		5DC364A105EFE5162FF25952 /* Ex8ContourVideo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ex8ContourVideo.cpp; sourceTree = "<group>"; };
 		5DC364B4CC564D90D424FAC9 /* TransformVideo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TransformVideo.cpp; sourceTree = "<group>"; };
 		5DC364DF2F5EC889AC69063D /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
 		5DC3651BB2DA6C845CFD5DAE /* FilterChain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FilterChain.cpp; sourceTree = "<group>"; };
+		5DC3652FA0D81DF382DE9484 /* HaarFaceTransformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HaarFaceTransformation.h; sourceTree = "<group>"; };
+		5DC365C3A5471BC1F2B93441 /* HaarFaceWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HaarFaceWindow.cpp; sourceTree = "<group>"; };
 		5DC365E409391739474F8FC0 /* CameraCaptureWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraCaptureWindow.cpp; sourceTree = "<group>"; };
 		5DC36633DB1CC31A10A7E4AE /* Lightness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lightness.h; sourceTree = "<group>"; };
 		5DC366A5CCEB6143F570152C /* Lightness.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Lightness.cpp; sourceTree = "<group>"; };
@@ -145,6 +150,7 @@
 		5DC36AC7D70BE81FABB195B1 /* DisplayWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DisplayWindow.cpp; sourceTree = "<group>"; };
 		5DC36AECC8A7E5B725EB537D /* VideoWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VideoWindow.cpp; sourceTree = "<group>"; };
 		5DC36B3161DB294655450DC2 /* Ex7Contours.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ex7Contours.cpp; sourceTree = "<group>"; };
+		5DC36B9DF6CD3D83AFB79EFB /* haarcascade_frontalface_default.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = haarcascade_frontalface_default.xml; sourceTree = "<group>"; };
 		5DC36BAFB2902A8660FA019E /* CameraFilterWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraFilterWindow.cpp; sourceTree = "<group>"; };
 		5DC36BBCD35B02BDE4E06F6E /* VideoFilterWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoFilterWindow.h; sourceTree = "<group>"; };
 		5DC36BD8C191C91D9DA406E4 /* SeeHandWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SeeHandWindow.cpp; sourceTree = "<group>"; };
@@ -155,6 +161,7 @@
 		5DC36C57DD76B31E56A9E231 /* FindLines.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FindLines.cpp; sourceTree = "<group>"; };
 		5DC36DE18C908F67F739DA84 /* Ex9Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ex9Window.h; sourceTree = "<group>"; };
 		5DC36E2B046B390A9A06C89C /* VideoFilterWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VideoFilterWindow.cpp; sourceTree = "<group>"; };
+		5DC36E4B6B71453B68436EDB /* HaarFaceTransformation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HaarFaceTransformation.cpp; sourceTree = "<group>"; };
 		5DC36E8500E4F19C0025677D /* TransformVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransformVideo.h; sourceTree = "<group>"; };
 		5DC36EF0DF774A9A41D7FF69 /* CameraCaptureWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraCaptureWindow.h; sourceTree = "<group>"; };
 		5DC36F068C204CD4C117873B /* HighestValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighestValue.h; sourceTree = "<group>"; };
@@ -202,6 +209,7 @@
 				1CA2AFD51807723200EE723D /* OpenCV Frameworks */,
 				1CA2AFCB1807711B00EE723D /* src */,
 				1CA2AFCA1807711B00EE723D /* Products */,
+				5DC36DF56ADB19AC83632E8D /* data */,
 			);
 			sourceTree = "<group>";
 		};
@@ -295,6 +303,15 @@
 			path = ex7;
 			sourceTree = "<group>";
 		};
+		5DC3665398F2D19AB03E62A4 /* ex10 */ = {
+			isa = PBXGroup;
+			children = (
+				5DC365C3A5471BC1F2B93441 /* HaarFaceWindow.cpp */,
+				5DC36479CF64D882326B61CF /* HaarFaceWindow.h */,
+			);
+			path = ex10;
+			sourceTree = "<group>";
+		};
 		5DC366608E9C24CBC90632FA /* filter */ = {
 			isa = PBXGroup;
 			children = (
@@ -316,6 +333,8 @@
 				5DC3670B6664CCCD6AAB9B5F /* Transformation.h */,
 				5DC36C57DD76B31E56A9E231 /* FindLines.cpp */,
 				5DC36F253A2BEF283D95A5B9 /* FindLines.h */,
+				5DC36E4B6B71453B68436EDB /* HaarFaceTransformation.cpp */,
+				5DC3652FA0D81DF382DE9484 /* HaarFaceTransformation.h */,
 			);
 			path = filter;
 			sourceTree = "<group>";
@@ -392,6 +411,7 @@
 				5DC364388F3318EF6A7FD13A /* ex7 */,
 				5DC3675639F8952DBDC3913D /* ex8 */,
 				5DC3686630C23FA2454B8094 /* ex9 */,
+				5DC3665398F2D19AB03E62A4 /* ex10 */,
 			);
 			path = UJ;
 			sourceTree = "<group>";
@@ -420,6 +440,14 @@
 				5DC36EF0DF774A9A41D7FF69 /* CameraCaptureWindow.h */,
 			);
 			path = ex3;
+			sourceTree = "<group>";
+		};
+		5DC36DF56ADB19AC83632E8D /* data */ = {
+			isa = PBXGroup;
+			children = (
+				5DC36B9DF6CD3D83AFB79EFB /* haarcascade_frontalface_default.xml */,
+			);
+			path = data;
 			sourceTree = "<group>";
 		};
 		5DC36E32548D0E8137B48479 /* window */ = {
@@ -516,6 +544,8 @@
 				5DC3649A4789483C5098A1F8 /* Ex8Generic.cpp in Sources */,
 				5DC3603D8AFE6283BEF3867C /* Ex9Window.cpp in Sources */,
 				5DC36967FCB1458EFF517D98 /* FindLines.cpp in Sources */,
+				5DC36164F7A81D6FF2B0CFCC /* HaarFaceWindow.cpp in Sources */,
+				5DC36C30B1E9E9F353DD2189 /* HaarFaceTransformation.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
