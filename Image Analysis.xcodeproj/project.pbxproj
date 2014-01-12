@@ -118,7 +118,6 @@
 		5DC36209E532DAB93131FDE4 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		5DC362472BB91BB4261C0199 /* Ex8Generic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ex8Generic.h; sourceTree = "<group>"; };
 		5DC362538FE5BC2065E8D0F7 /* Video4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Video4.cpp; sourceTree = "<group>"; };
-		5DC362939F265B7875587EB7 /* 4-new.avi */ = {isa = PBXFileReference; lastKnownFileType = video.avi; path = "4-new.avi"; sourceTree = "<group>"; };
 		5DC3629C1CE319C8199CEEDB /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
 		5DC362DE8AC3DAD3F11CDBD5 /* SharpenWithMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SharpenWithMatrix.cpp; sourceTree = "<group>"; };
 		5DC36354958C3D8CB9973317 /* Ex7Contours.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ex7Contours.h; sourceTree = "<group>"; };
@@ -327,7 +326,6 @@
 				5DC36AE65A550E027ACAA9B9 /* 4.jpg */,
 				5DC363FDD01C06E7E4025B3F /* a.avi */,
 				5DC36998539084B989546135 /* h.jpg */,
-				5DC362939F265B7875587EB7 /* 4-new.avi */,
 				5DC36BBFFE8970E784A44386 /* 11 film1.avi */,
 				5DC36B5104E74A7093B93AB5 /* 11 film2.avi */,
 				5DC36BA998A1D73F38917FEB /* 11 film3.avi */,
