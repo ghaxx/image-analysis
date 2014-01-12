@@ -16,6 +16,10 @@ string Util::intToString(int number) {
 
 void Util::pictureInPicture(Mat &source, Mat &destination, int x, int y, int w, int h, int offsetX, int offsetY, int sourceWidth, int sourceHeight) {
     Mat small(source);
+    if (w == 0)
+        w = source.cols;
+    if (h == 0)
+        h = source.rows;
     if (sourceWidth == 0)
         sourceWidth = source.cols - offsetX;
     if (sourceHeight == 0)

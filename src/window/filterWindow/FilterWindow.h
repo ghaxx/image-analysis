@@ -22,7 +22,7 @@ public:
     virtual Transformation* getT() const;
 
     virtual void preprocess(cv::Mat &image);
-    virtual void postprocess(cv::Mat &image);
+    virtual void postprocess(cv::Mat &image, cv::Mat &transformed);
 };
 
 

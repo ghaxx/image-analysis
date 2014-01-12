@@ -15,7 +15,7 @@ cv::Mat HaarFaceTransformation::transform(Mat image) {
     cvtColor(result, result, CV_RGB2GRAY);
 
     vector<Rect> objects;
-    classifier->detectMultiScale(result, objects);
+    classifier->detectMultiScale(result, objects, scaleFactor, minNeighbors, 0, minSize);
 
     for(std::vector<Rect>::iterator it = objects.begin(); it != objects.end(); ++it) {
         circle(image, Point(it->x + it->width/2, it->y + it->height/2), it->height/2, Scalar(0, 0, 0), 2);
@@ -27,4 +27,7 @@ cv::Mat HaarFaceTransformation::transform(Mat image) {
 
 HaarFaceTransformation::HaarFaceTransformation() {
     classifier = new CascadeClassifier(AppConfig::dataDir + "/haarcascade_frontalface_default.xml");
+    scaleFactor = 1.1;
+    minNeighbors = 3;
+    minSize = Size();
 }

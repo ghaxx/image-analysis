@@ -60,7 +60,7 @@ void Video4::startRecording() {
     }
 }
 
-void Video4::postprocess(cv::Mat &image) {
+void Video4::postprocess(cv::Mat &image, cv::Mat &transformed) {
     if (record) {
         writer->write(image);
         cv::putText(image, "Recording", cvPoint(10, 30), cv::FONT_HERSHEY_COMPLEX_SMALL, 0.8, cvScalar(0, 0, 0), 1, CV_AA);

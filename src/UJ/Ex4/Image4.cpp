@@ -49,10 +49,10 @@ void Image4::saveImage() {
     transformed.release();
 }
 
-void Image4::postprocess(cv::Mat &image) {
+void Image4::postprocess(cv::Mat &image, cv::Mat &transformed) {
     if (save) {
         save = false;
-        cv::putText(image, "Saved", cvPoint(10, 30), cv::FONT_HERSHEY_COMPLEX_SMALL, 0.8, cvScalar(0, 0, 0), 1, CV_AA);
+        cv::putText(transformed, "Saved", cvPoint(10, 30), cv::FONT_HERSHEY_COMPLEX_SMALL, 0.8, cvScalar(0, 0, 0), 1, CV_AA);
         refresh();
     }
 }

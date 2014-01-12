@@ -28,6 +28,8 @@
 #include "Ex8ContourVideo.h"
 #include "Ex9Window.h"
 #include "HaarFaceWindow.h"
+#include "MotionDetection11CameraWindow.h"
+#include "MotionDetection11VideoWindow.h"
 
 using namespace cv;
 
@@ -58,7 +60,9 @@ void App::run() {
 //    registerWindow(new Ex8ContourVideo("Camera2", AppConfig::inputDir + "/1.avi"));
 //    registerWindow(new Ex8ContourVideo("Camera3", AppConfig::inputDir + "/2.avi"));
 //    registerWindow(new Ex9Window("Camera"));
-    registerWindow(new HaarFaceWindow("Camera"));
+//    registerWindow(new HaarFaceWindow("Camera"));
+//    registerWindow(new MotionDetection11CameraWindow("Camera"));
+    registerWindow(new MotionDetection11VideoWindow("Video 1", AppConfig::inputDir + "/11 film3.avi"));
     if (windows.size() > 0)
         do {
             capture->refresh();

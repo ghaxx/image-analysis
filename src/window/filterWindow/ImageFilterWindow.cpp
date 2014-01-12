@@ -19,11 +19,11 @@ void ImageFilterWindow::show() {
         _refresh = 0;
         preprocess(image);
         if (getT() == 0) {
-            postprocess(image);
+            postprocess(image, image);
             imshow(getTitle(), image);
         } else {
             cv::Mat transformed = getT()->transform(image);
-            postprocess(transformed);
+            postprocess(image, transformed);
             imshow(getTitle(), transformed);
             transformed.release();
         }

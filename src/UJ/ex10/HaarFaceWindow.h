@@ -13,12 +13,18 @@
 
 
 class HaarFaceWindow : public CameraFilterWindow {
+    int scaleFactor;
+    int minNeighbors;
+    int minSize;
 
 public:
     HaarFaceWindow(const std::string &title);
 
-
     virtual HaarFaceTransformation* getTransformation();
+
+    static void onChange1(int c, void *p);
+    static void onChange2(int c, void *p);
+    static void onChange3(int c, void *p);
 };
 
 

@@ -25,7 +25,7 @@ public:
 
     static void addAlphaMat(cv::Mat &src, cv::Mat &dst, double alpha);
 
-    static void pictureInPicture(cv::Mat &source, cv::Mat &destination, int x, int y, int width, int height, int offsetX = 0, int offsetY = 0, int sourceW = 0, int sourceH = 0);
+    static void pictureInPicture(cv::Mat &source, cv::Mat &destination, int x, int y, int width = 0, int height = 0, int offsetX = 0, int offsetY = 0, int sourceW = 0, int sourceH = 0);
 
     static std::string intToString(int number);
 

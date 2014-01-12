@@ -25,6 +25,6 @@ void FilterWindow::preprocess(cv::Mat &image) {
 
 }
 
-void FilterWindow::postprocess(cv::Mat &image) {
+void FilterWindow::postprocess(cv::Mat &image, cv::Mat &transformed) {
 
 }

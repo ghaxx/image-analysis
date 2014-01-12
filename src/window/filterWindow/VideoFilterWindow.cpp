@@ -17,12 +17,12 @@ void VideoFilterWindow::show() {
     capture->read(image);
     preprocess(image);
     if (getT() == 0) {
-        postprocess(image);
+        postprocess(image, image);
         imshow(getTitle(), image);
         image.release();
     } else {
         cv::Mat transformed = getT()->transform(image);
-        postprocess(transformed);
+        postprocess(image, transformed);
         imshow(getTitle(), transformed);
         image.release();
         transformed.release();

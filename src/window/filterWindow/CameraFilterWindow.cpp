@@ -23,7 +23,7 @@ void CameraFilterWindow::show() {
     flip(image, image, 2);
     preprocess(image);
     if (getT() == 0) {
-        postprocess(image);
+        postprocess(image, image);
         imshow(getTitle(), image);
         if (record && writer->isOpened()) {
             writer->write(image);
@@ -31,7 +31,7 @@ void CameraFilterWindow::show() {
         image.release();
     } else {
         cv::Mat transformed = getT()->transform(image);
-        postprocess(transformed);
+        postprocess(image, transformed);
         imshow(getTitle(), transformed);
         if (record && writer->isOpened()) {
             writer->write(transformed);

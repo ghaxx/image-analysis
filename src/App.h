@@ -38,10 +38,6 @@ public:
     void registerWindow(DisplayWindow *window);
 
     static void debug(const char *format, ...);
-
-
-    int argc;
-    char** argv;
 };
 
 

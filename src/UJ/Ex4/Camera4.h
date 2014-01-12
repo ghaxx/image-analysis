@@ -25,7 +25,7 @@ public:
 
     virtual void control(char key) override;
 
-    virtual void postprocess(cv::Mat &image) override;
+    virtual void postprocess(cv::Mat &image, cv::Mat &transformed) override;
 };
 
 

@@ -42,7 +42,7 @@ void Camera4::control(char key) {
     }
 }
 
-void Camera4::postprocess(cv::Mat &image) {
+void Camera4::postprocess(cv::Mat &image, cv::Mat &transformed) {
     if (record && writer->isOpened()) {
         writer->write(image);
         cv::putText(image, "Recording...", cvPoint(10, 30), cv::FONT_HERSHEY_COMPLEX_SMALL, 0.8, cvScalar(255, 255, 255), 1, CV_AA);
