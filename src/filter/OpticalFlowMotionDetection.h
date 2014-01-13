@@ -16,6 +16,7 @@ class OpticalFlowMotionDetection : public Transformation {
     std::vector<cv::Point2f> features_prev, features_next;
     std::vector<unsigned char> status;
     std::vector<float> err;
+	int found;
 
 public:
 
