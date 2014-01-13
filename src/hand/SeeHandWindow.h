@@ -17,7 +17,7 @@ class SeeHandWindow: public DisplayWindow {
     cv::Mat result;
     SynchronizedVideoCapture* capture;
     cv::VideoWriter* writer;
-    bool record = false;
+    bool record;
     int minHue;
     int maxHue;
     bool morph;

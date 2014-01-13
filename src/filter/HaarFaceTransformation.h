@@ -12,7 +12,8 @@
 
 
 class HaarFaceTransformation : public Transformation {
-    cv::CascadeClassifier *classifier;
+//    cv::CascadeClassifier *classifier;
+    cv::CascadeClassifier **classifiers;
 public:
     double scaleFactor;
     int minNeighbors;

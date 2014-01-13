@@ -14,7 +14,10 @@
 class SharpenWithMatrix : public Transformation {
 
 public:
-    float mult = 1.0;
+    float mult;
+
+    SharpenWithMatrix();
+
     virtual cv::Mat transform(cv::Mat image);
 };
 

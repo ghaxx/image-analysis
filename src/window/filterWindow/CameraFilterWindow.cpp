@@ -12,6 +12,7 @@ using namespace cv;
 CameraFilterWindow::CameraFilterWindow(std::string title, Transformation *transformation):FilterWindow(title, transformation) {
     capture = SynchronizedVideoCapture::getInstance();
     writer = new VideoWriter();
+    record = false;
 }
 
 void CameraFilterWindow::show() {

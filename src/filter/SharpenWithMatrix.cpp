@@ -19,3 +19,7 @@ cv::Mat SharpenWithMatrix::transform(cv::Mat image) {
     cv::filter2D(image, result, image.depth(), kernel);
     return result;
 }
+
+SharpenWithMatrix::SharpenWithMatrix() {
+    mult = 1.0;
+}

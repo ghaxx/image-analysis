@@ -19,7 +19,7 @@ class Window5 : public DisplayWindow {
     bool diffWithPrevious;
     cv::VideoCapture *capture;
     cv::VideoWriter *writer;
-    bool record = false;
+    bool record;
     bool morph;
     int blurRadius;
     int thresholdMin;
