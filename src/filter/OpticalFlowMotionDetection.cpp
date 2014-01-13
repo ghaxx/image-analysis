@@ -14,9 +14,11 @@ OpticalFlowMotionDetection::OpticalFlowMotionDetection() {
     maxCorners = 8;
     qualityLevel = 0.0001;
     minDistance = 1;
+	found = 0;
 }
 
 cv::Mat OpticalFlowMotionDetection::transform(cv::Mat image) {
+	int foundNow = 0;
     if (image_prev.empty() || features_next.size() == 0) {
         printf("Initializing corners\n");
         cvtColor(image, image_next, CV_RGB2GRAY);
@@ -29,7 +31,6 @@ cv::Mat OpticalFlowMotionDetection::transform(cv::Mat image) {
     } else {
         features_prev = features_next;
         cvtColor(image, image_next, CV_RGB2GRAY);
-        printf("%d\n", features_next.size());
         // Find position of feature in new image
         calcOpticalFlowPyrLK(
                 image_prev, image_next, // 2 consecutive images
@@ -38,15 +39,24 @@ cv::Mat OpticalFlowMotionDetection::transform(cv::Mat image) {
                 status,    // tracking success
                 err      // tracking error
         );
-
+		
         for (int i = 0; i < status.size(); i++) {
-            if (status[i] == 1) {
+            if ((int) status[i] == 1) {
+				foundNow++;
                 line(image, Point(features_prev[i].x, features_prev[i].y), Point(features_next[i].x, features_next[i].y), Scalar(0, 0, 0), 2);
+                cv::circle(image, Point(features_next[i].x, features_next[i].y), 2, Scalar(0, 0, 0), -1);
+
                 line(image, Point(features_prev[i].x, features_prev[i].y), Point(features_next[i].x, features_next[i].y), Scalar(255, 255, 255), 1);
+                cv::circle(image, Point(features_next[i].x, features_next[i].y), 1, Scalar(255, 255, 255), -1);
             }
         }
     }
-    image_prev = image_next.clone();
+	if (foundNow < found) {
+		reset();
+	} else {
+		image_prev = image_next.clone();
+		found = foundNow;
+	}
     return image;
 }
 
@@ -55,4 +65,6 @@ void OpticalFlowMotionDetection::reset() {
 
     features_prev.clear();
     features_next.clear();
+
+	found = 0;
 }
