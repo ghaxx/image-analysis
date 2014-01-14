@@ -60,9 +60,9 @@ void App::run() {
 //    registerWindow(new Ex8ContourVideo("Camera2", AppConfig::inputDir + "/1.avi"));
 //    registerWindow(new Ex8ContourVideo("Camera3", AppConfig::inputDir + "/2.avi"));
 //    registerWindow(new Ex9Window("Camera"));
-    registerWindow(new HaarFaceWindow("Camera"));
+//    registerWindow(new HaarFaceWindow("Camera"));
 //    registerWindow(new MotionDetection11CameraWindow("Camera"));
-//    registerWindow(new MotionDetection11VideoWindow("Video 1", AppConfig::inputDir + "/11 film3.avi"));
+    registerWindow(new MotionDetection11VideoWindow("Video 1", AppConfig::inputDir + "/11 film3.avi"));
     if (windows.size() > 0)
         do {
             capture->refresh();

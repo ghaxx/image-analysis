@@ -14,20 +14,12 @@
 
 class MotionDetection11CameraWindow : public CameraFilterWindow {
 
-    int maxCorners;
-    int qualityLevel;
-    int minDistance;
-
 public:
     MotionDetection11CameraWindow(const std::string &title);
 
     virtual void postprocess(cv::Mat &image, cv::Mat &transformed) override;
 
     OpticalFlowMotionDetection* getTransformation();
-
-    static void onChange1(int c, void *p);
-    static void onChange2(int c, void *p);
-    static void onChange3(int c, void *p);
 };
 
 

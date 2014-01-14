@@ -22,10 +22,6 @@ public:
     MotionDetection11VideoWindow(const std::string &title, const std::string &path);
 
     OpticalFlowMotionDetection* getTransformation();
-
-    static void onChange1(int c, void *p);
-    static void onChange2(int c, void *p);
-    static void onChange3(int c, void *p);
 };
 
 

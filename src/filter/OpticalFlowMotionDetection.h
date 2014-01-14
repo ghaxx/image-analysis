@@ -27,7 +27,16 @@ public:
     double qualityLevel;
     double minDistance;
 
+
+    int _qualityLevel;
+    int _minDistance;
+
     void reset();
+
+    void createControls(const std::string &windowTitle);
+    static void onChange1(int c, void *p);
+    static void onChange2(int c, void *p);
+    static void onChange3(int c, void *p);
 };
 
 
