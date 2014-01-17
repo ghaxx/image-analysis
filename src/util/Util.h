@@ -31,6 +31,8 @@ public:
 
     static void addFrame(cv::Mat &dest, int width, cv::Scalar &color);
     static void resizeCanvas(cv::Mat &source, cv::Mat &canvas, int width, cv::Scalar &color);
+
+    static int quickDistance(cv::Point x1, cv::Point x2);
 };
 
 

@@ -86,3 +86,7 @@ void Util::createTrackbar(std::string &trackbarName, std::string &windowName, do
 //    trackbarValues[trackbarName] = val;
 //    cv::createTrackbar(trackbarName, windowName, val, count, trackbarChanged, &trackbarValues);
 }
+
+int Util::quickDistance(cv::Point x1, cv::Point x2) {
+    return abs(x1.x - x2.x) + abs(x1.y - x2.y);
+}
