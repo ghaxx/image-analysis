@@ -19,10 +19,18 @@ public:
     double scaleFactor;
     int minNeighbors;
     cv::Size minSize;
+    int _scaleFactor;
+    int _minSize;
 
     HaarFaceTransformation();
 
     virtual cv::Mat transform(cv::Mat image);
+
+    void createControls(std::string windowTitle);
+
+    static void onChange1(int c, void *p);
+    static void onChange2(int c, void *p);
+    static void onChange3(int c, void *p);
 };
 
 

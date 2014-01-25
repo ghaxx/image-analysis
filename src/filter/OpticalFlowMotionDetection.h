@@ -6,6 +6,7 @@
 
 
 #include "Transformation.h"
+#include <list>
 
 #ifndef __OpticalFlowMotionDetection_H_
 #define __OpticalFlowMotionDetection_H_
@@ -16,7 +17,9 @@ class OpticalFlowMotionDetection : public Transformation {
     std::vector<cv::Point2f> features_prev, features_next, features_first;
     std::vector<unsigned char> status;
     std::vector<float> err;
-	int found;
+	std::list<cv::Mat> lines;
+    int found;
+	int trailSize;
 
 public:
 

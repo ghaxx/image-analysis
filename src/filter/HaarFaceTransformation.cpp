@@ -4,6 +4,7 @@
 //
 
 
+#include <opencv2/highgui/highgui.hpp>
 #include "HaarFaceTransformation.h"
 #include "AppConfig.h"
 
@@ -48,4 +49,31 @@ HaarFaceTransformation::HaarFaceTransformation() {
     scaleFactor = 1.1;
     minNeighbors = 3;
     minSize = Size();
+
+    _scaleFactor = (int) ((scaleFactor - 1) * 10);
+    _minSize = minSize.width;
+}
+
+void HaarFaceTransformation::createControls(std::string windowTitle) {
+    string suffix = " - controls";
+    namedWindow(windowTitle + suffix);
+    imshow(windowTitle + suffix, Mat::zeros(1, 500, CV_8UC1));
+
+    createTrackbar("Scale factor", windowTitle + suffix, &_scaleFactor, 10, HaarFaceTransformation::onChange1, this);
+    createTrackbar("Min neighbors", windowTitle + suffix, &minNeighbors, 10);
+    createTrackbar("Min size", windowTitle + suffix, &_minSize, 100, HaarFaceTransformation::onChange3, this);
+}
+
+
+void HaarFaceTransformation::onChange1(int c, void *p) {
+    HaarFaceTransformation *w = (HaarFaceTransformation *) p;
+    w->scaleFactor = 1.0 + (double) (w->scaleFactor + 1) / 10;
+}
+
+void HaarFaceTransformation::onChange3(int c, void *p) {
+    HaarFaceTransformation *w = (HaarFaceTransformation *) p;
+    if (w->_minSize == 0)
+        w->minSize = Size();
+    else
+        w->minSize = Size((double) 640 * w->_minSize / 100, (double) 640 * w->_minSize / 100);
 }

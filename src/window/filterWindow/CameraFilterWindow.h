@@ -15,8 +15,13 @@
 class CameraFilterWindow : public FilterWindow {
     int number;
     SynchronizedVideoCapture *capture;
+//    cv::VideoCapture *capture;
     bool record;
     cv::VideoWriter* writer;
+    cv::Mat transformed;
+    cv::Mat image;
+    int cols;
+    int rows;
 
 public:
     CameraFilterWindow(std::string title, Transformation* transformation);

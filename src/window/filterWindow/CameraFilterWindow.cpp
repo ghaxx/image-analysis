@@ -11,12 +11,12 @@ using namespace cv;
 
 CameraFilterWindow::CameraFilterWindow(std::string title, Transformation *transformation):FilterWindow(title, transformation) {
     capture = SynchronizedVideoCapture::getInstance();
+//    capture = new VideoCapture();
     writer = new VideoWriter();
     record = false;
 }
 
 void CameraFilterWindow::show() {
-    Mat image;
     capture->read(image);
     if (image.empty())
         return;
@@ -29,14 +29,18 @@ void CameraFilterWindow::show() {
         if (record && writer->isOpened()) {
             writer->write(image);
         }
+        cols = image.cols;
+        rows = image.rows;
         image.release();
     } else {
-        cv::Mat transformed = getT()->transform(image);
+        transformed = getT()->transform(image);
         postprocess(image, transformed);
         imshow(getTitle(), transformed);
         if (record && writer->isOpened()) {
             writer->write(transformed);
         }
+        cols = transformed.cols;
+        rows = transformed.rows;
         image.release();
         transformed.release();
     }
@@ -49,7 +53,7 @@ void CameraFilterWindow::control(char key) {
             char name[100];
             sprintf(name, (AppConfig::outputDir + "/camera %li.avi").c_str(), time(0));
             printf("Recording started and will be saved as %s\n", name);
-            writer->open(name, 0, 15.0, Size(640, 480), true);
+            writer->open(name, 0, 15.0, Size(cols, rows), true);
         } else {
             printf("Recording ended\n");
             writer->release();

@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>716838DB-B116-4874-A99E-CF28F717335E</string>
+	<string>05A47D50-8C5E-48A4-8143-59AD4150936C</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Image Analysis</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>9C2DCE91-0C78-4B46-B958-358F03C47C5C</key>
-		<string>https://bitbucket.org/ghaxx/image-analysis.git</string>
+		<key>CA7000EA-0775-432E-AF98-55D94D99B329</key>
+		<string>https://github.com/ghaxx/image-analysis.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Image Analysis.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>9C2DCE91-0C78-4B46-B958-358F03C47C5C</key>
+		<key>CA7000EA-0775-432E-AF98-55D94D99B329</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://bitbucket.org/ghaxx/image-analysis.git</string>
+	<string>https://github.com/ghaxx/image-analysis.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>9C2DCE91-0C78-4B46-B958-358F03C47C5C</string>
+	<string>CA7000EA-0775-432E-AF98-55D94D99B329</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>9C2DCE91-0C78-4B46-B958-358F03C47C5C</string>
+			<string>CA7000EA-0775-432E-AF98-55D94D99B329</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Image Analysis</string>
 		</dict>

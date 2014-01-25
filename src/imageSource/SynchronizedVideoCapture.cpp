@@ -15,13 +15,12 @@ bool SynchronizedVideoCapture::read(cv::Mat &image) {
     if (!readNew) {
         result = true;
     } else {
-        readNew = false;
         lastRead.release();
-//        do {
-            result = VideoCapture::read(lastRead);
-//        } while(lastRead.empty());
+        result = VideoCapture::read(lastRead);
+        float factor = 2.0f/3;
+        cv::resize(lastRead, lastRead, cv::Size(lastRead.cols * factor, lastRead.rows * factor));
+        readNew = result && !lastRead.empty();
     }
-    result = VideoCapture::read(lastRead);
     lastRead.copyTo(image);
     return result;
 }
