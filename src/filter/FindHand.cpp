@@ -137,7 +137,7 @@ void FindHand::findHull(vector<Point> &contour, Mat &dest) {
             average += convDef[k][3];
         }
         average = average / convDef.size();
-        printf("%f\r", average);
+//        printf("%f\r", average);
 
 //        for (int k = 0; k < 4 && k < convDef.size(); k++) {
         for (int k = 0; k < convDef.size(); k++) {
@@ -187,7 +187,7 @@ void FindHand::addContours(Mat &source, Mat &dest) {
 
             findCenterOfObject(contours[i], dest);
             findHull(contours[i], dest);
-            addBoundingBox(contours[max], dest);
+//            addBoundingBox(contours[max], dest);
         }
     }
 }

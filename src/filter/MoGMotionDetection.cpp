@@ -58,8 +58,12 @@ MoGMotionDetection::MoGMotionDetection() {
 
 
 void MoGMotionDetection::createControls(const std::string &windowTitle) {
-    createTrackbar("History", windowTitle, &history, 30, MoGMotionDetection::onChange1, this);
-    createTrackbar("Var Threshold", windowTitle, &_threshold, 100, MoGMotionDetection::onChange4, this);
+    string suffix = " - controls";
+    namedWindow(windowTitle + suffix);
+    imshow(windowTitle + suffix, Mat::zeros(1, 500, CV_8UC1));
+
+    createTrackbar("History", windowTitle + suffix, &history, 30, MoGMotionDetection::onChange1, this);
+    createTrackbar("Var Threshold", windowTitle + suffix, &_threshold, 100, MoGMotionDetection::onChange4, this);
 //    createTrackbar("nMixtures", windowTitle, &nMixtures, 10, MoGMotionDetection::onChange2, this);
 //    createTrackbar("Background Ratio", windowTitle, &_backgroundRatio, 100, MoGMotionDetection::onChange3, this);
 }

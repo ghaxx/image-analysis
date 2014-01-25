@@ -7,6 +7,7 @@
 #include "CameraFilterWindow.h"
 #include "AppConfig.h"
 
+using namespace boost;
 using namespace cv;
 
 CameraFilterWindow::CameraFilterWindow(std::string title, Transformation *transformation):FilterWindow(title, transformation) {
@@ -14,6 +15,10 @@ CameraFilterWindow::CameraFilterWindow(std::string title, Transformation *transf
 //    capture = new VideoCapture();
     writer = new VideoWriter();
     record = false;
+
+    frames = 0;
+    timer = new progress_timer();
+    showFPS = false;
 }
 
 void CameraFilterWindow::show() {
@@ -44,6 +49,15 @@ void CameraFilterWindow::show() {
         image.release();
         transformed.release();
     }
+    frames++;
+    double elapsed = timer->elapsed();
+    if (showFPS) {
+        printf("FPS: %.7f\r", frames / elapsed);
+    }
+    if (elapsed > 3) {
+        frames = 0;
+        timer->restart();
+    }
 }
 
 void CameraFilterWindow::control(char key) {
@@ -58,6 +72,9 @@ void CameraFilterWindow::control(char key) {
             printf("Recording ended\n");
             writer->release();
         }
+    }
+    if (key == '.') {
+        showFPS = !showFPS;
     }
     FilterWindow::control(key);
 }

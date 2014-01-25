@@ -56,15 +56,15 @@ void App::run() {
 //    registerWindow(new Image4());
 //    registerWindow(new Video4());
 //    registerWindow(new Window5());
-//    registerWindow(new SeeHandWindow("Find Hand"));
+    registerWindow(new SeeHandWindow("Find Hand"));
 //    registerWindow(new Ex7Contours("Ex. 7"));
 //    registerWindow(new Ex8ContourCamera("Camera1"));
 //    registerWindow(new Ex8ContourVideo("Camera2", AppConfig::inputDir + "/1.avi"));
 //    registerWindow(new Ex8ContourVideo("Camera3", AppConfig::inputDir + "/2.avi"));
 //    registerWindow(new Ex9Window("Camera"));
-    registerWindow(new HaarFaceWindow("HAAR Face Detection"));
+//    registerWindow(new HaarFaceWindow("HAAR Face Detection"));
 //    registerWindow(new MotionDetection11CameraWindow("Camera"));
-//    registerWindow(new MotionDetection11VideoWindow("Video 1", AppConfig::inputDir + "/11 film3.avi"));
+//    registerWindow(new MotionDetection11VideoWindow("Video 1", AppConfig::inputDir + "/11 film2.avi"));
 //    registerWindow(new MoGMotionDetectionCameraWindow("Mixture of Gaussian Model Motion Detection"));
 //    registerWindow(new MoGVideoWindow("Video 1", AppConfig::inputDir + "/11 film1.avi"));
     if (windows.size() > 0)

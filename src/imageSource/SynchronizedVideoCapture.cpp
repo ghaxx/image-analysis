@@ -17,7 +17,7 @@ bool SynchronizedVideoCapture::read(cv::Mat &image) {
     } else {
         lastRead.release();
         result = VideoCapture::read(lastRead);
-        float factor = 2.0f/3;
+
         cv::resize(lastRead, lastRead, cv::Size(lastRead.cols * factor, lastRead.rows * factor));
         readNew = result && !lastRead.empty();
     }
@@ -42,6 +42,8 @@ SynchronizedVideoCapture::SynchronizedVideoCapture():VideoCapture() {
     double width = get(CV_CAP_PROP_FRAME_WIDTH);
     double height = get(CV_CAP_PROP_FRAME_HEIGHT);
     double fps = get(CV_CAP_PROP_FPS);
+
+    factor = 1.0;
 
     printf("System camera: %.0fx%.0f@%.2fFPS\n", width, height, fps);
 }

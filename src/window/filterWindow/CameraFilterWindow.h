@@ -5,6 +5,7 @@
 
 
 
+#include <boost/progress.hpp>
 #include "DisplayWindow.h"
 #include "FilterWindow.h"
 
@@ -23,11 +24,14 @@ class CameraFilterWindow : public FilterWindow {
     int cols;
     int rows;
 
+    float frames;
+    boost::progress_timer* timer;
+    bool showFPS;
+
 public:
     CameraFilterWindow(std::string title, Transformation* transformation);
 
     virtual void show() override;
-
 
     virtual void control(char key) override;
 };

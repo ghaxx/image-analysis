@@ -78,6 +78,7 @@ cv::Mat OpticalFlowMotionDetection::transform(Mat image) {
     image_prev = image_next.clone();
     features_prev = features_next;
     found = foundNow;
+
     return image;
 }
 
@@ -91,13 +92,13 @@ void OpticalFlowMotionDetection::reset() {
 }
 
 void OpticalFlowMotionDetection::createControls(const std::string &windowTitle) {
-    string suffix = " - controls";
-    namedWindow(windowTitle + suffix);
-    imshow(windowTitle + suffix, Mat::zeros(1, 500, CV_8UC1));
-    createTrackbar("Max Corners", windowTitle + suffix, &maxCorners, 400, OpticalFlowMotionDetection::onChange1, this);
-    createTrackbar("Quality level", windowTitle + suffix, &_qualityLevel, 10000, OpticalFlowMotionDetection::onChange2, this);
-    createTrackbar("Min distance", windowTitle + suffix, &_minDistance, 100, OpticalFlowMotionDetection::onChange3, this);
-    createTrackbar("Trail size", windowTitle + suffix, &trailSize, 100);
+    string controlsWindowTitle = windowTitle + " - controls";
+    namedWindow(controlsWindowTitle);
+    imshow(controlsWindowTitle, Mat::zeros(1, 500, CV_8UC1));
+    createTrackbar("Max Corners", controlsWindowTitle, &maxCorners, 400, OpticalFlowMotionDetection::onChange1, this);
+    createTrackbar("Quality level", controlsWindowTitle, &_qualityLevel, 10000, OpticalFlowMotionDetection::onChange2, this);
+    createTrackbar("Min distance", controlsWindowTitle, &_minDistance, 100, OpticalFlowMotionDetection::onChange3, this);
+    createTrackbar("Trail size", controlsWindowTitle, &trailSize, 100);
 }
 
 

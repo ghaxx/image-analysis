@@ -18,6 +18,7 @@ class SynchronizedVideoCapture : public cv::VideoCapture {
 
     cv::Mat lastRead;
     SynchronizedVideoCapture();
+    float factor;
 
 public:
 

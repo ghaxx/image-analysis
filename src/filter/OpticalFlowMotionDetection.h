@@ -7,6 +7,7 @@
 
 #include "Transformation.h"
 #include <list>
+#include <boost/progress.hpp>
 
 #ifndef __OpticalFlowMotionDetection_H_
 #define __OpticalFlowMotionDetection_H_
