@@ -15,7 +15,7 @@
 
 class OpticalFlowMotionDetection : public Transformation {
     cv::Mat image_prev, image_next;
-    std::vector<cv::Point2f> features_prev, features_next, features_first;
+    std::vector<cv::Point2f> features_prev, features_next;
     std::vector<unsigned char> status;
     std::vector<float> err;
 	std::list<cv::Mat> lines;

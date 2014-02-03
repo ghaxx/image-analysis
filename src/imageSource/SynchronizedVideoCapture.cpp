@@ -43,7 +43,7 @@ SynchronizedVideoCapture::SynchronizedVideoCapture():VideoCapture() {
     double height = get(CV_CAP_PROP_FRAME_HEIGHT);
     double fps = get(CV_CAP_PROP_FPS);
 
-    factor = 1.0;
+    factor = 0.67;
 
     printf("System camera: %.0fx%.0f@%.2fFPS\n", width, height, fps);
 }

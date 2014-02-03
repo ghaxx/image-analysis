@@ -19,11 +19,21 @@ public:
     bool record;
     int minHue;
     int maxHue;
+    int minSaturation;
+    int maxSaturation;
+    int minValue;
+    int maxValue;
     int blurRadius;
+
+    float shapeRadius;
 
     int cols;
     int rows;
     std::string title;
+    int center_x;
+    int center_y;
+    cv::Point center;
+    int handScale;
 
     OpticalFlowMotionDetection* motionDetection;
 
@@ -57,6 +67,23 @@ public:
 
     static bool sortConvDef(cv::Vec<int, 4> &p1, cv::Vec<int, 4> &p2);
 
+
+    int getMinSaturation() const;
+
+    void setMinSaturation(int minSaturation);
+
+    int getMaxSaturation() const;
+
+    void setMaxSaturation(int maxSaturation);
+
+    int getMinValue() const;
+
+    void setMinValue(int minValue);
+
+    int getMaxValue() const;
+
+    void setMaxValue(int maxValue);
+
 public:
 
     virtual cv::Mat transform(cv::Mat image);
@@ -66,6 +93,9 @@ public:
     std::string getTitle();
 
     FindHand();
+
+    double approxPolyEpsilon;
+    int drawAll;
 };
 
 

@@ -90,3 +90,7 @@ void Util::createTrackbar(std::string &trackbarName, std::string &windowName, do
 int Util::quickDistance(cv::Point x1, cv::Point x2) {
     return abs(x1.x - x2.x) + abs(x1.y - x2.y);
 }
+
+int Util::distance(cv::Point x1, cv::Point x2) {
+    return sqrt(pow(abs(x1.x - x2.x), 2) + pow(abs(x1.y - x2.y), 2));
+}

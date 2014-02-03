@@ -33,6 +33,7 @@ public:
     static void resizeCanvas(cv::Mat &source, cv::Mat &canvas, int width, cv::Scalar &color);
 
     static int quickDistance(cv::Point x1, cv::Point x2);
+    static int distance(cv::Point x1, cv::Point x2);
 };
 
 

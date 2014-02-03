@@ -28,6 +28,9 @@ void SeeHandWindow::control(char key) {
     if (key == 'r') getTransformation()->setBlurRadius(getTransformation()->blurRadius + 1);
     if (key == 'f') getTransformation()->setBlurRadius(getTransformation()->blurRadius - 1);
 
+    if (key == 't') getTransformation()->approxPolyEpsilon += 0.1;
+    if (key == 'g') getTransformation()->approxPolyEpsilon -= 0.1;
+
 //    if (key != '\xff')
 //        printf("Hue: %d - %d, Blur: %d, Morph: %s\r", minHue, maxHue, blurRadius, morph ? "yes" : "no");
     CameraFilterWindow::control(key);

@@ -13,7 +13,7 @@ using namespace cv;
 void FindHand::extractShapesInBinary(Mat &image, Mat &thresh) {
     Mat hsv;
     cvtColor(image, hsv, CV_RGB2HSV);
-    inRange(hsv, Scalar(minHue, 0, 0), Scalar(maxHue, 255, 255), thresh);
+    inRange(hsv, Scalar(minHue, minSaturation, minValue), Scalar(maxHue, maxSaturation, maxValue), thresh);
     Util::pictureInPicture(thresh, result, 0, rows / 2, cols / 2, rows / 2);
 
     if (blurRadius > 0) {
@@ -57,15 +57,20 @@ void FindHand::drawObject(int x, int y, Mat &frame) {
 
 void FindHand::findCenterOfObject(vector<Point> &contour, Mat &dest) {
     double refArea = 0;
-    int x = 0;
-    int y = 0;
 
     Moments moment = moments((Mat) contour);
     double area = moment.m00;
-    x = (int) (moment.m10 / area);
-    y = (int) (moment.m01 / area);
+    center_x = (int) (moment.m10 / area);
+    center_y = (int) (moment.m01 / area);
 
-    drawObject(x, y, dest);
+    center.x = center_x;
+    center.y = center_y;
+
+    if (drawAll) {
+        circle(dest, center, 10, Scalar(100, 0, 0), -1);
+        circle(dest, center, 10, Scalar(250, 150, 150), -1);
+//        drawObject(center_x, center_y, dest);
+    }
 }
 
 void FindHand::addBoundingBox(vector<Point> &contour, Mat &dest) {
@@ -84,6 +89,13 @@ void FindHand::addBoundingBox(vector<Point> &contour, Mat &dest) {
     rectangle(drawing, boundRect.tl(), boundRect.br(), Scalar(100, 255, 255), 1, 8, 0);
     circle(drawing, center, (int) radius, Scalar(255, 255, 100), 1, 8, 0);
 
+    RotatedRect box = minAreaRect(contour);
+    Point2f vertices[4];
+    box.points(vertices);
+    for (int i = 0; i < 4; ++i)
+        cv::line(drawing, vertices[i], vertices[(i + 1) % 4], cv::Scalar(255, 100, 100), 1, 0);
+
+
     Util::addAlphaMat(drawing, dest, 0.4);
 }
 
@@ -99,66 +111,62 @@ void FindHand::findHull(vector<Point> &contour, Mat &dest) {
 
     convexHull(Mat(contour), hull[0], false);
     convexHull(Mat(contour), hull_i[0], false);
-    drawContours(drawing, hull, 0, Scalar(1, 1, 50), 2, 8, vector<Vec4i>(), 0, Point());
-    drawContours(drawing, hull, 0, Scalar(20, 20, 200), 1, 8, vector<Vec4i>(), 0, Point());
-
-    Util::addAlphaMat(drawing, dest, 0.4);
+    if (drawAll) {
+        drawContours(drawing, hull, 0, Scalar(5, 5, 20), 2, 8, vector<Vec4i>(), 0, Point());
+        drawContours(drawing, hull, 0, Scalar(200, 200, 255), 1, 8, vector<Vec4i>(), 0, Point());
+    }
+    Util::addAlphaMat(drawing, dest, 0.7);
     drawing = Mat::zeros(dest.size(), CV_8UC3);
 
     std::vector<Vec4i> convDef;
-
-    if (hull_i[0].size() > 3) {
+    if (hull_i[0].size() > 0) {
         convexityDefects(contour, hull_i[0], convDef);
-
-        int max4[convDef.size()];
-        int max4p[convDef.size()];
-        for (int k = 0; k < convDef.size(); k++) {
-            int ind_0 = convDef[k][0];
-            int ind_1 = convDef[k][1];
-            int ind_2 = convDef[k][2];
-            max4[k] = convDef[k][3];
-            max4p[k] = convDef[k][2];
-            cv::line(drawing, contour[ind_2], contour[ind_0], Scalar(1, 0, 25), 2);
-            cv::line(drawing, contour[ind_2], contour[ind_1], Scalar(1, 0, 25), 2);
-            cv::circle(drawing, contour[ind_0], 3, Scalar(1, 25, 0), -1);
-            cv::circle(drawing, contour[ind_1], 3, Scalar(1, 25, 0), -1);
-            cv::circle(drawing, contour[ind_2], 3, Scalar(1, 0, 25), -1);
-
-            cv::line(drawing, contour[ind_2], contour[ind_0], Scalar(1, 0, 255), 1);
-            cv::line(drawing, contour[ind_2], contour[ind_1], Scalar(1, 0, 255), 1);
-            cv::circle(drawing, contour[ind_0], 2, Scalar(1, 255, 0), -1);
-            cv::circle(drawing, contour[ind_1], 2, Scalar(1, 255, 0), -1);
-            cv::circle(drawing, contour[ind_2], 2, Scalar(1, 0, 255), -1);
-        }
-        std::sort(convDef.begin(), convDef.end(), sortConvDef);
-//        int maxc = 0;
-        double average = 0;
-        for (int k = 0; k < convDef.size(); k++) {
-            average += convDef[k][3];
-        }
-        average = average / convDef.size();
-//        printf("%f\r", average);
-
-//        for (int k = 0; k < 4 && k < convDef.size(); k++) {
-        for (int k = 0; k < convDef.size(); k++) {
-            if (convDef[k][3] > 3 * average) {
-                int ind_0 = convDef[k][0];
-                int ind_1 = convDef[k][1];
-                int ind_2 = convDef[k][2];
-                cv::circle(drawing, contour[ind_0], 5, Scalar(1, 255, 25), -1);
-                cv::circle(drawing, contour[ind_0], 4, Scalar(1, 255, 255), -1);
-                cv::circle(drawing, contour[ind_1], 5, Scalar(1, 255, 25), -1);
-                cv::circle(drawing, contour[ind_1], 4, Scalar(1, 255, 255), -1);
-                cv::circle(drawing, contour[ind_2], 5, Scalar(1, 255, 25), -1);
-                cv::circle(drawing, contour[ind_2], 4, Scalar(1, 255, 255), -1);
-            }
+        float minDistance = shapeRadius * handScale / 100;
+        int fingertipRadius = 0.1 * shapeRadius;
+//        if (convDef.size() > 0)
+            for (int k = 0; k < convDef.size(); k++) {
+                if (convDef[k][3] > shapeRadius * 0.77) {
+                    int ind_0 = convDef[k][0];
+                    int ind_1 = convDef[k][1];
+                    int ind_2 = convDef[k][2];
+                    int widthsDebug[2] = {8, 7};
+                    int widths[2] = {2, 1};
+                    Scalar colors[2] = {Scalar(1, 25, 5), Scalar(200, 255, 200)};
+                    for (int i = 0; i < 2; i++) {
+                        if (drawAll) {
+                            if (Util::distance(center, contour[ind_0]) > minDistance)
+                                cv::line(drawing, contour[ind_2], contour[ind_0], colors[i], widths[i]);
+                            if (Util::distance(center, contour[ind_1]) > minDistance)
+                                cv::line(drawing, contour[ind_2], contour[ind_1], colors[i], widths[i]);
+                        }
+                        if (Util::distance(center, contour[ind_0]) > minDistance)
+                            cv::line(drawing, contour[ind_0], Point(center_x, center_y), colors[i], widths[i]);
+                        if (Util::distance(center, contour[ind_1]) > minDistance)
+                            cv::line(drawing, contour[ind_1], Point(center_x, center_y), colors[i], widths[i]);
+                    }
+                    if (!drawAll) {
+                        circle(drawing, contour[ind_0], fingertipRadius, Scalar(0, 0, 0), -1);
+                        circle(drawing, contour[ind_1], fingertipRadius, Scalar(0, 0, 0), -1);
+                    }
+                    for (int i = 0; i < 2; i++) {
+                        if (drawAll) {
+                            circle(drawing, contour[ind_0], widthsDebug[i], colors[i], -1);
+                            circle(drawing, contour[ind_1], widthsDebug[i], colors[i], -1);
+                            circle(drawing, contour[ind_2], widthsDebug[i], colors[i], -1);
+                        }
+                        if (Util::distance(center, contour[ind_0]) > minDistance)
+                            circle(drawing, contour[ind_0], fingertipRadius, colors[i], widths[i]);
+                        if (Util::distance(center, contour[ind_1]) > minDistance)
+                            circle(drawing, contour[ind_1], fingertipRadius, colors[i], widths[i]);
+                    }
+                }
 //            if (ind_1 > maxc)
 //                maxc = ind_1;
-        }
+            }
 //        cv::circle(drawing, contour[maxc], 11, Scalar(1, 255, 25), -1);
 //        cv::circle(drawing, contour[maxc], 9, Scalar(1, 255, 255), -1);
     }
-    Util::addAlphaMat(drawing, dest, 0.4);
+    Util::addAlphaMat(drawing, dest, 0.7);
 }
 
 
@@ -171,50 +179,72 @@ void FindHand::addContours(Mat &source, Mat &dest) {
     Canny(source, canny_output, 10, 100 * 2, 3);
     findContours(canny_output, contours, hierarchy, RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE, Point(0, 0));
 
-    /// Find contours
-//    findContours(canny_output, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0));
-//    findContours(source, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0));
-
     /// Draw contours
     Mat drawing = Mat::zeros(canny_output.size(), CV_8UC3);
     int max = 0;
     double maxArea = 0;
     for (int i = 0; i < contours.size(); i++) {
-        if (&(contours[i]) != 0) {
-            drawContours(drawing, contours, i, Scalar(20, rows / 2, 20), 1, 8, hierarchy, 0, Point());
-            drawContours(drawing, contours, i, Scalar(2, 20, 2), 2, 8, hierarchy, 0, Point());
-            Util::addAlphaMat(drawing, dest, 0.4);
-
-            findCenterOfObject(contours[i], dest);
-            findHull(contours[i], dest);
-//            addBoundingBox(contours[max], dest);
+        Moments moment = moments((cv::Mat) contours[i]);
+        double area = moment.m00;
+        if (area > maxArea) {
+            maxArea = area;
+            max = i;
         }
+//        if (&(contours[i]) != 0) {
+//            drawContours(drawing, contours, i, Scalar(20, rows / 2, 20), 1, 8, hierarchy, 0, Point());
+//            drawContours(drawing, contours, i, Scalar(2, 20, 2), 2, 8, hierarchy, 0, Point());
+//            Util::addAlphaMat(drawing, dest, 0.4);
+//
+//            findCenterOfObject(contours[i], dest);
+//            findHull(contours[i], dest);
+////            addBoundingBox(contours[max], dest);
+//        }
+    }
+    if (&(contours[max]) != 0) {
+
+        Mat drawing = Mat::zeros(dest.size(), CV_8UC3);
+        Point2f center;
+
+        minEnclosingCircle((Mat) contours[max], center, shapeRadius);
+//        cvApproxPoly(contours[max], 0, <#(CvMemStorage*)storage#>, <#(int)method#>, <#(double)eps#>, <#(int)recursive#>)
+        approxPolyDP(contours[max], contours[max], shapeRadius / 6, true);
+        if (drawAll) {
+            drawContours(drawing, contours, max, Scalar(2, 20, 2), 2, 8, hierarchy, 0, Point());
+            drawContours(drawing, contours, max, Scalar(200, 255, 200), 1, 8, hierarchy, 0, Point());
+        }
+        Util::addAlphaMat(drawing, dest, 0.7);
+
+        findCenterOfObject(contours[max], dest);
+        findHull(contours[max], dest);
+        if (drawAll)
+            addBoundingBox(contours[max], dest);
     }
 }
 
 Mat FindHand::transform(Mat image) {
-        cols = image.cols;
-        rows = image.rows;
-        result = Mat::zeros(image.rows, image.cols * 3 / 2, image.type());
-        flip(image, image, 2);
-        Scalar color = Scalar(0, 0, 0);
+    cols = image.cols;
+    rows = image.rows;
+    result = Mat::zeros(image.rows, image.cols * 3 / 2, image.type());
+//    result = image.clone();
+    Scalar color = Scalar(0, 0, 0);
 //        image = imread(AppConfig::inputDir + "/h.jpg", CV_LOAD_IMAGE_COLOR);
-        image = motionDetection->transform(image);
+//    image = motionDetection->transform(image);
 
-        Mat thresholdMat;
+    Mat thresholdMat;
 
-        extractShapesInBinary(image, thresholdMat);
+    extractShapesInBinary(image, thresholdMat);
 
-        Util::resizeCanvas(image, image, 10, color);
-        Util::resizeCanvas(thresholdMat, thresholdMat, 10, color);
+    Util::resizeCanvas(image, image, 10, color);
+    Util::resizeCanvas(thresholdMat, thresholdMat, 10, color);
 
-        addContours(thresholdMat, image);
+    addContours(thresholdMat, image);
 
-        Util::pictureInPicture(thresholdMat, result, 0, 0, cols / 2, rows / 2, 10, 10, cols, rows);
-        Util::pictureInPicture(image, result, cols / 2, 0, cols, rows, 10, 10, cols, rows);
+    Util::pictureInPicture(thresholdMat, result, 0, 0, cols / 2, rows / 2, 10, 10, cols, rows);
+    Util::pictureInPicture(image, result, cols / 2, 0, cols, rows, 10, 10, cols, rows);
 
-        thresholdMat.release();
-        return result;
+    thresholdMat.release();
+    return result;
+//    return this->image;
 }
 
 void onMouse(int event, int x, int y, int c, void *p) {
@@ -223,8 +253,14 @@ void onMouse(int event, int x, int y, int c, void *p) {
     if (event == 1) { //click
         cvtColor(image, image, CV_RGB2HSV);
         int h = (int) image.at<Vec3b>(y, x)[0];
-        w->setMinHue(h-4);
-        w->setMaxHue(h+4);
+        int s = (int) image.at<Vec3b>(y, x)[1];
+        int v = (int) image.at<Vec3b>(y, x)[2];
+        w->setMinHue(h - 4);
+        w->setMaxHue(h + 4);
+//        w->setMinSaturation(s - 10);
+//        w->setMaxSaturation(s + 10);
+//        w->setMinValue(v - 10);
+//        w->setMaxValue(v + 10);
     }
 }
 
@@ -233,7 +269,15 @@ FindHand::FindHand() {
     record = false;
     minHue = 99;
     maxHue = 125;
+    minSaturation = 0;
+    maxSaturation = 255;
+    minValue = 0;
+    maxValue = 255;
+
     blurRadius = 5;
+    approxPolyEpsilon = 15.0;
+    drawAll = false;
+    handScale = 87;
 
     motionDetection = new OpticalFlowMotionDetection();
 }
@@ -245,7 +289,16 @@ void FindHand::createControls(const std::string &windowTitle) {
 
     createTrackbar("Hue - min", windowTitle + suffix, &minHue, 180);
     createTrackbar("Hue - max", windowTitle + suffix, &maxHue, 180);
+
+    createTrackbar("saturation - min", windowTitle + suffix, &minSaturation, 255);
+    createTrackbar("saturation - max", windowTitle + suffix, &maxSaturation, 255);
+
+    createTrackbar("value - min", windowTitle + suffix, &minValue, 255);
+    createTrackbar("value - max", windowTitle + suffix, &maxValue, 255);
+
     createTrackbar("Blur radius", windowTitle + suffix, &blurRadius, 30);
+    createTrackbar("Draw all?", windowTitle + suffix, &drawAll, 1);
+    createTrackbar("Hand scale", windowTitle + suffix, &handScale, 100);
     setMouseCallback(windowTitle, onMouse, this);
     motionDetection->createControls(windowTitle);
 
@@ -261,8 +314,8 @@ int FindHand::getMinHue() const {
 }
 
 void FindHand::setMinHue(int minHue) {
-    this->minHue = minHue;
-    setTrackbarPos("Hue - min", getTitle(), minHue);
+    this->minHue = min(255, max(0, minHue));
+    setTrackbarPos("Hue - min", getTitle(), this->minHue);
 }
 
 int FindHand::getMaxHue() const {
@@ -270,8 +323,8 @@ int FindHand::getMaxHue() const {
 }
 
 void FindHand::setMaxHue(int maxHue) {
-    this->maxHue = maxHue;
-    setTrackbarPos("Hue - max", getTitle(), maxHue);
+    this->maxHue = min(255, max(0, maxHue));
+    setTrackbarPos("Hue - max", getTitle(), this->maxHue);
 }
 
 int FindHand::getBlurRadius() const {
@@ -287,4 +340,40 @@ void FindHand::setBlurRadius(int blurRadius) {
 
 std::string FindHand::getTitle() {
     return title;
+}
+
+int FindHand::getMinSaturation() const {
+    return minSaturation;
+}
+
+void FindHand::setMinSaturation(int minSaturation) {
+    this->minSaturation = min(255, max(0, minSaturation));
+    setTrackbarPos("saturation - min", getTitle(), this->minSaturation);
+}
+
+int FindHand::getMaxSaturation() const {
+    return maxSaturation;
+}
+
+void FindHand::setMaxSaturation(int maxSaturation) {
+    this->maxSaturation = min(255, max(0, maxSaturation));
+    setTrackbarPos("saturation - max", getTitle(), this->maxSaturation);
+}
+
+int FindHand::getMinValue() const {
+    return minValue;
+}
+
+void FindHand::setMinValue(int minValue) {
+    this->minValue = min(255, max(0, minValue));
+    setTrackbarPos("value - min", getTitle(), this->minValue);
+}
+
+int FindHand::getMaxValue() const {
+    return maxValue;
+}
+
+void FindHand::setMaxValue(int maxValue) {
+    this->maxValue = min(255, max(0, maxValue));
+    setTrackbarPos("max - value", getTitle(), this->maxValue);
 }

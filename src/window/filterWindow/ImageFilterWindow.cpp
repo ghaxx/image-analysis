@@ -32,6 +32,7 @@ void ImageFilterWindow::show() {
 
 void ImageFilterWindow::refresh() {
     _refresh = TRUE;
+    image = imread(imageFile, CV_LOAD_IMAGE_COLOR);
 }
 
 cv::Mat const &ImageFilterWindow::getImage() const {

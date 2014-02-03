@@ -36,7 +36,6 @@ cv::Mat OpticalFlowMotionDetection::transform(Mat image) {
                 qualityLevel,
                 minDistance
         );
-        features_first = features_next;
     } else {
         cvtColor(image, image_next, CV_RGB2GRAY);
         features_next.clear();
@@ -49,7 +48,6 @@ cv::Mat OpticalFlowMotionDetection::transform(Mat image) {
         );
         Mat currentLines = Mat::zeros(image.rows, image.cols, image.type());
         for (int i = 0; i < status.size(); i++) {
-            Point2i pt0 = Point(features_first[i].x, features_first[i].y);
             Point2i pt2 = Point(features_next[i].x, features_next[i].y);
             Point2i pt1 = Point(features_prev[i].x, features_prev[i].y);
             if ((int) status[i] == 1 && Util::quickDistance(pt2, pt1) > 2) {

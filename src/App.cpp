@@ -32,6 +32,7 @@
 #include "MotionDetection11VideoWindow.h"
 #include "MoGMotionDetectionCameraWindow.h"
 #include "MoGVideoWindow.h"
+#include "HandImageWindow.h"
 
 using namespace cv;
 
@@ -57,6 +58,7 @@ void App::run() {
 //    registerWindow(new Video4());
 //    registerWindow(new Window5());
     registerWindow(new SeeHandWindow("Find Hand"));
+//    registerWindow(new HandImageWindow("Find Hand"));
 //    registerWindow(new Ex7Contours("Ex. 7"));
 //    registerWindow(new Ex8ContourCamera("Camera1"));
 //    registerWindow(new Ex8ContourVideo("Camera2", AppConfig::inputDir + "/1.avi"));

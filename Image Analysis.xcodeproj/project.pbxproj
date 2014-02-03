@@ -44,6 +44,7 @@
 		5DC365518AD97E7FE4321798 /* LinearTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC36A7F3037716509228B8A /* LinearTransformation.cpp */; };
 		5DC3655D819DC77168D0C8CA /* libopencv_imgproc.2.4.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC36932282627DED314CB0D /* libopencv_imgproc.2.4.7.dylib */; };
 		5DC365697BA824188E14E2C2 /* libopencv_stitching.2.4.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC36A28D887983E34204F1E /* libopencv_stitching.2.4.7.dylib */; };
+		5DC3657773779E3E69341BD1 /* HandImageWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC365E36FD6A46CC185AB0A /* HandImageWindow.cpp */; };
 		5DC36585FA57888AAE545590 /* Video4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC362538FE5BC2065E8D0F7 /* Video4.cpp */; };
 		5DC3658860DDE6EA2A688332 /* libopencv_features2d.2.4.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC366456B008A54CC391376 /* libopencv_features2d.2.4.7.dylib */; };
 		5DC365905F8EF9C82B6743AF /* ImageFilterWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC3684FB6C8A1FD35CF0D45 /* ImageFilterWindow.cpp */; };
@@ -163,6 +164,7 @@
 		5DC3651BB2DA6C845CFD5DAE /* FilterChain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FilterChain.cpp; sourceTree = "<group>"; };
 		5DC3652FA0D81DF382DE9484 /* HaarFaceTransformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HaarFaceTransformation.h; sourceTree = "<group>"; };
 		5DC365C3A5471BC1F2B93441 /* HaarFaceWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HaarFaceWindow.cpp; sourceTree = "<group>"; };
+		5DC365E36FD6A46CC185AB0A /* HandImageWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HandImageWindow.cpp; sourceTree = "<group>"; };
 		5DC365E409391739474F8FC0 /* CameraCaptureWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraCaptureWindow.cpp; sourceTree = "<group>"; };
 		5DC36603C9D8B06E3B6EF092 /* FindHand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindHand.h; sourceTree = "<group>"; };
 		5DC36607060ED0174D2B8212 /* 4_1382950877.avi */ = {isa = PBXFileReference; lastKnownFileType = video.avi; path = 4_1382950877.avi; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 		5DC366A5CCEB6143F570152C /* Lightness.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Lightness.cpp; sourceTree = "<group>"; };
 		5DC366B942ABC82659C89538 /* Util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Util.cpp; sourceTree = "<group>"; };
 		5DC366F5FBD69BB1D7A81668 /* libopencv_gpu.2.4.7.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_gpu.2.4.7.dylib; path = /usr/local/Cellar/opencv/2.4.7.1/lib/libopencv_gpu.2.4.7.dylib; sourceTree = "<absolute>"; };
+		5DC366FA432C2FDC69D6BD9E /* HandImageWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandImageWindow.h; sourceTree = "<group>"; };
 		5DC366FC6C8D50CA9632D681 /* MotionDetection11VideoWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionDetection11VideoWindow.h; sourceTree = "<group>"; };
 		5DC3670520A452F6C9B9D232 /* HighestValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HighestValue.cpp; sourceTree = "<group>"; };
 		5DC3670B6664CCCD6AAB9B5F /* Transformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transformation.h; sourceTree = "<group>"; };
@@ -509,6 +512,8 @@
 			children = (
 				5DC36BD8C191C91D9DA406E4 /* SeeHandWindow.cpp */,
 				5DC36F7FA56338DE3AAD6BCE /* SeeHandWindow.h */,
+				5DC365E36FD6A46CC185AB0A /* HandImageWindow.cpp */,
+				5DC366FA432C2FDC69D6BD9E /* HandImageWindow.h */,
 			);
 			path = hand;
 			sourceTree = "<group>";
@@ -714,6 +719,7 @@
 				5DC3618E0B47CDE07EC97348 /* MoGMotionDetection.cpp in Sources */,
 				5DC36CE2230A6D3620CEBC44 /* MoGVideoWindow.cpp in Sources */,
 				5DC36C77C0F3B9D73724392B /* FindHand.cpp in Sources */,
+				5DC3657773779E3E69341BD1 /* HandImageWindow.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
